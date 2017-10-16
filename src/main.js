@@ -2,7 +2,7 @@
 // import { BTree } from "./algorithm/binarySearchTree";
 // import './features/objectLiterals';
 // import './features/iterators';
-import './features/unicode';
+import './features/weakSet';
 
 // console.log("2π = " + sum(pi, pi));
 

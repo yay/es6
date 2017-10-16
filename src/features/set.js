@@ -89,6 +89,10 @@ A value in the Set may only occur once.
 
     let set = new Set(array);
     console.log(set);         // Set { 'a', 'b', 'c' }
+}
 
+{
+    let set = (new Set()).add('a').add('b').add('c');
 
+    console.log(set); // Set { 'a', 'b', 'c' }
 }

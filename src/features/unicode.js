@@ -27,7 +27,6 @@ console.log(
     s.codePointAt(0) === 0x20BB7, // true
     s.charAt(0) === '\uD842',     // true
     s.charAt(1) === '\uDFB7'      // true
-
 );
 
 // for-of iterates code points
