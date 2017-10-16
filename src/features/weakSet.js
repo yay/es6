@@ -1,6 +1,8 @@
 /*
 Syntax: new WeakSet([iterable]);
 
+The WeakSet itself is not an iterable.
+
 Methods: add, has, delete.
 
 Just as with the WeakMap, it's impossible to check whether the object
@@ -30,3 +32,7 @@ ws.delete(a);
 console.log(
     ws.has(a) // false
 );
+
+for (let entry of ws) {  // ws[Symbol.iterator] is not a function
+    console.log(entry);
+}

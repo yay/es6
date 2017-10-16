@@ -1,6 +1,8 @@
 /*
 Syntax: new WeakMap([iterable])
 
+The WeakMap itself is not an iterable.
+
 Keys of WeakMaps are of the type Object only.
 Values can be of any type.
 
@@ -38,4 +40,8 @@ console.log(wm.has(a)); // false
 console.log(wm.size === undefined);   // true
 console.log(wm.keys === undefined);   // true
 console.log(wm.values === undefined); // true
+
+for (let entry of wm) { // wm[Symbol.iterator] is not a function
+    console.log(entry);
+}
 
