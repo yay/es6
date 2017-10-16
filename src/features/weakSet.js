@@ -36,3 +36,9 @@ console.log(
 for (let entry of ws) {  // ws[Symbol.iterator] is not a function
     console.log(entry);
 }
+
+/*
+
+Use cases: marking objects (e.g. dirty sprites).
+
+*/
