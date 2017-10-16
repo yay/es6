@@ -17,14 +17,16 @@ console.log(
 );
 
 console.log(
-    s === "\uD842\uDFB7", // true
+    s === '\uD842\uDFB7', // true
     // new form
-    s === "\u{20BB7}"     // true
+    s === '\u{20BB7}'     // true
 );
 
 // new String ops
 console.log(
-    s.codePointAt(0) === 0x20BB7 // true
+    s.codePointAt(0) === 0x20BB7, // true
+    s.charAt(0) === '\uD842',     // true
+    s.charAt(1) === '\uDFB7'      // true
 
 );
 
