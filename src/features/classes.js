@@ -129,6 +129,8 @@ class Circle {} // class declarations are not hoisted
 })();
 
 (() => {
+    console.log('--- ES5 (manual) subclassing ---');
+
     // Hand-coded inheritance.
     function Animal(name) {
         this.name = name;
@@ -147,7 +149,7 @@ class Circle {} // class declarations are not hoisted
         console.log('zzzz...');
     };
     Animal.prototype.poop = function () {
-        console.log('💩');
+        console.log(this.name + ' 💩');
     };
 
 
@@ -203,7 +205,8 @@ class Circle {} // class declarations are not hoisted
 })();
 
 (() => {
-    // ES6 subclassing
+    console.log('--- ES6 subclassing ---');
+
     class Animal {
         constructor(name) {
             this.name = name;
@@ -220,6 +223,10 @@ class Circle {} // class declarations are not hoisted
     }
 
     class Dog extends Animal {
+        // Below constructor is implicit.
+        // constructor(name) {
+        //     super(name);
+        // }
         speak() {
             console.log(this.name + ' barks.');
         }
@@ -233,13 +240,14 @@ class Circle {} // class declarations are not hoisted
     dog.speak(); // Doge barks.
     dog.sleep(); // Doge sleeps. Zzzz...
     dog.poop();  // Doge 💩\n💩💩
+    console.log(dog.id);
 
     console.log('dog.constructor === Dog:',
         dog.constructor === Dog);
 })();
 
 (() => {
-    // Classes under the hood.
+    console.log('--- Transpiled ES6 -> ES5 subclassing ---')
     var _createClass = function () {
         function defineProperties(target, props) {
             for (var i = 0; i < props.length; i++) {

@@ -1,4 +1,6 @@
 /*
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
+
 1) strict mode eliminates some JavaScript silent errors
    by changing them to throw errors
 2) strict mode fixes mistakes that make it difficult for JavaScript
