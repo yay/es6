@@ -94,6 +94,13 @@
     console.log(obj); // { b: 'hello', a: 'hey', c: { d: 'howdy' } }
 }
 
+{
+    let str = 'hello';
+    str[1] = 'a'; // strings are immutable
+
+    console.log(str); // 'hello'
+}
+
 /*
 
 function factorial(n, acc = 1) {
@@ -108,4 +115,4 @@ function factorial(n, acc = 1) {
 // but safe on arbitrary inputs in ES6.
 factorial(100000); // Still throws in Chrome 61 and Node 8.6
 
- */
+*/

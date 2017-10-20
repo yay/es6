@@ -1,4 +1,17 @@
 {
+    // For...of creates a loop iterating over iterable objects
+    // (including Array, TypedArray, String, Map, Set,
+    // arguments object and so on).
+
+    let obj = {}; // NOT an iterable!
+
+    // TypeError: obj[Symbol.iterator] is not a function
+    // for (let v of obj) {
+    //     console.log(v);
+    // }
+}
+
+{
     let fibonacci = {
         [Symbol.iterator]() {
             let pre = 0, cur = 1;
@@ -100,19 +113,6 @@ function iterate(fibonacci) {
     for (let n of fibonacci) {
         console.log(n);
     }
-}
-
-{
-    let obj = {}; // NOT an iterable!
-
-    // For...of creates a loop iterating over iterable objects
-    // (including Array, Map, Set, String, TypedArray,
-    // arguments object and so on).
-
-    // TypeError: obj[Symbol.iterator] is not a function
-    // for (let v of obj) {
-    //     console.log(v);
-    // }
 }
 
 {
