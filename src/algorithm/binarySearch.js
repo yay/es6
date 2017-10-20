@@ -5,25 +5,24 @@ let arr = randomSortedNumbers(30, 0, 1000);
 removeDuplicates(arr);
 console.log(arr.join(' '));
 
-function binarySearch(array, value) {
-    let min = 0;
-    let max = array.length - 1;
+function binarySearch(array, target) {
+    let lo = 0;
+    let hi = array.length - 1;
 
-    console.log(`Binary search steps (index : value) for array of ${max + 1} elements:`);
+    console.log(`Binary search steps (index : value) for array of ${hi + 1} elements:`);
 
-    while (max >= min) {
-        let i = Math.floor((min + max) / 2);
-        let v = array[i];
+    while (lo <= hi) {
+        let iMid = Math.floor((lo + hi) / 2);
+        let vMid = array[iMid];
 
-        console.log(`${i} : ${v}`);
+        console.log(`${iMid} : ${vMid}`);
 
-        if (value === v) {
-            return i;
-        } else if (value < v) {
-            max = i - 1;
-        } else {
-            min = i + 1;
-        }
+        if (target === vMid)
+            return iMid;
+        else if (target < vMid)
+            hi = iMid - 1;
+        else
+            lo = iMid + 1;
     }
 
     return -1;
