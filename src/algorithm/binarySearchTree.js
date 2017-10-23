@@ -24,6 +24,22 @@ class BTree {
         return false;
     }
 
+    _findR(data, root) {
+        if (root) {
+            if (root.data === data) {
+                return true;
+            } else {
+                let next = root.data < data ? root.right : root.left;
+                return this._findR(data, next);
+            }
+        }
+        return false;
+    }
+
+    findRecursively(data) {
+        return this._findR(data, this.root);
+    }
+
     insert(data) {
         if (this.root === null) {
             this.root = new BNode(data);
