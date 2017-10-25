@@ -73,7 +73,6 @@ function selectionSort(arr) {
  * Worst case: Θ(n*n).
  * Best case: Θ(n*n).
  */
- */
 
 selectionSort(arr);
 console.log('Sorted array:\n', arr);
