@@ -25,6 +25,7 @@ More info:
 
 * grid-column - shorthand for grid-column-start and grid-column-end
 
+https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout
 https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns
 
 */
