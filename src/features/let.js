@@ -4,7 +4,7 @@
 var x = 'global';
 let y = 'global';
 console.log(this.x); // "global" (undefined in Node)
-console.log(this.y); // undefined
+console.log(this.index); // undefined
 
 function f1() {
     {

@@ -1,5 +1,5 @@
-import { randomSortedNumbers } from "./helper/randomNumbers";
-import { removeDuplicates } from "./helper/dedupe";
+import { randomSortedNumbers } from "../helper/randomNumbers";
+import { removeDuplicates } from "../helper/dedupe";
 
 let arr = randomSortedNumbers(30, 0, 1000);
 removeDuplicates(arr);

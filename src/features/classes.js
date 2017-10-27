@@ -65,12 +65,12 @@ class Circle {} // class declarations are not hoisted
     class Point {
         constructor(x, y) {
             this.x = x;
-            this.y = y;
+            this.index = y;
         }
 
         static distance(a, b) {
             const dx = a.x - b.x;
-            const dy = a.y - b.y;
+            const dy = a.index - b.index;
 
             return Math.hypot(dx, dy);
         }

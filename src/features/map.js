@@ -50,6 +50,13 @@ Objects and maps compared:
     // [ 'a', 'hey' ]
     // [ 'b', 'hi' ]
 
+    for (let [key, value] of m) {
+        console.log(`${key} - ${value}`);
+    }
+
+    // a - hey
+    // b - hi
+
     m.forEach((value, key, map) => {
         console.log(value, key);
     });

@@ -92,7 +92,7 @@
 
 {
     // Setting a function parameter's default value
-    function draw({size = 'big', coords = {x: 0, y: 0}, radius = 25} = {}) {
+    function draw({size = 'big', coords = {x: 0, index: 0}, radius = 25} = {}) {
         console.log(size, coords, radius);
     }
 

@@ -43,10 +43,13 @@ returned by the then's successCallback, failureCallback or generated automatical
         return timeout(2000);
     }).then(() => {
         console.log(2);
-        throw new Error("hmm");
+        throw new Error("dammit");
     }).catch(err => {
         return Promise.all([timeout(100), timeout(200)]);
     });
+
+    console.log(p);
+    // Promise {[[PromiseStatus]]: "pending", [[PromiseValue]]: undefined}
 }
 
 function inSequence(promises) {
@@ -74,3 +77,6 @@ new Promise((resolve, reject) => reject('failure'))
     .then(() => console.log('c'))  // doesn't run
     .catch(err => console.log('Catch:', err))         // Catch: failure
     .then(() => console.log('Continue after catch')); // Continue after catch
+
+
+// https://developers.google.com/web/updates/2017/10/promise-finally
