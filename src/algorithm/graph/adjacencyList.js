@@ -192,28 +192,26 @@ class ListGraph {
         return {parent, depth, state};
     }
 
-    countConnectedComponents() {
-        let n = 0;
+    getConnectedComponents() {
         let k = this.vertexCount;
+        let components = [];
         let state;
-
-        console.log(`\nCounting connected components of ${ this.directed ? '' : 'un' }directed graph:`);
-        let out = [];
-        function processVertexEarly(v) {
-            out.push(v);
-        }
 
         for (let i = 1; i <= k; i++) {
             if (!state || !state[i]) {
-                out.length = 0;
+                let nodes = [];
+                let links = [];
 
-                n++;
-                state = this.bfs(i, {state, processVertexEarly}).state;
+                state = this.bfs(i, {state,
+                    processVertexEarly: v => nodes.push({index: v}),
+                    processEdge: (u, v) => links.push({source: u, target: v})
+                }).state;
 
-                console.log(out.join());
+                components.push({nodes, links});
             }
         }
-        return n;
+
+        return components;
     }
 
     findPath(start, end, parent, print = false) {
@@ -360,7 +358,13 @@ class ListGraph {
 
     directedGraph.findPath(1, 2, directedGraph.bfs(1).parent, true);
 
-    undirectedGraph.countConnectedComponents();
+    {
+        let comps = undirectedGraph.getConnectedComponents();
+        console.log(JSON.stringify(comps, null, 4));
+    }
 
-    directedGraph.countConnectedComponents();
+    {
+        let comps = directedGraph.getConnectedComponents();
+        console.log(JSON.stringify(comps, null, 4));
+    }
 }
