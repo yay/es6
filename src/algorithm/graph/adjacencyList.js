@@ -91,7 +91,7 @@ class ListGraph {
         let graph;
 
         if (ln) {
-            graph = new ListGraph();
+            graph = new ListGraph(directed);
             let header = lines[0];
             let counts = header.split(' ');
             graph.vertexCount = parseInt(counts[0], 10);
@@ -132,17 +132,21 @@ class ListGraph {
 
     /**
      * Breadth-first search.
-     * @param {Number} start The index of the root vertex.
-     * @param {Function} processVertex Passed a vertex index.
-     * @param {Function} processEdge Passed two vertex indexes.
+     *
+     * Complexity for undirected unweighted graph is O(|V|+|E|)
+     * because we process each vertex and edge only once.
      */
-    bfs(start, processVertex, processEdge) {
-        if (!start) return;
+    bfs(start, options) {
+        if (!(start && options)) return;
+
+        let pVe = options.processVertexEarly;
+        let pVl = options.processVertexLate;
+        let pE = options.processEdge;
 
         let state = [];  // vertexIndex -> 0 | 1 | 2
-        let parent = []; // vertexIndex -> vertexIndex
         let queue = [];  // of vertexIndex
-        let depth = [];
+        let parent = []; // vertexIndex -> vertexIndex
+        let depth = [];  // vertexIndex -> Number
 
         // Since a vertex is discovered at most once, it has at most one parent.
 
@@ -152,35 +156,46 @@ class ListGraph {
         queue.push(start);
         while (queue.length) {
             let u = queue.shift();
-            processVertex(u);
+            pVe && pVe(u); // process vertex early
 
-            let p = this.edges[u];
+            let p = this.edges[u];           // cursor for list walking
             while (p) {
                 let v = p.index;
+                if (state[v] !== 2 || this.directed) {
+                    // If the vertex we link to hasn't been processed yet
+                    // in an undirected graph, it means that:
+                    // - either we just discovered it
+                    //   and so we should process this edge;
+                    // - or this vertex has been already discovered
+                    //   from another vertex, but this edge is still new
+                    //   and we should process it.
+                    // In a directed graph all back-links are unique and
+                    // should be processed.
+                    pE && pE(u, v);          // process edge
+                }
                 if (!state[v]) {             // undiscovered
-                    processEdge(u, v);
                     state[v] = 1;            // discovered
                     parent[v] = u;           // u is a parent of v
                     depth[v] = depth[u] + 1;
                     queue.push(v);
-                } else if (this.directed) {
-                    processEdge(u, v);
                 }
                 p = p.next;
             }
             state[u] = 2; // processed
+            pVl && pVl(u); // process vertex late
         }
-        return parent;
+        return {parent, depth};
     }
 
     traverse(index) {
-        this.bfs(index,
-            (x) => {
+        this.bfs(index, {
+            processVertexEarly: (x) => {
                 console.log(x);
             },
-            (x, y) => {
+            processEdge: (x, y) => {
                 console.log(`(${x}, ${y})`);
-            });
+            }
+        });
     }
 }
 
@@ -225,11 +240,19 @@ class ListGraph {
     // (1, 5)
     // 3
     // (3, 7)
+    // (3, 1)
     // 4
+    // (4, 5)
     // 5
+    // (5, 7)
     // (5, 6)
     // 7
     // 6
+    // (6, 7)
+    //
+    // Out of total 7 vertices and 10 edges, 6 vertices and 9 edges are listed,
+    // because vertex 2 and edge (2,4) are unreachable in this directed graph
+    // if traversal is started from vertex #1.
 
     console.log('\nTraverse undirected graph:\n');
     undirectedGraph.traverse(1);
@@ -243,10 +266,13 @@ class ListGraph {
     // 3
     // (3, 7)
     // 4
+    // (4, 5)
     // (4, 2)
     // 5
+    // (5, 7)
     // (5, 6)
     // 7
+    // (7, 6)
     // 2
     // 6
 }
