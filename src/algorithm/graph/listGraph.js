@@ -138,7 +138,7 @@ class ListGraph {
      * because we process each vertex and edge only once.
      */
     bfs(start, options = {}) {
-        if (!(start && options)) return;
+        if (!start) return;
 
         let pVe = options.processVertexEarly;
         let pVl = options.processVertexLate;
@@ -187,6 +187,54 @@ class ListGraph {
                 p = p.next;
             }
             state[u] = 2;  // processed
+            pVl && pVl(u); // process vertex late
+        }
+        return {parent, depth, state};
+    }
+
+    /*
+    The difference between BFS and DFS results is in the order in which they
+    explore vertices. This order depends completely upon the container data structure
+    used to store the discovered but not processed vertices:
+    - queue (FIFO) - explore the oldest discovered vertices first;
+    - stack (FILO) - explore the
+    */
+
+    dfs(start, options = {}) {
+        if (!start) return;
+
+        let pVe = options.processVertexEarly;
+        let pVl = options.processVertexLate;
+        let pE = options.processEdge;
+
+        let state = options.state || [];
+        let parent = [];
+        let depth = [];
+
+        depth[start] = 0;
+        state[start] = 1; // discovered
+
+        let stack = []; // process stack of vertexIndex
+        stack.push(start);
+        while (stack.length) {
+            let u = stack.pop();
+            pVe && pVe(u); // process vertex early
+
+            let p = this.edges[u];
+            while (p) {
+                let v = p.index;
+                if (state[v] !== 2 || this.directed) {
+                    pE && pE(u, v);          // process edge
+                }
+                if (!state[v]) {  // undiscovered
+                    state[v] = 1; // discovered
+                    parent[v] = u;
+                    depth[v] = depth[u] + 1;
+                    stack.push(v);
+                }
+                p = p.next;
+            }
+            state[u] = 2; // processed
             pVl && pVl(u); // process vertex late
         }
         return {parent, depth, state};
@@ -289,8 +337,8 @@ class ListGraph {
         }
     }
 
-    traverse(index) {
-        this.bfs(index, {
+    traverse(index, {type = 'bfs'} = {}) {
+        this[type](index, {
             processVertexEarly: (x) => {
                 console.log(x);
             },
@@ -347,8 +395,11 @@ function examples() {
     console.log('\nUndirected graph:\n');
     undirectedGraph.printGraph();
 
-    console.log('\nTraverse directed graph:\n');
+    console.log('\nBFS traverse directed graph:\n');
     directedGraph.traverse(1);
+
+    console.log('\nDFS traverse directed graph:\n');
+    directedGraph.traverse(1, {type: 'dfs'});
 
     // Traverse directed graph:
     //
@@ -372,8 +423,11 @@ function examples() {
     // because vertex 2 and edge (2,4) are unreachable in this directed graph
     // if traversal is started from vertex #1.
 
-    console.log('\nTraverse undirected graph:\n');
+    console.log('\nBFS traverse undirected graph:\n');
     undirectedGraph.traverse(1);
+
+    console.log('\nDFS traverse undirected graph:\n');
+    undirectedGraph.traverse(1, {type: 'dfs'});
 
     // Traverse undirected graph:
     //
