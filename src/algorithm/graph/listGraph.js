@@ -217,6 +217,37 @@ class ListGraph {
         return components;
     }
 
+    twoColor() {
+        let k = this.vertexCount;
+        let colors = [];
+        let bipartite = true;
+        let state;
+
+        function complement(color) {
+            if (color === 1) return 0;
+            if (color === 0) return 1;
+            return undefined;
+        }
+
+        for (let i = 1; i <= k; i++) {
+            if (!state || !state[i]) {
+                colors[i] = 1; // 0 - black, 1 - white, undefined - uncolored
+                state = this.bfs(i, {state,
+                    processEdge: (u, v) => { // here we are given unique edges only
+                        if (colors[u] === colors[v]) {
+                            bipartite = false;
+                            console.warn(`Warning: not bipartite due to (${u}, ${v}).`);
+                        } else {
+                            colors[v] = complement(colors[u]);
+                        }
+                    }
+                }).state;
+            }
+        }
+
+        return {bipartite, colors};
+    }
+
     findPath(start, end, parent, print = false) {
         if (!start || start >= end) return;
 
@@ -281,6 +312,7 @@ export { ListGraph, EdgeNode }
 function examples() {
     let graphSpec = [
         '7 10', // 7 vertices, 10 edges (next 10 lines)
+
         '1 5',
         '1 4',
         '1 3',
@@ -290,6 +322,19 @@ function examples() {
         '4 5',
         '5 6',
         '5 7',
+        '6 7'
+    ];
+
+    let bipartiteGraphSpec = [
+        '7 8',
+
+        '1 2',
+        '1 3',
+        '2 4',
+        '3 4',
+        '3 7',
+        '4 5',
+        '4 6',
         '6 7'
     ];
 
@@ -371,6 +416,21 @@ function examples() {
     {
         let comps = directedGraph.getConnectedComponents();
         console.log(JSON.stringify(comps, null, 4));
+    }
+
+    {
+        let result = undirectedGraph.twoColor();
+        console.log(result);
+    }
+
+    {
+        // undirected bipartite graph
+        console.log('This graph must be bipartite:');
+        let graph = ListGraph.readGraph(bipartiteGraphSpec, false);
+        graph.printGraph();
+
+        let result = graph.twoColor();
+        console.log(result);
     }
 }
 

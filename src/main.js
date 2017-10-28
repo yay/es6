@@ -4,8 +4,8 @@
 // import './features/iterators';
 // import './features/proxy';
 // import './features/promises';
-// import './algorithm/graph/listGraph';
-import './d3/graphExample';
+import './algorithm/graph/listGraph';
+// import './d3/graphExample';
 
 // console.log("2π = " + sum(pi, pi));
 
