@@ -192,11 +192,13 @@ class ListGraph {
         return {parent, depth, state};
     }
 
-    getConnectedComponents({zeroBasedIndex = false}) {
+    getConnectedComponents({toNode, toLink} = {}) {
         let k = this.vertexCount;
         let components = [];
-        let o = zeroBasedIndex ? -1 : 0; // offset
         let state;
+
+        toNode = toNode || (v => v);
+        toLink = toLink || ((u, v) => [u, v]);
 
         for (let i = 1; i <= k; i++) {
             if (!state || !state[i]) {
@@ -204,8 +206,8 @@ class ListGraph {
                 let links = [];
 
                 state = this.bfs(i, {state,
-                    processVertexEarly: v => nodes.push({index: v + o}),
-                    processEdge: (u, v) => links.push({source: u + o, target: v + o})
+                    processVertexEarly: v => nodes.push(toNode(v)),
+                    processEdge: (u, v) => links.push(toLink(u, v))
                 }).state;
 
                 components.push({nodes, links});
@@ -371,3 +373,5 @@ function examples() {
         console.log(JSON.stringify(comps, null, 4));
     }
 }
+
+examples();

@@ -17,7 +17,10 @@ let graphSpec = [
 
 window.onload = function () {
     let graph = new ListGraph.readGraph(graphSpec, false);
-    let comps = graph.getConnectedComponents({zeroBasedIndex: true});
+    let comps = graph.getConnectedComponents({
+        toNode: v => ({index: v - 1}),
+        toLink: (u, v) => ({source: u - 1, target: v - 1})
+    });
 
     if (comps.length) {
         renderGraph(comps[0]);

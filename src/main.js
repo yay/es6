@@ -2,7 +2,10 @@
 // import { BTree } from "./algorithm/binarySearchTree";
 // import './features/objectLiterals';
 // import './features/iterators';
-import './features/proxy';
+// import './features/proxy';
+// import './features/promises';
+// import './algorithm/graph/listGraph';
+import './d3/graphExample';
 
 // console.log("2π = " + sum(pi, pi));
 
@@ -16,5 +19,5 @@ import './features/proxy';
 //     btree.inOrder();
 //
 //     console.log('7 found:', btree.find(7));
+//     console.log('7 found recursively:', btree.findRecursively(7));
 // };
-
