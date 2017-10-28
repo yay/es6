@@ -192,9 +192,10 @@ class ListGraph {
         return {parent, depth, state};
     }
 
-    getConnectedComponents() {
+    getConnectedComponents({zeroBasedIndex = false}) {
         let k = this.vertexCount;
         let components = [];
+        let o = zeroBasedIndex ? -1 : 0; // offset
         let state;
 
         for (let i = 1; i <= k; i++) {
@@ -203,8 +204,8 @@ class ListGraph {
                 let links = [];
 
                 state = this.bfs(i, {state,
-                    processVertexEarly: v => nodes.push({index: v}),
-                    processEdge: (u, v) => links.push({source: u, target: v})
+                    processVertexEarly: v => nodes.push({index: v + o}),
+                    processEdge: (u, v) => links.push({source: u + o, target: v + o})
                 }).state;
 
                 components.push({nodes, links});
@@ -267,14 +268,16 @@ class ListGraph {
     }
 }
 
+export { ListGraph, EdgeNode }
+
 // We represent directed edge (x,y) by an EdgeNode y in x's adjacency list.
 // The 'degree' field counts the number of meaningful entries for the given vertex.
 // An undirected edge (x,y) appears twice in any adjacency-based graph structure:
 // once as y in x's list, once in x in y's list.
 // The 'directed' flag tells us how to interpret the given graph (directed or not).
 
-{
-    let lines = [
+function examples() {
+    let graphSpec = [
         '7 10', // 7 vertices, 10 edges (next 10 lines)
         '1 5',
         '1 4',
@@ -288,8 +291,8 @@ class ListGraph {
         '6 7'
     ];
 
-    let directedGraph = ListGraph.readGraph(lines, true);
-    let undirectedGraph = ListGraph.readGraph(lines, false);
+    let directedGraph = ListGraph.readGraph(graphSpec, true);
+    let undirectedGraph = ListGraph.readGraph(graphSpec, false);
 
     console.log('\nDirected graph:\n');
     directedGraph.printGraph();
