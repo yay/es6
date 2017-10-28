@@ -136,7 +136,7 @@ class ListGraph {
      * Complexity for undirected unweighted graph is O(|V|+|E|)
      * because we process each vertex and edge only once.
      */
-    bfs(start, options) {
+    bfs(start, options = {}) {
         if (!(start && options)) return;
 
         let pVe = options.processVertexEarly;
@@ -144,15 +144,19 @@ class ListGraph {
         let pE = options.processEdge;
 
         let state = [];  // vertexIndex -> 0 | 1 | 2
-        let queue = [];  // of vertexIndex
         let parent = []; // vertexIndex -> vertexIndex
         let depth = [];  // vertexIndex -> Number
 
         // Since a vertex is discovered at most once, it has at most one parent.
+        // The `parent` array represents the discovery tree. Because vertices
+        // are discovered in order of increasing distance from the root, the unique
+        // path from each vertex to the root uses the smallest number of edges
+        // possible.
 
         depth[start] = 0;
         state[start] = 1; // discovered
 
+        let queue = [];   // process queue of vertexIndex
         queue.push(start);
         while (queue.length) {
             let u = queue.shift();
@@ -185,6 +189,27 @@ class ListGraph {
             pVl && pVl(u); // process vertex late
         }
         return {parent, depth};
+    }
+
+    findPath(start, end, parent) {
+        if (!start || start >= end) return;
+
+        let path = [];
+        let cursor = end;
+        while (cursor && start !== cursor) {
+            path.push(cursor);
+            cursor = parent[cursor];
+        }
+
+        let graph = (this.directed ? '' : 'un') + 'directed';
+        if (start === cursor) {
+            path.push(start);
+            console.log(`\nShortest path from ${start} to ${end} in ${graph} graph:\n`
+                + path.reverse().join(' -> '));
+        } else {
+            console.log(`\n${end} can't be reached from ${start}`
+                + ` in the given ${graph} graph.`);
+        }
     }
 
     traverse(index) {
@@ -275,4 +300,11 @@ class ListGraph {
     // (7, 6)
     // 2
     // 6
+
+    undirectedGraph.findPath(2, 7, undirectedGraph.bfs(2).parent);
+    // Notice how we had to use 2 as the root for the breadth-first search
+    // to generate the child-parent tree to be used by findPath.
+
+
+    directedGraph.findPath(1, 2, directedGraph.bfs(1).parent);
 }
