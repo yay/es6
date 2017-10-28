@@ -133,7 +133,8 @@ class ListGraph {
     /**
      * Breadth-first search.
      *
-     * Complexity for undirected unweighted graph is O(|V|+|E|)
+     * Linear time:
+     * O(|V|+|E|) for both directed and undirected graphs (unweighted)
      * because we process each vertex and edge only once.
      */
     bfs(start, options = {}) {
@@ -143,7 +144,7 @@ class ListGraph {
         let pVl = options.processVertexLate;
         let pE = options.processEdge;
 
-        let state = [];  // vertexIndex -> 0 | 1 | 2
+        let state = options.state || [];  // vertexIndex -> 0 | 1 | 2
         let parent = []; // vertexIndex -> vertexIndex
         let depth = [];  // vertexIndex -> Number
 
@@ -185,10 +186,34 @@ class ListGraph {
                 }
                 p = p.next;
             }
-            state[u] = 2; // processed
+            state[u] = 2;  // processed
             pVl && pVl(u); // process vertex late
         }
-        return {parent, depth};
+        return {parent, depth, state};
+    }
+
+    countConnectedComponents() {
+        let n = 0;
+        let k = this.vertexCount;
+        let state;
+
+        console.log(`\nCounting connected components of ${ this.directed ? '' : 'un' }directed graph:`);
+        let out = [];
+        function processVertexEarly(v) {
+            out.push(v);
+        }
+
+        for (let i = 1; i <= k; i++) {
+            if (!state || !state[i]) {
+                out.length = 0;
+
+                n++;
+                state = this.bfs(i, {state, processVertexEarly}).state;
+
+                console.log(out.join());
+            }
+        }
+        return n;
     }
 
     findPath(start, end, parent, print = false) {
@@ -334,4 +359,8 @@ class ListGraph {
     undirectedGraph.findPathR(2, 7, undirectedGraph.bfs(2).parent);
 
     directedGraph.findPath(1, 2, directedGraph.bfs(1).parent, true);
+
+    undirectedGraph.countConnectedComponents();
+
+    directedGraph.countConnectedComponents();
 }
