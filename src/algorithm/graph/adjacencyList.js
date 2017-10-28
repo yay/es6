@@ -191,24 +191,44 @@ class ListGraph {
         return {parent, depth};
     }
 
-    findPath(start, end, parent) {
+    findPath(start, end, parent, print = false) {
         if (!start || start >= end) return;
 
         let path = [];
         let cursor = end;
+
         while (cursor && start !== cursor) {
             path.push(cursor);
             cursor = parent[cursor];
         }
 
-        let graph = (this.directed ? '' : 'un') + 'directed';
         if (start === cursor) {
             path.push(start);
-            console.log(`\nShortest path from ${start} to ${end} in ${graph} graph:\n`
-                + path.reverse().join(' -> '));
+            path.reverse();
         } else {
-            console.log(`\n${end} can't be reached from ${start}`
-                + ` in the given ${graph} graph.`);
+            path = null;
+        }
+
+        if (print) {
+            let graph = (this.directed ? '' : 'un') + 'directed';
+            if (path) {
+                console.log(`\nShortest path from ${start} to ${end} (${graph}):\n`
+                    + path.join(' -> '));
+            } else {
+                console.log(`\n${end} can't be reached from ${start} (${graph}).`);
+            }
+        }
+
+        return path;
+    }
+
+    // Reverse the path using recursion.
+    findPathR(start, end, parent) {
+        if (start === end || !end) {
+            console.log(start);
+        } else {
+            this.findPathR(start, parent[end], parent);
+            console.log(end);
         }
     }
 
@@ -301,10 +321,17 @@ class ListGraph {
     // 2
     // 6
 
-    undirectedGraph.findPath(2, 7, undirectedGraph.bfs(2).parent);
+    // There are two points to remember when using breadth-first search
+    // to find a shortest path from x to y:
+    // 1) the shortest path tree is only useful if BFS was performed with x
+    //    as the root of the search;
+    // 2) BFS gives the shortest path only if the graph is unweighted.
+
+    undirectedGraph.findPath(2, 7, undirectedGraph.bfs(2).parent, true);
     // Notice how we had to use 2 as the root for the breadth-first search
     // to generate the child-parent tree to be used by findPath.
+    console.log('\nFind and print the above path using recursion:\n');
+    undirectedGraph.findPathR(2, 7, undirectedGraph.bfs(2).parent);
 
-
-    directedGraph.findPath(1, 2, directedGraph.bfs(1).parent);
+    directedGraph.findPath(1, 2, directedGraph.bfs(1).parent, true);
 }
