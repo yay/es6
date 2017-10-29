@@ -1,21 +1,32 @@
-class EdgeNode {
+class Link {
     constructor(y, next = null) {
-        this.index = y;       // adjacency info
-        this.next = next;     // next edge in list
+        this.index = y;       // the vertex `y` that `x` has as a neighbour
+        this.next = next;     // next Link (another neighbour of `x`), if any
     }
 }
 
-// Adjacency list - array where each element is a linked list (EdgeNode).
+// Naming convention:
+//
+//     node = vertex
+//     link = edge
+//
+// Variable names lean in favor of `node` and `link` while in comments
+// node/vertex and link/edge can be used interchangeably.
+
+// Adjacency list - array where each element is a linked list of Links.
 // Specifies which other vertices each vertex is connected to by an edge.
 //
 // Directed graph:
 //
-//     [1] -> 3 -> 4 -> 5
-//     [2] -> 4
-//     [3] -> 7 -> 1
-//     [4] -> 5
-//     [5] -> 7 -> 6
-//     [6] -> 7
+//    index      [n] - indexes of the `links` array, where n is the vertex (node) index
+//      |        (n) - instances of Link, with instance `index` set n
+//      V
+//     [1] -> (3) -> (4) -> (5)
+//     [2] -> (4)
+//     [3] -> (7) -> (1)
+//     [4] -> (5)
+//     [5] -> (7) -> (6)
+//     [6] -> (7)
 //     [7]
 
 // In a directed graph the length of all linked lists (not counting the head)
@@ -28,13 +39,13 @@ class EdgeNode {
 //
 // Undirected graph:
 //
-//     [1] -> 3 -> 4 -> 5
-//     [2] -> 4
-//     [3] -> 7 -> 1
-//     [4] -> 5 -> 2 -> 1
-//     [5] -> 7 -> 6 -> 4 -> 1
-//     [6] -> 7 -> 5
-//     [7] -> 6 -> 5 -> 3
+//     [1] -> (3) -> (4) -> (5)
+//     [2] -> (4)
+//     [3] -> (7) -> (1)
+//     [4] -> (5) -> (2) -> (1)
+//     [5] -> (7) -> (6) -> (4) -> (1)
+//     [6] -> (7) -> (5)
+//     [7] -> (6) -> (5) -> (3)
 
 // The weight w(u, v) of the edge (u, v) can be stored in the vertex v
 // of the u's adjacency list.
@@ -44,15 +55,15 @@ class EdgeNode {
 
 class ListGraph {
     constructor(directed = false) {
-        this.edges = [];  // adjacency info (as shown above), 1-based indexes
-        this.degree = []; // degree of each vertex, 1-based indexes
-        this.vertexCount = 0;
-        this.edgeCount = 0;
+        this.links = [];  // adjacency info (as shown above), 1-based indexes
+        this.degree = []; // degree of each node, 1-based indexes
+        this.nodeCount = 0;
+        this.linkCount = 0;
         this.directed = directed;
     }
 
     exists(x, y) {
-        let node = this.edges[x];
+        let node = this.links[x];
         while (node) {
             if (node.index === y)
                 return true;
@@ -61,18 +72,18 @@ class ListGraph {
         return false;
     }
 
-    insertEdge(x, y, directed = false) {
+    insertLink(x, y, directed = false) {
         if (this.exists(x, y))
             return;
 
-        let edges = this.edges;
-        edges[x] = new EdgeNode(y, edges[x]); // insert at head of list
+        let links = this.links;
+        links[x] = new Link(y, links[x]); // insert at head of list
         this.degree[x] = (this.degree[x] || 0) + 1;
 
         if (directed) {
-            this.edgeCount++;
+            this.linkCount++;
         } else {
-            this.insertEdge(y, x, true);
+            this.insertLink(y, x, true);
         }
 
     }
@@ -80,8 +91,8 @@ class ListGraph {
     /**
      * Parses an array of strings in the following format into
      * an adjacency list:
-     * First line:                 '<vertexCount> <edgeCount>'
-     * Subsequent edgeCount lines: '<vertexIndex> <vertexIndex>'
+     * First line:                 '<nodeCount> <linkCount>'
+     * Subsequent linkCount lines: '<nodeIndex> <nodeIndex>'
      * @param lines String[]
      * @param directed Boolean
      * @return {ListGraph}
@@ -94,16 +105,16 @@ class ListGraph {
             graph = new ListGraph(directed);
             let header = lines[0];
             let counts = header.split(' ');
-            graph.vertexCount = parseInt(counts[0], 10);
-            let edgeCount = parseInt(counts[1], 10);
+            graph.nodeCount = parseInt(counts[0], 10);
+            let linkCount = parseInt(counts[1], 10);
 
-            for (let i = 1; i <= edgeCount; i++) {
+            for (let i = 1; i <= linkCount; i++) {
                 let line = lines[i];
                 let xy = line.split(' ');
                 let x = parseInt(xy[0], 10);
                 let y = parseInt(xy[1], 10);
 
-                graph.insertEdge(x, y, directed);
+                graph.insertLink(x, y, directed);
             }
         }
 
@@ -111,13 +122,13 @@ class ListGraph {
     }
 
     printGraph() {
-        let vertexCount = this.vertexCount;
-        for (let i = 1; i <= vertexCount; i++) {
-            let edgeNode = this.edges[i];
+        let nodeCount = this.nodeCount;
+        for (let i = 1; i <= nodeCount; i++) {
+            let link = this.links[i];
             let str = `[${i}]`;
-            while (edgeNode) {
-                str += ` -> ${edgeNode.index}`;
-                edgeNode = edgeNode.next;
+            while (link) {
+                str += ` -> ${link.index}`;
+                link = link.next;
             }
             console.log(str);
         }
@@ -137,14 +148,9 @@ class ListGraph {
      * O(|V|+|E|) for both directed and undirected graphs (unweighted)
      * because we process each vertex and edge only once.
      */
-    bfs(start, options = {}) {
+    bfs(start, {processNodeSoon, processNodeLate, processLink, state = []} = {}) {
         if (!start) return;
 
-        let pVe = options.processVertexEarly;
-        let pVl = options.processVertexLate;
-        let pE = options.processEdge;
-
-        let state = options.state || [];  // vertexIndex -> 0 | 1 | 2
         let parent = []; // vertexIndex -> vertexIndex
         let depth = [];  // vertexIndex -> Number
 
@@ -161,9 +167,9 @@ class ListGraph {
         queue.push(start);
         while (queue.length) {
             let u = queue.shift();
-            pVe && pVe(u); // process vertex early
+            processNodeSoon && processNodeSoon(u);
 
-            let p = this.edges[u];           // cursor for list walking
+            let p = this.links[u];           // cursor for list walking
             while (p) {
                 let v = p.index;
                 if (state[v] !== 2 || this.directed) {
@@ -176,7 +182,7 @@ class ListGraph {
                     //   and we should process it.
                     // In a directed graph all back-links are unique and
                     // should be processed.
-                    pE && pE(u, v);          // process edge
+                    processLink && processLink(u, v);
                 }
                 if (!state[v]) {             // undiscovered
                     state[v] = 1;            // discovered
@@ -186,8 +192,8 @@ class ListGraph {
                 }
                 p = p.next;
             }
+            processNodeLate && processNodeLate(u);
             state[u] = 2;  // processed
-            pVl && pVl(u); // process vertex late
         }
         return {parent, depth, state};
     }
@@ -200,14 +206,9 @@ class ListGraph {
     - stack (FILO) - explore the
     */
 
-    dfs(start, options = {}) {
+    dfs(start, {processNodeSoon, processNodeLate, processLink, state = []} = {}) {
         if (!start) return;
 
-        let pVe = options.processVertexEarly;
-        let pVl = options.processVertexLate;
-        let pE = options.processEdge;
-
-        let state = options.state || [];
         let parent = [];
         let depth = [];
 
@@ -218,13 +219,13 @@ class ListGraph {
         stack.push(start);
         while (stack.length) {
             let u = stack.pop();
-            pVe && pVe(u); // process vertex early
+            processNodeSoon && processNodeSoon(u);
 
-            let p = this.edges[u];
+            let p = this.links[u];
             while (p) {
                 let v = p.index;
                 if (state[v] !== 2 || this.directed) {
-                    pE && pE(u, v);          // process edge
+                    processLink && processLink(u, v);
                 }
                 if (!state[v]) {  // undiscovered
                     state[v] = 1; // discovered
@@ -234,14 +235,54 @@ class ListGraph {
                 }
                 p = p.next;
             }
+            processNodeLate && processNodeLate(u);
             state[u] = 2; // processed
-            pVl && pVl(u); // process vertex late
         }
         return {parent, depth, state};
     }
 
+    dfsR(start, {processNodeSoon, processNodeLate, processLink, state = []} = {}) {
+        if (!start) return;
+
+        let links = this.links;
+        let directed = this.directed;
+        let parent = [];
+        let depth = [];
+        let inTime = [];
+        let outTime = [];
+        let time = 0;
+
+        depth[start] = 0;
+
+        (function search(u) {
+            state[u] = 1; // discovered
+            inTime[u] = ++time;
+            processNodeSoon && processNodeSoon(u);
+
+            let p = links[u];
+            while (p) {
+                let v = p.index;
+                if (!state[v]) { // undiscovered
+                    parent[v] = u;
+                    depth[v] = depth[u] + 1;
+                    processLink && processLink(u, v);
+                    search(v);
+                } else if (directed) {
+                    processLink && processLink(u, v);
+                }
+                p = p.next;
+            }
+
+            processNodeLate && processNodeLate(u);
+            outTime[u] = ++time;
+            state[u] = 2; // processed
+        })(start);
+
+        return {parent, depth, state, inTime, outTime};
+    }
+
     getConnectedComponents({toNode, toLink} = {}) {
-        let k = this.vertexCount;
+        let k = this.nodeCount;
         let components = [];
         let state;
 
@@ -254,8 +295,8 @@ class ListGraph {
                 let links = [];
 
                 state = this.bfs(i, {state,
-                    processVertexEarly: v => nodes.push(toNode(v)),
-                    processEdge: (u, v) => links.push(toLink(u, v))
+                    processNodeSoon: v => nodes.push(toNode(v)),
+                    processLink: (u, v) => links.push(toLink(u, v))
                 }).state;
 
                 components.push({nodes, links});
@@ -266,7 +307,7 @@ class ListGraph {
     }
 
     twoColor() {
-        let k = this.vertexCount;
+        let k = this.nodeCount;
         let colors = [];
         let bipartite = true;
         let state;
@@ -281,7 +322,7 @@ class ListGraph {
             if (!state || !state[i]) {
                 colors[i] = 1; // 0 - black, 1 - white, undefined - uncolored
                 state = this.bfs(i, {state,
-                    processEdge: (u, v) => { // here we are given unique edges only
+                    processLink: (u, v) => { // here we are given unique edges only
                         if (colors[u] === colors[v]) {
                             bipartite = false;
                             console.warn(`Warning: not bipartite due to (${u}, ${v}).`);
@@ -337,19 +378,19 @@ class ListGraph {
         }
     }
 
-    traverse(index, {type = 'bfs'} = {}) {
-        this[type](index, {
-            processVertexEarly: (x) => {
+    printTraversal(index, {type = 'bfs'} = {}) {
+        return this[type](index, {
+            processNodeSoon: (x) => {
                 console.log(x);
             },
-            processEdge: (x, y) => {
+            processLink: (x, y) => {
                 console.log(`(${x}, ${y})`);
             }
         });
     }
 }
 
-export { ListGraph, EdgeNode }
+export { ListGraph, Link }
 
 // We represent directed edge (x,y) by an EdgeNode y in x's adjacency list.
 // The 'degree' field counts the number of meaningful entries for the given vertex.
@@ -396,10 +437,7 @@ function examples() {
     undirectedGraph.printGraph();
 
     console.log('\nBFS traverse directed graph:\n');
-    directedGraph.traverse(1);
-
-    console.log('\nDFS traverse directed graph:\n');
-    directedGraph.traverse(1, {type: 'dfs'});
+    directedGraph.printTraversal(1);
 
     // Traverse directed graph:
     //
@@ -423,11 +461,11 @@ function examples() {
     // because vertex 2 and edge (2,4) are unreachable in this directed graph
     // if traversal is started from vertex #1.
 
-    console.log('\nBFS traverse undirected graph:\n');
-    undirectedGraph.traverse(1);
+    console.log('\nDFS traverse directed graph:\n');
+    directedGraph.printTraversal(1, {type: 'dfs'});
 
-    console.log('\nDFS traverse undirected graph:\n');
-    undirectedGraph.traverse(1, {type: 'dfs'});
+    console.log('\nBFS traverse undirected graph:\n');
+    undirectedGraph.printTraversal(1);
 
     // Traverse undirected graph:
     //
@@ -447,6 +485,15 @@ function examples() {
     // (7, 6)
     // 2
     // 6
+
+    console.log('\nDFS traverse undirected graph:\n');
+    undirectedGraph.printTraversal(1, {type: 'dfs'});
+
+    {
+        console.log('\nRecursive DFS traverse undirected graph:\n');
+        let result = undirectedGraph.printTraversal(1, {type: 'dfsR'});
+        console.log(result);
+    }
 
     // There are two points to remember when using breadth-first search
     // to find a shortest path from x to y:
