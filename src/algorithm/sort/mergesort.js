@@ -3,6 +3,8 @@ Mergesort is a divide and conquer algorithm that was invented by John von Neuman
 in 1945. Most implementations produce a stable sort - preserve the input order
 of equal elements in the sorted output.
 
+Does not work in place (unlike selection, insertion, quick sorts etc.)
+
 Merge sort has an average and worst-case performance of O(n log n).
 If the running time of merge sort for a list of length n is T(n),
 then the recurrence T(n) = 2T(n/2) + n follows from the definition
@@ -22,11 +24,21 @@ of the original list, and add the n steps taken to merge the resulting two lists
    log2(n) = k basically means that we need to take k-th root or n to get 2,
    and we have k + 1 summands, the remaining one being 1.
 
-Merge sort as implemented here is slower than the quick sort also implemented here:
-54% slower in Chrome v62
-22% slower in Safari v11
+--- Performance with regular arrays ---------------
+Browser       Quick        Merge          Built-in
+---------------------------------------------------
+Chrome 62    baseline     54% slower     78% slower
+Safari 11    baseline     22% slower
+Firefox 56   2% slower    baseline
 
-However in Firefox 56 the quick sort is 2% slower than merge sort.
+--- Performance with Float64Array arrays (pre-allocated size) ---
+Browser       Quick        Merge          Built-in
+-----------------------------------------------------------------
+Chrome 62    baseline     10% slower     78% slower
+Safari 11    33% slower   baseline       92% slower
+Firefox 56   19% slower   baseline       64% slower
+
+Built-in sort = array.sort((a, b) => a - b)
 
 https://jsperf.com/quick-sort-vs-merge-sort
 
