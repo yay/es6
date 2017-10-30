@@ -37,12 +37,14 @@ let list = [-9, -8, -7, -5, -3, -2, 0, 1, 2, 3, 4, 6, 8, 10];
     // merge sort two sorted arrays
     let ni = 0;
     let pi = 0;
-    let ln = list.length;
+    let nc = negSqrt.length;
+    let pc = posSqrt.length;
+    let count = list.length;
     let result = [];
 
     // Complexity: O(n)
-    for (let k = 0; k < ln; k++) {
-        if (negSqrt[ni] < posSqrt[pi]) {
+    for (let k = 0; k < count; k++) {
+        if (ni < nc && (negSqrt[ni] < posSqrt[pi] || pi >= pc)) {
             result[k] = negSqrt[ni++];
         } else {
             result[k] = posSqrt[pi++];
