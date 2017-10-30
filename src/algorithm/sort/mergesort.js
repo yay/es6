@@ -9,6 +9,19 @@ then the recurrence T(n) = 2T(n/2) + n follows from the definition
 of the algorithm (apply the algorithm to two lists of half the size
 of the original list, and add the n steps taken to merge the resulting two lists).
 
+1) divide step (finding the midpoint) takes O(1) time
+2) merging the arrays takes O(n) time at each level of recursion
+   whether it's merging 2 sub-arrays of size n/2 each
+   or 4 sub-arrays of size n/4 each
+   and so on until the size of each sub-problem is 1
+3) the number of levels of recursion is log2(n) + 1
+   because each time we divide each sub-problem in half:
+   n + n/2 + n/4 + n/8 + ... + 1 = log2(n) + 1
+
+   1 + 2 + 4 + 8 + ... = 2^0 + 2^1 + 2^2 + 2^3 + ...
+   log2(n) = k basically means that we need to take k-th root or n to get 2,
+   and we have k + 1 summands, the remaining one being 1.
+
 Merge sort as implemented here is slower than the quick sort also implemented here:
 54% slower in Chrome v62
 22% slower in Safari v11
