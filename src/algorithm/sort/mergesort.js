@@ -31,12 +31,17 @@ Chrome 62    baseline     54% slower     78% slower
 Safari 11    baseline     22% slower
 Firefox 56   2% slower    baseline
 
---- Performance with Float64Array arrays (pre-allocated size) ---
-Browser       Quick        Merge          Built-in
------------------------------------------------------------------
-Chrome 62    baseline     10% slower     78% slower
-Safari 11    33% slower   baseline       92% slower
-Firefox 56   19% slower   baseline       64% slower
+--- Performance with Float64Array arrays (pre-allocated size) -------
+Browser       Quick        Merge          Built-in      Merge with comp. fn: (a, b) => a < b
+---------------------------------------------------------------------
+Chrome 62    baseline     12% slower     78% slower     68% slower
+Safari 11    33% slower   baseline       92% slower     16% slower
+Firefox 56   19% slower   baseline       64% slower     baseline (yes, just as fast)
+
+--- In terms of absolute performance ---
+Safari 11     baseline   (merge sort)
+Firefox 56    29% slower (merge sort)
+Chrome 62     40% slower (quick sort)
 
 Built-in sort = array.sort((a, b) => a - b)
 
