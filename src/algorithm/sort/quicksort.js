@@ -1,5 +1,5 @@
 /*
-Developed by Tony Hoare in 1959.
+A divide and conquer algorithm developed by Tony Hoare in 1959.
 */
 
 function quicksort(A, lo, hi) {
@@ -105,6 +105,8 @@ function partitionEdu(A, lo, hi, depth) {
 
 {
     let arr = [7, 1, 5, 2, 9, 3];
+
+    console.log(arr);
     quicksort(arr, 0, arr.length - 1);
     console.log(arr);
 }

@@ -23,65 +23,76 @@ of the original list, and add the n steps taken to merge the resulting two lists
    1 + 2 + 4 + 8 + ... = 2^0 + 2^1 + 2^2 + 2^3 + ...
    log2(n) = k basically means that we need to take k-th root or n to get 2,
    and we have k + 1 summands, the remaining one being 1.
-
---- Performance with regular arrays ---------------
-Browser       Quick        Merge          Built-in
----------------------------------------------------
-Chrome 62    baseline     54% slower     78% slower
-Safari 11    baseline     22% slower
-Firefox 56   2% slower    baseline
-
---- Performance with Float64Array arrays (pre-allocated size) -------
-Browser       Quick        Merge          Built-in      Merge with comp. fn: (a, b) => a < b
----------------------------------------------------------------------
-Chrome 62    baseline     12% slower     78% slower     68% slower
-Safari 11    33% slower   baseline       92% slower     16% slower
-Firefox 56   19% slower   baseline       64% slower     baseline (yes, just as fast)
-
---- In terms of absolute performance ---
-Safari 11     baseline   (merge sort)
-Firefox 56    29% slower (merge sort)
-Chrome 62     40% slower (quick sort)
-
-Built-in sort = array.sort((a, b) => a - b)
-
-https://jsperf.com/quick-sort-vs-merge-sort
-
 */
 
-function mergeSort(A, B, start, end) {
-    if (end - start < 2) return;
-    let mid = ~~((start + end) / 2);
-    mergeSort(A, B, start, mid);
-    mergeSort(A, B, mid, end);
-    merge(A, B, start, mid, end);
+function mergesort(A, lo, hi) {
+    let B = A.slice();
+    splitMerge(B, A, lo, hi);
+    return A;
 }
 
-function merge(source, target, start, mid, end) {
-    let i1 = start;
-    let i2 = mid;
-    for (let k = start; k < end; k++) {
-        // still have elements in list1 <and>
-        // (current element of list1 < current element of list2
-        // <or> no more elements in list2)
-        if (i1 < mid && (source[i1] < source[i2] || i2 >= end)) {
-            target[k] = source[i1++];
+function splitMerge(B, A, lo, hi) {
+    if (hi - lo < 2)
+        return;
+
+    let mid = ~~((lo + hi) / 2);
+
+    splitMerge(A, B, lo, mid);
+    splitMerge(A, B, mid, hi);
+
+    merge(B, A, lo, mid, hi);
+}
+
+function merge(A, B, lo, mid, hi) {
+    let i = lo;
+    let j = mid;
+
+    for (let k = lo; k < hi; k++) {
+        if (i < mid && (j >= hi || A[i] <= A[j])) {
+            B[k] = A[i++];
         } else {
-            target[k] = source[i2++];
+            B[k] = A[j++];
         }
     }
 }
 
-{
-    let input = [6,8,9,1,3,3,4,5];
-    let output = [];
-    merge(input, output, 0, 3, input.length);
-    console.log(output);
-}
+// {
+//     let input = [6,8,9,1,3,3,4,5];
+//     let output = [];
+//     // merge(input, output, 0, 3, input.length);
+//     // console.log(output);
+// }
 
 {
-    let source = [7, 1, 5, 2, 9, 3];
-    let target = [];
-    mergeSort(source, target, 0, source.length - 1);
-    console.log(target);
+    let arr = [7, 1, 5, 2, 9, 3];
+
+    console.log(arr);
+    mergesort(arr, 0, arr.length);
+    console.log(arr);
 }
+//
+// function bottomUpMergeSort(A) {
+//     let n = A.length;
+//     let B = Array(n);
+//
+//     for (let width = 1; width < n; width *= 2) {
+//         for (let i = 0; i < n; i += 2 * width) {
+//             merge(A, B, i, Math.min(i + width, n), Math.min(i + 2 * width, n));
+//         }
+//         copyArray(B, A, n);
+//     }
+// }
+//
+// function copyArray(A, B, n) {
+//     for (let i = 0; i < n; i++) {
+//         B[i] = A[i];
+//     }
+// }
+//
+// {
+//     let source = [7, 1, 5, 2, 9, 3];
+//     // TODO: doesn't work
+//     let target = bottomUpMergeSort(source);
+//
+//     // console.log(target);
+// }

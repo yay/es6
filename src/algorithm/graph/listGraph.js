@@ -241,6 +241,43 @@ class ListGraph {
         return {parent, depth, state};
     }
 
+    dfsBB(start, {processNodeSoon, processNodeLate, processLink, state = []} = {}) {
+        if (!start) return;
+
+        let parent = [];
+        let depth = [];
+        let stack = []; // stack of vertex indexes to be processed
+
+        depth[start] = 0;
+
+        stack.push(start);
+        while (stack.length) {
+            let u = stack.pop();
+            if (state[u]) continue;
+            state[u] = 1;
+
+            processNodeSoon && processNodeSoon(u);
+
+            let from = parent[u];
+            if (from && state[u] !== 2 || this.directed) {
+                processLink && processLink(parent[u], u);
+            }
+
+            let p = this.links[u];
+            while (p) {
+                let v = p.index;
+                parent[v] = u;
+                depth[v] = depth[u] + 1;
+                stack.push(v);
+                p = p.next;
+            }
+
+            processNodeLate && processNodeLate(u);
+            state[u] = 2; // processed
+        }
+        return {parent, depth, state};
+    }
+
     dfsR(start, {processNodeSoon, processNodeLate, processLink, state = []} = {}) {
         if (!start) return;
 
@@ -267,7 +304,7 @@ class ListGraph {
                     depth[v] = depth[u] + 1;
                     processLink && processLink(u, v);
                     search(v);
-                } else if (directed) {
+                } else if (state[v] !== 2 || directed) {
                     processLink && processLink(u, v);
                 }
                 p = p.next;
@@ -491,7 +528,7 @@ function examples() {
 
     {
         console.log('\nRecursive DFS traverse undirected graph:\n');
-        let result = undirectedGraph.printTraversal(1, {type: 'dfsR'});
+        let result = undirectedGraph.printTraversal(1, {type: 'dfsBB'});
         console.log(result);
     }
 
