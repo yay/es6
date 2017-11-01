@@ -25,12 +25,14 @@ of the original list, and add the n steps taken to merge the resulting two lists
    and we have k + 1 summands, the remaining one being 1.
 */
 
+// [lo, hi)
 function mergesort(A, lo, hi) {
-    let B = A.slice();
-    splitMerge(B, A, lo, hi);
+    let B = A.slice();        // work array
+    splitMerge(B, A, lo, hi); // sort data from B into A
     return A;
 }
 
+// [lo, hi)
 function splitMerge(B, A, lo, hi) {
     if (hi - lo < 2)
         return;
@@ -43,6 +45,8 @@ function splitMerge(B, A, lo, hi) {
     merge(B, A, lo, mid, hi);
 }
 
+// Merge two arrays [lo, mid) [mid, hi) in A
+// into [lo, hi) in B
 function merge(A, B, lo, mid, hi) {
     let i = lo;
     let j = mid;
@@ -56,43 +60,48 @@ function merge(A, B, lo, mid, hi) {
     }
 }
 
-// {
-//     let input = [6,8,9,1,3,3,4,5];
-//     let output = [];
-//     // merge(input, output, 0, 3, input.length);
-//     // console.log(output);
-// }
+{
+    console.log('Merge two sorted arrays test:');
+    let input = [6,8,9,1,3,3,4,5];
+    let output = [];
+
+    console.log(input);
+    merge(input, output, 0, 3, input.length);
+    console.log(output);
+}
 
 {
     let arr = [7, 1, 5, 2, 9, 3];
 
+    console.log('Top-down merge sort test (recursive):');
     console.log(arr);
     mergesort(arr, 0, arr.length);
     console.log(arr);
 }
-//
-// function bottomUpMergeSort(A) {
-//     let n = A.length;
-//     let B = Array(n);
-//
-//     for (let width = 1; width < n; width *= 2) {
-//         for (let i = 0; i < n; i += 2 * width) {
-//             merge(A, B, i, Math.min(i + width, n), Math.min(i + 2 * width, n));
-//         }
-//         copyArray(B, A, n);
-//     }
-// }
-//
-// function copyArray(A, B, n) {
-//     for (let i = 0; i < n; i++) {
-//         B[i] = A[i];
-//     }
-// }
-//
-// {
-//     let source = [7, 1, 5, 2, 9, 3];
-//     // TODO: doesn't work
-//     let target = bottomUpMergeSort(source);
-//
-//     // console.log(target);
-// }
+
+function bottomUpMergeSort(A) {
+    let n = A.length;
+    let B = A.slice(); // work array
+
+    for (let width = 1; width < n; width *= 2) {
+        for (let i = 0; i < n; i += 2 * width) {
+            merge(A, B, i, Math.min(i + width, n), Math.min(i + 2 * width, n));
+        }
+        copyArray(B, A, n);
+    }
+}
+
+function copyArray(A, B, n) {
+    for (let i = 0; i < n; i++) {
+        B[i] = A[i];
+    }
+}
+
+{
+    let arr = [7, 1, 5, 2, 9, 3];
+
+    console.log('Bottom-up merge sort test (non-recursive):');
+    console.log(arr);
+    bottomUpMergeSort(arr);
+    console.log(arr);
+}

@@ -2,6 +2,7 @@
 A divide and conquer algorithm developed by Tony Hoare in 1959.
 */
 
+// [lo, hi]
 function quicksort(A, lo, hi) {
     if (lo < hi) {
         let p = partition(A, lo, hi);
@@ -10,6 +11,7 @@ function quicksort(A, lo, hi) {
     }
 }
 
+// [lo, hi]
 function partition(A, lo, hi) {
     let pivot = A[lo];
     let i = lo - 1;
