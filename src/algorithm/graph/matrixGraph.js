@@ -64,7 +64,7 @@ class MatrixGraph {
      * Subsequent edgeCount lines: '<vertexIndex> <vertexIndex>'
      * @param lines String[]
      * @param directed Boolean
-     * @return {ListGraph}
+     * @return {MatrixGraph}
      */
     static readGraph(lines, directed) {
         let ln = lines.length;

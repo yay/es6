@@ -53,6 +53,12 @@ class Link {
 // Drawbacks:
 // - can't quickly check if (u, v) is in graph, other than to look for v in u's list
 
+// We represent directed edge (x,y) by an Link y in x's adjacency list.
+// The 'degree' field counts the number of meaningful entries for the given vertex.
+// An undirected edge (x,y) appears twice in any adjacency-based graph structure:
+// once as y in x's list, once in x in y's list.
+// The 'directed' flag tells us how to interpret the given graph (directed or not).
+
 class ListGraph {
     constructor(directed = false) {
         this.links = [];  // adjacency info (as shown above), 1-based indexes
@@ -398,7 +404,7 @@ class ListGraph {
                 console.log(`\nShortest path from ${start} to ${end} (${graph}):\n`
                     + path.join(' -> '));
             } else {
-                console.log(`\n${end} can't be reached from ${start} (${graph}).`);
+                console.log(`\n${end} can't be reached from ${start} (${graph}).\n`);
             }
         }
 
@@ -428,148 +434,3 @@ class ListGraph {
 }
 
 export { ListGraph, Link }
-
-// We represent directed edge (x,y) by an EdgeNode y in x's adjacency list.
-// The 'degree' field counts the number of meaningful entries for the given vertex.
-// An undirected edge (x,y) appears twice in any adjacency-based graph structure:
-// once as y in x's list, once in x in y's list.
-// The 'directed' flag tells us how to interpret the given graph (directed or not).
-
-function examples() {
-    let graphSpec = [
-        '7 10', // 7 vertices, 10 edges (next 10 lines)
-
-        '1 5',
-        '1 4',
-        '1 3',
-        '2 4',
-        '3 1',
-        '3 7',
-        '4 5',
-        '5 6',
-        '5 7',
-        '6 7'
-    ];
-
-    let bipartiteGraphSpec = [
-        '7 8',
-
-        '1 2',
-        '1 3',
-        '2 4',
-        '3 4',
-        '3 7',
-        '4 5',
-        '4 6',
-        '6 7'
-    ];
-
-    let directedGraph = ListGraph.readGraph(graphSpec, true);
-    let undirectedGraph = ListGraph.readGraph(graphSpec, false);
-
-    console.log('\nDirected graph:\n');
-    directedGraph.printGraph();
-
-    console.log('\nUndirected graph:\n');
-    undirectedGraph.printGraph();
-
-    console.log('\nBFS traverse directed graph:\n');
-    directedGraph.printTraversal(1);
-
-    // Traverse directed graph:
-    //
-    // 1
-    // (1, 3)
-    // (1, 4)
-    // (1, 5)
-    // 3
-    // (3, 7)
-    // (3, 1)
-    // 4
-    // (4, 5)
-    // 5
-    // (5, 7)
-    // (5, 6)
-    // 7
-    // 6
-    // (6, 7)
-    //
-    // Out of total 7 vertices and 10 edges, 6 vertices and 9 edges are listed,
-    // because vertex 2 and edge (2,4) are unreachable in this directed graph
-    // if traversal is started from vertex #1.
-
-    console.log('\nDFS traverse directed graph:\n');
-    directedGraph.printTraversal(1, {type: 'dfs'});
-
-    console.log('\nBFS traverse undirected graph:\n');
-    undirectedGraph.printTraversal(1);
-
-    // Traverse undirected graph:
-    //
-    // 1
-    // (1, 3)
-    // (1, 4)
-    // (1, 5)
-    // 3
-    // (3, 7)
-    // 4
-    // (4, 5)
-    // (4, 2)
-    // 5
-    // (5, 7)
-    // (5, 6)
-    // 7
-    // (7, 6)
-    // 2
-    // 6
-
-    console.log('\nDFS traverse undirected graph:\n');
-    undirectedGraph.printTraversal(1, {type: 'dfs'});
-
-    {
-        console.log('\nRecursive DFS traverse undirected graph:\n');
-        let result = undirectedGraph.printTraversal(1, {type: 'dfsBB'});
-        console.log(result);
-    }
-
-    // There are two points to remember when using breadth-first search
-    // to find a shortest path from x to y:
-    // 1) the shortest path tree is only useful if BFS was performed with x
-    //    as the root of the search;
-    // 2) BFS gives the shortest path only if the graph is unweighted.
-
-    undirectedGraph.findPath(2, 7, undirectedGraph.bfs(2).parent, true);
-    // Notice how we had to use 2 as the root for the breadth-first search
-    // to generate the child-parent tree to be used by findPath.
-    console.log('\nFind and print the above path using recursion:\n');
-    undirectedGraph.findPathR(2, 7, undirectedGraph.bfs(2).parent);
-
-    directedGraph.findPath(1, 2, directedGraph.bfs(1).parent, true);
-
-    {
-        let comps = undirectedGraph.getConnectedComponents();
-        console.log(JSON.stringify(comps, null, 4));
-    }
-
-    {
-        let comps = directedGraph.getConnectedComponents();
-        console.log(JSON.stringify(comps, null, 4));
-    }
-
-    {
-        let result = undirectedGraph.twoColor();
-        console.log(result);
-    }
-
-    {
-        // undirected bipartite graph
-        console.log('This graph must be bipartite:');
-        let graph = ListGraph.readGraph(bipartiteGraphSpec, false);
-        graph.printGraph();
-
-        let result = graph.twoColor();
-        console.log(result);
-    }
-}
-
-examples();
