@@ -15,6 +15,20 @@ let graphSpec = [
     '6 7'
 ];
 
+let dfsGraphSpec = [
+    '10 9',
+
+    '1 8',
+    '1 6',
+    '1 2',
+    '2 3',
+    '3 5',
+    '3 4',
+    '6 7',
+    '8 10',
+    '8 9'
+];
+
 let bipartiteGraphSpec = [
     '7 8',
 
@@ -98,21 +112,31 @@ function bfsTraversal() {
 }
 
 function dfsTraversal() {
-    let directedGraph = ListGraph.readGraph(graphSpec, true);
+    // let directedGraph = ListGraph.readGraph(graphSpec, true);
+    //
+    // console.log('\nDFS traverse directed graph:\n');
+    // directedGraph.printTraversal(1, {type: 'dfs'});
+    //
+    // let undirectedGraph = ListGraph.readGraph(graphSpec, false);
+    //
+    // console.log('\nDFS traverse undirected graph:\n');
+    // undirectedGraph.printTraversal(1, {type: 'dfs'});
+    //
+    // console.log('\nRecursive DFS traverse undirected graph:\n');
+    // console.log( undirectedGraph.printTraversal(1, {type: 'dfsBB'}) );
 
-    console.log('\nDFS traverse directed graph:\n');
-    directedGraph.printTraversal(1, {type: 'dfs'});
+    let undirectedGraph = ListGraph.readGraph(dfsGraphSpec, false);
+    undirectedGraph.printGraph();
 
-    let undirectedGraph = ListGraph.readGraph(graphSpec, false);
+    // undirectedGraph.printTraversal(1, {type: 'dfs'});
 
-    console.log('\nDFS traverse undirected graph:\n');
-    undirectedGraph.printTraversal(1, {type: 'dfs'});
+    console.log('\n\n');
 
-    {
-        console.log('\nRecursive DFS traverse undirected graph:\n');
-        let result = undirectedGraph.printTraversal(1, {type: 'dfsBB'});
-        console.log(result);
-    }
+    undirectedGraph.dfsBasicRecursive(1);
+    console.log('\n\n');
+    undirectedGraph.dfsBasicStack(1);
+    console.log('\n\n');
+    undirectedGraph.dfsAdvancedStack(1);
 }
 
 function findPath() {
@@ -167,9 +191,10 @@ function twoColor() {
     console.log( 'Result:', bipartiteGraph.twoColor() ); // examine 'colors' array
 }
 
-readAndPrint();
-bfsTraversal();
+// readAndPrint();
+// findPath();
+// connectedComponents();
+// twoColor();
+
+// bfsTraversal();
 dfsTraversal();
-findPath();
-connectedComponents();
-twoColor();

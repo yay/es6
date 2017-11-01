@@ -169,8 +169,8 @@ class ListGraph {
         depth[start] = 0;
         state[start] = 1; // discovered
 
-        let queue = [];   // process queue of vertexIndex
-        queue.push(start);
+        let queue = [start];   // process queue of vertexIndex
+
         while (queue.length) {
             let u = queue.shift();
             processNodeSoon && processNodeSoon(u);
@@ -204,125 +204,113 @@ class ListGraph {
         return {parent, depth, state};
     }
 
-    /*
-    The difference between BFS and DFS results is in the order in which they
-    explore vertices. This order depends completely upon the container data structure
-    used to store the discovered but not processed vertices:
-    - queue (FIFO) - explore the oldest discovered vertices first;
-    - stack (FILO) - explore the
-    */
-
-    dfs(start, {processNodeSoon, processNodeLate, processLink, state = []} = {}) {
-        if (!start) return;
-
-        let parent = [];
-        let depth = [];
-
-        depth[start] = 0;
-        state[start] = 1; // discovered
-
-        let stack = []; // process stack of vertexIndex
-        stack.push(start);
-        while (stack.length) {
-            let u = stack.pop();
-            processNodeSoon && processNodeSoon(u);
-
-            let p = this.links[u];
-            while (p) {
-                let v = p.index;
-                if (state[v] !== 2 || this.directed) {
-                    processLink && processLink(u, v);
-                }
-                if (!state[v]) {  // undiscovered
-                    state[v] = 1; // discovered
-                    parent[v] = u;
-                    depth[v] = depth[u] + 1;
-                    stack.push(v);
-                }
-                p = p.next;
-            }
-            processNodeLate && processNodeLate(u);
-            state[u] = 2; // processed
-        }
-        return {parent, depth, state};
-    }
-
-    dfsBB(start, {processNodeSoon, processNodeLate, processLink, state = []} = {}) {
-        if (!start) return;
-
-        let parent = [];
-        let depth = [];
-        let stack = []; // stack of vertex indexes to be processed
-
-        depth[start] = 0;
-
-        stack.push(start);
-        while (stack.length) {
-            let u = stack.pop();
-            if (state[u]) continue;
-            state[u] = 1;
-
-            processNodeSoon && processNodeSoon(u);
-
-            let from = parent[u];
-            if (from && state[u] !== 2 || this.directed) {
-                processLink && processLink(parent[u], u);
-            }
-
-            let p = this.links[u];
-            while (p) {
-                let v = p.index;
-                parent[v] = u;
-                depth[v] = depth[u] + 1;
-                stack.push(v);
-                p = p.next;
-            }
-
-            processNodeLate && processNodeLate(u);
-            state[u] = 2; // processed
-        }
-        return {parent, depth, state};
-    }
-
-    dfsR(start, {processNodeSoon, processNodeLate, processLink, state = []} = {}) {
-        if (!start) return;
-
+    dfsBasicRecursive(start) {
         let links = this.links;
-        let directed = this.directed;
-        let parent = [];
-        let depth = [];
-        let inTime = [];
-        let outTime = [];
-        let time = 0;
+        let visited = [];
 
-        depth[start] = 0;
+        function visit(u) {
+            let link = links[u];
 
-        (function search(u) {
-            state[u] = 1; // discovered
-            inTime[u] = ++time;
-            processNodeSoon && processNodeSoon(u);
-
-            let p = links[u];
-            while (p) {
-                let v = p.index;
-                if (!state[v]) { // undiscovered
-                    parent[v] = u;
-                    depth[v] = depth[u] + 1;
-                    processLink && processLink(u, v);
-                    search(v);
-                } else if (state[v] !== 2 || directed) {
-                    processLink && processLink(u, v);
+            while (link) {
+                let v = link.index;
+                if (!visited[v]) {
+                    visited[v] = true;
+                    console.log(v);
+                    visit(v);
                 }
-                p = p.next;
+                link = link.next;
             }
+        }
 
-            processNodeLate && processNodeLate(u);
-            outTime[u] = ++time;
-            state[u] = 2; // processed
-        })(start);
+        visited[start] = 1;
+        console.log(start);
 
-        return {parent, depth, state, inTime, outTime};
+        visit(start);
     }
+
+    dfsBasicStack(start) {
+        let visited = [];
+        let stack = [start];
+
+        while (stack.length) {
+            let u = stack.pop();
+            if (!visited[u]) {
+                visited[u] = true;
+                console.log(u);
+                let link = this.links[u];
+                while (link) {
+                    if (!visited[link.index]) {
+                        stack.push(link.index);
+                    }
+                    link = link.next;
+                }
+            }
+        }
+    }
+
+    dfsAdvancedStack(start) {
+        let visited = [];
+        let stack = [start];
+
+        visited[start] = true;
+        console.log(start);
+
+        while (stack.length) {
+            let u = stack.pop();
+            let link = this.links[u];
+            while (link && visited[link.index]) {
+                link = link.next;
+            }
+            // if there's at least one unvisited vertex adjacent to u
+            if (link) {
+                let v = link.index;
+                stack.push(u);
+                visited[v] = true;
+                console.log(v);
+                stack.push(v);
+            }
+        }
+    }
+
+    // dfsR(start, {processNodeSoon, processNodeLate, processLink, state = []} = {}) {
+    //     if (!start) return;
+    //
+    //     let links = this.links;
+    //     let directed = this.directed;
+    //     let parent = [];
+    //     let depth = [];
+    //     let inTime = [];
+    //     let outTime = [];
+    //     let time = 0;
+    //
+    //     depth[start] = 0;
+    //
+    //     (function search(u) {
+    //         state[u] = 1; // discovered
+    //         inTime[u] = ++time;
+    //         processNodeSoon && processNodeSoon(u);
+    //
+    //         let p = links[u];
+    //         while (p) {
+    //             let v = p.index;
+    //             if (!state[v]) { // undiscovered
+    //                 parent[v] = u;
+    //                 depth[v] = depth[u] + 1;
+    //                 processLink && processLink(u, v);
+    //                 search(v);
+    //             } else if (state[v] !== 2 || directed) {
+    //                 processLink && processLink(u, v);
+    //             }
+    //             p = p.next;
+    //         }
+    //
+    //         processNodeLate && processNodeLate(u);
+    //         outTime[u] = ++time;
+    //         state[u] = 2; // processed
+    //     })(start);
+    //
+    //     return {parent, depth, state, inTime, outTime};
+    // }
 
     getConnectedComponents({toNode, toLink} = {}) {
         let k = this.nodeCount;
