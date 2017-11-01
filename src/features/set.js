@@ -89,6 +89,9 @@ A value in the Set may only occur once.
 
     let set = new Set(array);
     console.log(set);         // Set { 'a', 'b', 'c' }
+
+    // convert set to an array
+    console.log([...set]);  // [ 'a', 'b', 'c' ]
 }
 
 {
