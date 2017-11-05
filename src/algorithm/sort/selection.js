@@ -35,9 +35,9 @@ console.log(arr);
  * @return {Number[]}
  */
 function selectionSort(arr) {
+    let ln = arr.length;
     console.log(`Sorting array of ${ln} elements.`);
 
-    let ln = arr.length;
     for (let i = 0, last = ln - 1; i < last; i++) {
         let min = arr[i];
         let minIndex;

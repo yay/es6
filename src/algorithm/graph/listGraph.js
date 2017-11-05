@@ -228,6 +228,38 @@ class ListGraph {
         visit(start);
     }
 
+    findFurthestNode(start) {
+        let links = this.links;
+        let visited = [];
+        let maxDistance = 0;
+        let furthestNode = null;
+
+        function search(u, distance = 0) {
+            if (distance > maxDistance) {
+                maxDistance = distance;
+                furthestNode = u;
+            }
+
+            let link = links[u];
+            while (link) {
+                let v = link.index;
+                if (!visited[v]) {
+                    visited[v] = true;
+                    search(v, distance + 1);
+                }
+                link = link.next;
+            }
+        }
+
+        visited[start] = true;
+        search(start);
+
+        return {
+            node: furthestNode,
+            distance: maxDistance
+        };
+    }
+
     dfsBasicStack(start) {
         let visited = [];
         let stack = [start];

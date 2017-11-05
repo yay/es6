@@ -42,6 +42,27 @@ let bipartiteGraphSpec = [
     '6 7'
 ];
 
+// The diameter of a tree is the number of nodes on the longest path
+// between two leaves in the tree.
+let BTD9NTR = [ // binary tree with a diameter of 9, not through root (13 to 15)
+    '15 14',
+
+    '1 2',
+    '1 3',
+    '2 4',
+    '2 5',
+    '3 6',
+    '4 7',
+    '4 8',
+    '5 9',
+    '8 10',
+    '9 11',
+    '9 12',
+    '10 13',
+    '10 14',
+    '12 15'
+];
+
 function readAndPrint() {
     // Read directed graph
     let directedGraph = ListGraph.readGraph(graphSpec, true);
@@ -191,10 +212,19 @@ function twoColor() {
     console.log( 'Result:', bipartiteGraph.twoColor() ); // examine 'colors' array
 }
 
+function diameter() {
+    let graph = ListGraph.readGraph(BTD9NTR, false);
+
+    let result = graph.findFurthestNode(13);
+
+    console.log(result);
+}
+
 // readAndPrint();
 // findPath();
 // connectedComponents();
 // twoColor();
 
 // bfsTraversal();
-dfsTraversal();
+// dfsTraversal();
+diameter();
