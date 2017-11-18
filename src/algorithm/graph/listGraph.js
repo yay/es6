@@ -147,10 +147,34 @@ class ListGraph {
     before discovering any vertices at distance k + 1.
     */
 
-    // Breadth-first search.
-    // Linear time:
-    // O(|V|+|E|) for both directed and undirected graphs (unweighted)
-    // because we process each vertex and edge only once.
+    /**
+     * @typedef BfsResult
+     * Maps the index of each node to the index of its parent.
+     * @property {Number[]} parent
+     * The depth of each node (number of edges from the start node).
+     * @property {Number[]} depth
+     * The state of each node (0 - undiscovered, 1 - discovered, 2 - processed).
+     * @property {Number[]} state
+     */
+
+    /**
+     * @typedef BfsOptions
+     * @property {Function} [processNodeSoon]
+     * @property {Function} [processNodeLate]
+     * @property {Function} [processLink]
+     * The state of the nodes (e.g. from a previous BFS run from another starting point).
+     * @property {Number[]} [state]
+     */
+
+    /**
+     * Breadth-first search.
+     * Linear time:
+     * O(|V|+|E|) for both directed and undirected graphs (unweighted)
+     * because we process each vertex and edge only once.
+     * @param {Number} start The index of the start node.
+     * @param {BfsOptions} options
+     * @return {BfsResult}
+     */
     bfs(start, {processNodeSoon, processNodeLate, processLink, state = []} = {}) {
         if (!start) return;
 
@@ -284,12 +308,11 @@ class ListGraph {
 
     /**
      * The function returns the number of edges to the furthest node.
-     * The diameter of a graph is "the number of nodes on the longest path",
-     * so just add 1 to the returned distance to get the diameter.
      * @param {Number} start The index of the start node.
      * @return {FurthestNodeResult} The index of the furthest node and the distance to it.
      */
     findFurthestNode(start) {
+        if (!start) throw 'Invalid parameter';
         // To find the diameter of graph simply performs a depth-first search
         // from the start node, while keeping track of the distance on each
         // recursive descent.
@@ -322,6 +345,42 @@ class ListGraph {
             node: furthestNode,
             distance: maxDistance
         };
+    }
+
+    /**
+     * @typedef {Object} FindDiameterResult
+     * @property {Number} diameter The number of nodes on the longest path.
+     * The ends of the longest path (node indexes).
+     * Note that that there may be several longest paths!
+     * In this case, `nodes` will represent just one of them.
+     * @property {Number[]} nodes
+     */
+
+    /**
+     * Find the diameter of a connected undirected graph.
+     * @return {FindDiameterResult}
+     */
+    findDiameter() {
+        // Pick a vertex v.
+        // Find u such that d(v,u) is maximum
+        // Find w such that d(u,w) is maximum
+        // Return d(u,w)
+        let v = 1;
+        let vFurthest = this.findFurthestNode(v);
+        let u = vFurthest.node;
+        if (u) {
+            let uFurthest = this.findFurthestNode(u);
+            let w = uFurthest.node;
+            if (w) {
+                return {
+                    // Add 1 because the `distance` is in number of edges
+                    // but we need the number of nodes on the longest path.
+                    diameter: Math.max(vFurthest.distance, uFurthest.distance) + 1,
+                    nodes: vFurthest.distance > uFurthest.distance ? [v, u] : [u, w]
+                };
+            }
+        }
+        return null;
     }
 
     dfsBasicStack(start) {
@@ -368,6 +427,11 @@ class ListGraph {
         }
     }
 
+    /**
+     * https://en.wikipedia.org/wiki/Connected_component_(graph_theory)
+     * @param {Object} asdf asdf
+     * @return {Array}
+     */
     getConnectedComponents({toNode, toLink} = {}) {
         let k = this.nodeCount;
         let components = [];
@@ -394,20 +458,21 @@ class ListGraph {
     }
 
     twoColor() {
-        let k = this.nodeCount;
-        let colors = [];
+        let nodeCount = this.nodeCount;
+        let colors = []; // 0 - black, 1 - white, undefined - uncolored
         let bipartite = true;
         let state;
 
+        // Returns the opposite color.
         function complement(color) {
             if (color === 1) return 0;
             if (color === 0) return 1;
             return undefined;
         }
 
-        for (let i = 1; i <= k; i++) {
+        for (let i = 1; i <= nodeCount; i++) {
             if (!state || !state[i]) {
-                colors[i] = 1; // 0 - black, 1 - white, undefined - uncolored
+                colors[i] = 1;
                 state = this.bfs(i, {state,
                     processLink: (u, v) => { // here we are given unique edges only
                         if (colors[u] === colors[v]) {
@@ -477,4 +542,4 @@ class ListGraph {
     }
 }
 
-export { ListGraph, Link }
+export { ListGraph, Link };

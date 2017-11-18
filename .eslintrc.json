@@ -13,6 +13,8 @@
         "valid-jsdoc": [
             "warn",
             {
+                "requireParamDescription": false,
+                "requireReturnDescription": false,
                 "prefer": {
                     "returns": "return"
                 }

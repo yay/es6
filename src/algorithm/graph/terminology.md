@@ -1,0 +1,1 @@
+A graph is `connected` when there is a path between every pair of vertices. In a connected graph, there are no unreachable vertices. A graph that is not connected is `disconnected`.

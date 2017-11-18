@@ -213,11 +213,13 @@ function twoColor() {
 }
 
 function diameter() {
+    // This graph has two longest paths.
     let graph = ListGraph.readGraph(BTD9NTR, false);
 
-    let result = graph.findFurthestNode(13);
+    console.log( graph.findFurthestNode(13) );    // {node: 15, distance: 8}
+    console.log( graph.findFurthestNode(14) );    // {node: 15, distance: 8}
 
-    console.log(result); // {node: 15, distance: 8}
+    console.log( graph.findDiameter() );          // {diameter: 9, nodes: [15, 14]}
 }
 
 // readAndPrint();
