@@ -96,12 +96,12 @@ class ListGraph {
 
     /**
      * Parses an array of strings in the following format into
-     * an adjacency list:
+     * a ListGraph instance:
      * First line:                 '<nodeCount> <linkCount>'
      * Subsequent linkCount lines: '<nodeIndex> <nodeIndex>'
-     * @param lines String[]
-     * @param directed Boolean
-     * @return {ListGraph}
+     * @param {String[]} lines Array of strings as described above.
+     * @param {Boolean} directed Whether a graph is directed.
+     * @return {ListGraph} A list graph instance.
      */
     static readGraph(lines, directed) {
         let ln = lines.length;
