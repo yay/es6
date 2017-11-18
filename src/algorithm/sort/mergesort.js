@@ -37,7 +37,7 @@ function splitMerge(B, A, lo, hi) {
     if (hi - lo < 2)
         return;
 
-    let mid = ~~((lo + hi) / 2);
+    let mid = Math.floor((lo + hi) / 2);
 
     splitMerge(A, B, lo, mid);
     splitMerge(A, B, mid, hi);
