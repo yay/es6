@@ -147,13 +147,10 @@ class ListGraph {
     before discovering any vertices at distance k + 1.
     */
 
-    /**
-     * Breadth-first search.
-     *
-     * Linear time:
-     * O(|V|+|E|) for both directed and undirected graphs (unweighted)
-     * because we process each vertex and edge only once.
-     */
+    // Breadth-first search.
+    // Linear time:
+    // O(|V|+|E|) for both directed and undirected graphs (unweighted)
+    // because we process each vertex and edge only once.
     bfs(start, {processNodeSoon, processNodeLate, processLink, state = []} = {}) {
         if (!start) return;
 
@@ -370,46 +367,6 @@ class ListGraph {
             }
         }
     }
-
-    // dfsR(start, {processNodeSoon, processNodeLate, processLink, state = []} = {}) {
-    //     if (!start) return;
-    //
-    //     let links = this.links;
-    //     let directed = this.directed;
-    //     let parent = [];
-    //     let depth = [];
-    //     let inTime = [];
-    //     let outTime = [];
-    //     let time = 0;
-    //
-    //     depth[start] = 0;
-    //
-    //     (function search(u) {
-    //         state[u] = 1; // discovered
-    //         inTime[u] = ++time;
-    //         processNodeSoon && processNodeSoon(u);
-    //
-    //         let p = links[u];
-    //         while (p) {
-    //             let v = p.index;
-    //             if (!state[v]) { // undiscovered
-    //                 parent[v] = u;
-    //                 depth[v] = depth[u] + 1;
-    //                 processLink && processLink(u, v);
-    //                 search(v);
-    //             } else if (state[v] !== 2 || directed) {
-    //                 processLink && processLink(u, v);
-    //             }
-    //             p = p.next;
-    //         }
-    //
-    //         processNodeLate && processNodeLate(u);
-    //         outTime[u] = ++time;
-    //         state[u] = 2; // processed
-    //     })(start);
-    //
-    //     return {parent, depth, state, inTime, outTime};
-    // }
 
     getConnectedComponents({toNode, toLink} = {}) {
         let k = this.nodeCount;
