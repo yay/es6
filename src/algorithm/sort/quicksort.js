@@ -1,8 +1,23 @@
 /*
 A divide and conquer algorithm developed by Tony Hoare in 1959.
+
+- Pick an element as pivot
+- Partition the given array around the picked pivot
+
+Multiple ways of picking a pivot:
+- first element
+- last element
+- random element
+- median element
+
 */
 
-// [lo, hi]
+/**
+ * Sorts the slice of A between [lo, hi] using quicksort.
+ * @param {Number[]} A
+ * @param {Number} lo
+ * @param {Number} hi
+ */
 function quicksort(A, lo, hi) {
     if (lo < hi) {
         let p = partition(A, lo, hi);
@@ -11,8 +26,8 @@ function quicksort(A, lo, hi) {
     }
 }
 
-// [lo, hi]
-function partition(A, lo, hi) {
+// Picks the first element as pivot.
+function partition(A, lo, hi) { // [lo, hi]
     let pivot = A[lo];
     let i = lo - 1;
     let j = hi + 1;
@@ -81,7 +96,9 @@ function partitionEdu(A, lo, hi, depth) {
     for (;;) {
         do {
             i++;
-            printIJ(A, i, j, padStr);
+            // j = hi + 1 index will never be used,
+            // so make sure we don't print it.
+            printIJ(A, i, j > hi && hi || j, padStr);
         } while (A[i] < pivot);
 
         do {
