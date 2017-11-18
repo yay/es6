@@ -13,7 +13,7 @@ Find the distance (number of edges) between the farthest two elements in a binar
 
 */
 
-import { BTree } from "../algorithm/binarySearchTree";
+import { BTree } from '../algorithm/binarySearchTree';
 
 let btree = new BTree();
 
