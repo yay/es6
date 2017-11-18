@@ -17,3 +17,7 @@ window.onload = function () {
         .attr('stroke', 'black')
         .attr('stroke-width', 2);
 };
+
+// document.addEventListener('DOMContentLoaded', function(e) {
+//
+// });

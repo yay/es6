@@ -12,10 +12,14 @@
     "babel-preset-env": "^1.6.0",
     "cytoscape": "^3.2.5",
     "d3": "^4.11.0",
+    "eslint": "^4.11.0",
+    "paper": "^0.11.5",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jest": "^21.2.1"
+  },
   "scripts": {
     "watch": "webpack --progress --watch"
   },

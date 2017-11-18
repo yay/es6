@@ -12,7 +12,7 @@ function f1() {
         {
             const x = 'foo';  // ok
             // Assignment to constant variable.
-            x = 'bar'         // error
+            // x = 'bar'         // error
         }
         // Identifier 'x' has already been declared
         let x = 'hey';        // error

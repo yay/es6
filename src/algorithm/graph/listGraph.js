@@ -179,14 +179,19 @@ class ListGraph {
             while (p) {
                 let v = p.index;
                 if (state[v] !== 2 || this.directed) {
-                    // If the vertex we link to hasn't been processed yet
-                    // in an undirected graph, it means that:
+                    // If the vertex we link to hasn't been processed yet,
+                    // it means that:
                     // - either we just discovered it
                     //   and so we should process this edge;
                     // - or this vertex has been already discovered
                     //   from another vertex, but this edge is still new
                     //   and we should process it.
-                    // In a directed graph all back-links are unique and
+                    // For undirected graphs this check will prevent
+                    // listing the same link twice: first from parent to
+                    // child, then from child to parent, because the parent
+                    // will have been processed by the time we check out
+                    // child's links.
+                    // In a directed graph, all back-links are unique and
                     // should be processed.
                     processLink && processLink(u, v);
                 }
@@ -202,6 +207,52 @@ class ListGraph {
             state[u] = 2;  // processed
         }
         return {parent, depth, state};
+    }
+
+    bfsBasicQueue(start) {
+        let visited = [];
+        let queue = [start];
+        visited[start] = true;
+
+        while (queue.length) {
+            let u = queue.shift();
+            console.log(u);
+
+            let link = this.links[u];
+            while (link) {
+                let v = link.index;
+                if (!visited[v]) {
+                    visited[v] = true;
+                    queue.push(v);
+                }
+                link = link.next;
+            }
+        }
+    }
+
+    bfsAdvancedQueue(start) {
+        let state = [];
+        let queue = [start];
+        state[start] = 1; // discovered
+
+        while (queue.length) {
+            let u = queue.shift();
+            console.log(`Node: ${u}`);
+
+            let link = this.links[u];
+            while (link) {
+                let v = link.index;
+                if (state[v] !== 2 || this.directed) {
+                    console.log(`Link: ${u} - ${v}`);
+                }
+                if (!state[v]) {
+                    state[v] = 1;
+                    queue.push(v);
+                }
+                link = link.next;
+            }
+            state[u] = 2;
+        }
     }
 
     dfsBasicRecursive(start) {
@@ -228,7 +279,23 @@ class ListGraph {
         visit(start);
     }
 
+    /**
+     * @typedef {Object} FurthestNodeResult
+     * @property {Number} node The index of the furthest node.
+     * @property {Number} distance The number of edges to the furthest node.
+     */
+
+    /**
+     * The function returns the number of edges to the furthest node.
+     * The diameter of a graph is "the number of nodes on the longest path",
+     * so just add 1 to the returned distance to get the diameter.
+     * @param {Number} start The index of the start node.
+     * @return {FurthestNodeResult} The index of the furthest node and the distance to it.
+     */
     findFurthestNode(start) {
+        // To find the diameter of graph simply performs a depth-first search
+        // from the start node, while keeping track of the distance on each
+        // recursive descent.
         let links = this.links;
         let visited = [];
         let maxDistance = 0;

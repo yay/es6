@@ -217,7 +217,7 @@ function diameter() {
 
     let result = graph.findFurthestNode(13);
 
-    console.log(result);
+    console.log(result); // {node: 15, distance: 8}
 }
 
 // readAndPrint();
