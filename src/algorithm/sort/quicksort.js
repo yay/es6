@@ -19,11 +19,11 @@ function partition(A, lo, hi) {
 
     for (;;) {
         do {
-            i++
+            i++;
         } while (A[i] < pivot);
 
         do {
-            j--
+            j--;
         } while (A[j] > pivot);
 
         if (i >= j)
