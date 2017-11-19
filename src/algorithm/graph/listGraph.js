@@ -348,12 +348,15 @@ class ListGraph {
     }
 
     isTree(debug = false) {
-        if (this.getConnectedComponents().length !== 1) return false;
         // For every visited vertex `v`, if there is an adjacent `u`
         // such that `u` is already visited and `u` is not parent of `v`,
         // then there is a cycle in graph.
         let start = 1;
-        let visited = [];
+        // Need to reserve the elements in the array for the connectedness
+        // check at the bottom of this method to work property. For if we
+        // have a disconnected graph, we could have a BFS visit all nodes
+        // in the first connected component, but not all nodes there are.
+        let visited = new Array(this.nodeCount + 1); // node indexes are 1-based
         let parent = [];
         let queue = [start];
 
@@ -378,6 +381,14 @@ class ListGraph {
                 }
                 link = link.next;
             }
+        }
+
+        // Ditch the first 'undefined' element, since node indexes are 1-based.
+        visited.shift();
+        // If some vertices were left unexplored,
+        // the graph is not connected.
+        for (let v of visited) {
+            if (!v) return false;
         }
 
         return true;
