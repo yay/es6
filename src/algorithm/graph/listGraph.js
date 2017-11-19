@@ -464,6 +464,8 @@ class ListGraph {
     // Examples of bipartite graphs:
     // - every tree (acyclic connected graph)
     // - cycle graphs with an even number of vertices (e.g. square)
+    //
+    // https://www.quora.com/What-are-the-best-resources-on-practical-applications-of-Bipartite-Graphs
 
     /**
      * @typedef TwoColorResult

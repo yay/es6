@@ -1,4 +1,4 @@
-import { randomNumbers } from "../helper/randomNumbers";
+import { randomNumbers } from '../helper/randomNumbers';
 
 console.log('### Selection sort ###');
 
@@ -16,7 +16,7 @@ console.log(arr);
 
 /**
  * 8 + 7 + 6 + 5 + 4 + 3 + 2 + 1
- * ​(8+1)+(7+2)+(6+3)+(5+4) = 9+9+9+9 = 4*9 = 36
+ * (8+1)+(7+2)+(6+3)+(5+4) = 9+9+9+9 = 4*9 = 36
  * What if the number of integers in the sequence is odd,
  * so that you cannot pair them all up? It doesn't matter!
  * Just count the unpaired number in the middle of the sequence
