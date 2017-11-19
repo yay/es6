@@ -457,6 +457,21 @@ class ListGraph {
         return components;
     }
 
+    // Bipartite graph (or bigraph) is a graph whose vertices can be divided into
+    // two disjoint and independent sets U and V such that every edge connects a vertex
+    // in U to one in V. Vertex sets U and V are usually called the parts of the graph.
+
+    /**
+     * @typedef TwoColorResult
+     * @property {Boolean} bipartite
+     * @property {Number[]} colors // 0 - black, 1 - white, undefined - uncolored
+     */
+
+    /**
+     * Checks if the graph is bipartite by coloring its vertices.
+     * Works on graphs with multiple connected components.
+     * @return {TwoColorResult}
+     */
     twoColor() {
         let nodeCount = this.nodeCount;
         let colors = []; // 0 - black, 1 - white, undefined - uncolored
@@ -470,9 +485,11 @@ class ListGraph {
             return undefined;
         }
 
+        // Perform BFS from every unvisited vertex on previous BFS runs to
+        // cover all connected components.
         for (let i = 1; i <= nodeCount; i++) {
             if (!state || !state[i]) {
-                colors[i] = 1;
+                colors[i] = 1; // color starting vertex as white
                 state = this.bfs(i, {state,
                     processLink: (u, v) => { // here we are given unique edges only
                         if (colors[u] === colors[v]) {

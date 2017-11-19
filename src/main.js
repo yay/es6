@@ -6,8 +6,8 @@
 // import './features/promises';
 // import './algorithm/graph/listGraph';
 // import './interview/distanceFarthestTreeElements';
-// import './algorithm/graph/listGraphExample';
-import './features/shadowDom';
+import './algorithm/graph/listGraphExample';
+// import './features/shadowDom';
 
 // console.log("2π = " + sum(pi, pi));
 

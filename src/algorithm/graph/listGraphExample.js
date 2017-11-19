@@ -63,6 +63,22 @@ let BTD9NTR = [ // binary tree with a diameter of 9, not through root (13 to 15)
     '12 15'
 ];
 
+// A bipartite graph with three connected components.
+let threeCompGraphSpec = [
+    '9 7',
+    // triangle
+    '1 2',
+    '2 3',
+    // '3 1',  // uncomment to close the triangle and make the graph non-bipartite
+    // square
+    '4 5',
+    '5 6',
+    '6 7',
+    '7 4',
+    // line
+    '8 9'
+];
+
 function readAndPrint() {
     // Read directed graph
     let directedGraph = ListGraph.readGraph(graphSpec, true);
@@ -210,6 +226,10 @@ function twoColor() {
 
     console.log('\nTwo-color bipartite graph:');
     console.log( 'Result:', bipartiteGraph.twoColor() ); // examine 'colors' array
+
+    let threeCompGraph = ListGraph.readGraph(threeCompGraphSpec, false);
+    console.log('\nTwo-color graph with 3 connected components:');
+    console.log( 'Result:', threeCompGraph.twoColor() );
 }
 
 function diameter() {
@@ -225,8 +245,8 @@ function diameter() {
 // readAndPrint();
 // findPath();
 // connectedComponents();
-// twoColor();
+twoColor();
 
 // bfsTraversal();
 // dfsTraversal();
-diameter();
+// diameter();
