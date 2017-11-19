@@ -232,6 +232,16 @@ function twoColor() {
     console.log( 'Result:', threeCompGraph.twoColor() );
 }
 
+function isTree() {
+    let disconnectedGraph = ListGraph.readGraph(threeCompGraphSpec, false);
+    let binaryTree = ListGraph.readGraph(BTD9NTR, false);
+    let cycleGraph = ListGraph.readGraph(graphSpec, false);
+
+    console.log('Is disconnected graph a tree?', disconnectedGraph.isTree());
+    console.log('Is binary tree a tree?', binaryTree.isTree());
+    console.log('Is graph with cycles a tree?', cycleGraph.isTree(true));
+}
+
 function diameter() {
     // This graph has two longest paths.
     let graph = ListGraph.readGraph(BTD9NTR, false);
@@ -239,14 +249,15 @@ function diameter() {
     console.log( graph.findFurthestNode(13) );    // {node: 15, distance: 8}
     console.log( graph.findFurthestNode(14) );    // {node: 15, distance: 8}
 
-    console.log( graph.findDiameter() );          // {diameter: 9, nodes: [15, 14]}
+    console.log( graph.findTreeDiameter() );          // {diameter: 9, nodes: [15, 14]}
 }
 
 // readAndPrint();
 // findPath();
 // connectedComponents();
-twoColor();
+// twoColor();
 
 // bfsTraversal();
 // dfsTraversal();
 // diameter();
+isTree();

@@ -196,9 +196,9 @@ class ListGraph {
             let u = queue.shift();
             processNodeSoon && processNodeSoon(u);
 
-            let p = this.links[u];           // cursor for list walking
-            while (p) {
-                let v = p.index;
+            let link = this.links[u];           // cursor for list walking
+            while (link) {
+                let v = link.index;
                 if (state[v] !== 2 || this.directed) {
                     // If the vertex we link to hasn't been processed yet,
                     // it means that:
@@ -222,7 +222,7 @@ class ListGraph {
                     depth[v] = depth[u] + 1;
                     queue.push(v);
                 }
-                p = p.next;
+                link = link.next;
             }
             processNodeLate && processNodeLate(u);
             state[u] = 2;  // processed
@@ -347,6 +347,42 @@ class ListGraph {
         };
     }
 
+    isTree(debug = false) {
+        if (this.getConnectedComponents().length !== 1) return false;
+        // For every visited vertex `v`, if there is an adjacent `u`
+        // such that `u` is already visited and `u` is not parent of `v`,
+        // then there is a cycle in graph.
+        let start = 1;
+        let visited = [];
+        let parent = [];
+        let queue = [start];
+
+        // BFS
+        visited[start] = true;
+        while (queue.length) {
+            let u = queue.shift();
+            let link = this.links[u];
+            while (link) {
+                let v = link.index;
+                if (visited[v]) {
+                    if (v !== parent[u]) { // cycle
+                        if (debug) {
+                            console.warn('Graph cycle found:', [u, v]);
+                        }
+                        return false;
+                    }
+                } else {
+                    visited[v] = true;
+                    parent[v] = u;
+                    queue.push(v);
+                }
+                link = link.next;
+            }
+        }
+
+        return true;
+    }
+
     /**
      * @typedef {Object} FindDiameterResult
      * @property {Number} diameter The number of nodes on the longest path.
@@ -357,10 +393,11 @@ class ListGraph {
      */
 
     /**
-     * Find the diameter of a connected undirected graph.
+     * Find the diameter of a tree.
      * @return {FindDiameterResult}
      */
-    findDiameter() {
+    findTreeDiameter() {
+        if (!this.isTree()) return null;
         // Pick a vertex v.
         // Find u such that d(v,u) is maximum
         // Find w such that d(u,w) is maximum
@@ -427,20 +464,16 @@ class ListGraph {
         }
     }
 
-    /**
-     * https://en.wikipedia.org/wiki/Connected_component_(graph_theory)
-     * @param {Object} asdf asdf
-     * @return {Array}
-     */
+    // https://en.wikipedia.org/wiki/Connected_component_(graph_theory)
     getConnectedComponents({toNode, toLink} = {}) {
-        let k = this.nodeCount;
+        let nodeCount = this.nodeCount;
         let components = [];
         let state;
 
         toNode = toNode || (v => v);
         toLink = toLink || ((u, v) => [u, v]);
 
-        for (let i = 1; i <= k; i++) {
+        for (let i = 1; i <= nodeCount; i++) {
             if (!state || !state[i]) {
                 let nodes = [];
                 let links = [];
