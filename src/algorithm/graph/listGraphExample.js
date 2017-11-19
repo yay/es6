@@ -63,7 +63,7 @@ let BTD9NTR = [ // binary tree with a diameter of 9, not through root (13 to 15)
     '12 15'
 ];
 
-// A bipartite graph with three connected components.
+// A bipartite disconnected graph with three connected components.
 let threeCompGraphSpec = [
     '9 7',
     // triangle

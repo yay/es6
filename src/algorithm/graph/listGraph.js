@@ -460,6 +460,10 @@ class ListGraph {
     // Bipartite graph (or bigraph) is a graph whose vertices can be divided into
     // two disjoint and independent sets U and V such that every edge connects a vertex
     // in U to one in V. Vertex sets U and V are usually called the parts of the graph.
+    //
+    // Examples of bipartite graphs:
+    // - every tree (acyclic connected graph)
+    // - cycle graphs with an even number of vertices (e.g. square)
 
     /**
      * @typedef TwoColorResult
