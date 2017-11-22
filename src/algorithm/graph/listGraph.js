@@ -69,11 +69,11 @@ class ListGraph {
     }
 
     exists(x, y) {
-        let node = this.links[x];
-        while (node) {
-            if (node.index === y)
+        let link = this.links[x];
+        while (link) {
+            if (link.index === y)
                 return true;
-            node = node.next;
+            link = link.next;
         }
         return false;
     }

@@ -36,7 +36,7 @@ let css =
       grid-template-columns: repeat(3, 1fr);
       grid-gap: 10px;
       grid-auto-rows: minmax(100px, auto);
-      
+
       background-color: rgba(255,255,0,0.3);
       padding: 10px;
     }
@@ -56,7 +56,7 @@ let css =
     .three {
       grid-column: 1;
       grid-row: 2 / 5;
-      
+
       display: grid;
       grid-gap: 10px;
     }

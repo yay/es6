@@ -43,7 +43,7 @@ returned by the then's successCallback, failureCallback or generated automatical
         return timeout(2000);
     }).then(() => {
         console.log(2);
-        throw new Error("dammit");
+        throw new Error('dammit');
     }).catch(err => {
         return Promise.all([timeout(100), timeout(200)]);
     });
