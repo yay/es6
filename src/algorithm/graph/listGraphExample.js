@@ -164,6 +164,7 @@ function dfsTraversal() {
 
     let undirectedGraph = ListGraph.readGraph(dfsGraphSpec, false);
     undirectedGraph.printGraph();
+    console.log( undirectedGraph.toDot() );
 
     // undirectedGraph.printTraversal(1, {type: 'dfs'});
 
@@ -260,4 +261,6 @@ function diameter() {
 // bfsTraversal();
 // dfsTraversal();
 // diameter();
-isTree();
+// isTree();
+
+dfsTraversal();

@@ -140,6 +140,37 @@ class ListGraph {
         }
     }
 
+    toDot() {
+        const linkSym = this.directed ? ' -> ' : ' -- ';
+        const nodeCount = this.nodeCount;
+        const linksDef = [];
+        const skip = [];
+        for (let u = 1; u <= nodeCount; u++) {
+            let link = this.links[u];
+            while (link) {
+                let v = link.index;
+                if (skip[u] !== v) {
+                    linksDef.push('\t' + u + linkSym + v + ';');
+                    skip[v] = u;
+                }
+                link = link.next;
+            }
+        }
+        return 'graph {\n' + linksDef.join('\n') + '\n}';
+    }
+
+    // To render to PostScript use:
+    // dot -Tps graph.dot -o graph.ps
+    // To render to PNG use:
+    // dot -Tpng graph.dot -o graph.png
+    saveToDot(filename = 'graph.dot') {
+        let a = document.createElement('a');
+        let blob = new Blob([this.toDot()], {type: 'plain/text'});
+        a.href = URL.createObjectURL(blob);
+        a.download = filename;
+        a.click();
+    }
+
     /*
     Breadth-first search is so named because it expands the frontier between
     discovered and undiscovered vertices uniformly across the breadth of the

@@ -46,7 +46,7 @@ class BTree {
         } else {
             let it = this.root;
 
-            while (true) {
+            for (;;) {
                 if (it.data === data) {
                     return false;
                 } else {
