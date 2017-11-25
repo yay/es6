@@ -141,28 +141,32 @@ class ListGraph {
     }
 
     toDot() {
-        const linkSym = this.directed ? ' -> ' : ' -- ';
+        const directed = this.directed;
+        const linkSym = directed ? ' -> ' : ' -- ';
         const nodeCount = this.nodeCount;
         const linksDef = [];
-        const skip = [];
+        const skip = new Set();
+
         for (let u = 1; u <= nodeCount; u++) {
             let link = this.links[u];
             while (link) {
                 let v = link.index;
-                if (skip[u] !== v) {
+                if (!skip.has(`${u},${v}`)) {
                     linksDef.push('\t' + u + linkSym + v + ';');
-                    skip[v] = u;
+                    skip.add(`${v},${u}`);
                 }
                 link = link.next;
             }
         }
-        return 'graph {\n' + linksDef.join('\n') + '\n}';
+        const type = directed ? 'digraph' : 'graph';
+        return type + ' {\n' + linksDef.join('\n') + '\n}';
     }
 
-    // To render to PostScript use:
+    // To render to PostScript, PNG and SVG (respectively) use:
     // dot -Tps graph.dot -o graph.ps
-    // To render to PNG use:
     // dot -Tpng graph.dot -o graph.png
+    // dot -Tsvg graph.dot -o graph.svg
+    // Or use http://www.webgraphviz.com/
     saveToDot(filename = 'graph.dot') {
         let a = document.createElement('a');
         let blob = new Blob([this.toDot()], {type: 'plain/text'});

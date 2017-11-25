@@ -85,6 +85,7 @@ function readAndPrint() {
 
     console.log('\nPrint directed graph:\n');
     directedGraph.printGraph();
+    console.log( directedGraph.toDot() );
 
 
     // Read undirected graph
@@ -92,6 +93,7 @@ function readAndPrint() {
 
     console.log('\nPrint undirected graph:\n');
     undirectedGraph.printGraph();
+    console.log( undirectedGraph.toDot() );
 }
 
 function bfsTraversal() {
@@ -253,7 +255,7 @@ function diameter() {
     console.log( graph.findTreeDiameter() );          // {diameter: 9, nodes: [15, 14]}
 }
 
-// readAndPrint();
+readAndPrint();
 // findPath();
 // connectedComponents();
 // twoColor();
@@ -262,5 +264,3 @@ function diameter() {
 // dfsTraversal();
 // diameter();
 // isTree();
-
-dfsTraversal();
