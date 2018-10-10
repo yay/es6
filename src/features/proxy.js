@@ -32,7 +32,7 @@ var handler = {
 {
     // Proxying a normal object
     let target = {
-        bob: 'marley'
+        Bob: 'Marley'
     };
     let handler = {
         get: function (target, name) {
@@ -42,6 +42,7 @@ var handler = {
 
     let p = new Proxy(target, handler);
     console.log(p.Vitaly); // Hello, Vitaly!
+    console.log(p.Bob);    // won't print 'Marley'
 }
 
 {
@@ -70,7 +71,7 @@ var handler = {
             //
             //     target.apply(target, args)
             //
-            // or in this case even simply:
+            // or in this case simply:
             //
             //     target()
             //
