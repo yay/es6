@@ -35,3 +35,10 @@ let bob = {
 };
 bob.printFriends();
 bob.printMoreFriends();
+
+
+function Fun1() {}
+const Fun2 = () => {};
+
+new Fun1(); // OK
+new Fun2(); // Fun2 is not a constructor

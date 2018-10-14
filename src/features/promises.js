@@ -45,6 +45,9 @@ returned by the then's successCallback, failureCallback or generated automatical
         console.log(2);
         throw new Error('dammit');
     }).catch(err => {
+        // Creates a Promise that is resolved with an array of results
+        // when all of the provided Promises resolve,
+        // or rejected when any Promise is rejected.
         return Promise.all([timeout(100), timeout(200)]);
     });
 
@@ -61,8 +64,12 @@ function inSequence(promises) {
 new Promise((resolve, reject) => resolve('success'))
     .then(v => console.log(1, v))   // 1 'success'
     .then(v => console.log(2, v))   // 2 undefined
-    .then(v => console.log(3, v))   // 3 undefined
-    .then(() => {
+    .then(v => {
+        console.log(3, v);          // 3 undefined
+        return 5;
+    })
+    .then((v) => {
+        console.log(4, v);          // 4 5
         throw new Error('failure');
     })
     .catch(err => console.log(err))       // Error: failure

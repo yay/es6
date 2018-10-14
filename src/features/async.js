@@ -1,5 +1,9 @@
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
 
+// The async function declaration defines an asynchronous function,
+// which returns an AsyncFunction object. An asynchronous function is a function
+// which operates asynchronously via the event loop, using an implicit Promise to return its result.
+
 function resolveAfter2Seconds(x) {
     return new Promise(resolve => {
         setTimeout(() => {
