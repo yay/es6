@@ -211,3 +211,11 @@ function draw() {
 
     console.log(fizzBuzz); // "true"
 }
+
+{
+    let obj = {xx: 1, yy: 2, xy: 3, yx: 4};
+    let xx, yy, xy, yx;
+    // {xx, yy, xy, yx} = obj; // Error: "Uncaught SyntaxError: Unexpected token ="
+    ({xx, yy, xy, yx} = obj);  // assignment without declaration syntax
+    console.log(yy); // 2
+}
