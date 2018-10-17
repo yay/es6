@@ -2,10 +2,27 @@
 
 // The async function declaration defines an asynchronous function,
 // which returns an AsyncFunction object. An asynchronous function is a function
-// which operates asynchronously via the event loop, using an implicit Promise to return its result.
+// which operates asynchronously via the event loop,
+// using an implicit Promise to return its result.
+
+// async function myFirstAsyncFunction() {
+//     try {
+//         const fulfilledValue = await promise;
+//     }
+//     catch (rejectedValue) {
+//         // …
+//     }
+// }
+
+// If you use the async keyword before a function definition,
+// you can then use await within the function.
+//
+// When you await a promise, the function is paused in a non-blocking way
+// until the promise settles. If the promise fulfills, you get the value back.
+// If the promise rejects, the rejected value is thrown.
 
 function resolveAfter2Seconds(x) {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve(x);
         }, 2000);
@@ -14,22 +31,44 @@ function resolveAfter2Seconds(x) {
 
 
 async function add1(x) {
-    const a = await resolveAfter2Seconds(20);
-    const b = await resolveAfter2Seconds(30);
-    return x + a + b;
+    // tasks are launched one by one
+    const a = await resolveAfter2Seconds(20); // launch a task and wait for it to finish
+    const b = await resolveAfter2Seconds(30); // then launch another task and wait for it to finish
+    return x + a + b; // returns after 4 seconds
 }
-
-add1(10).then(v => {
-    console.log(v);  // prints 60 after 4 seconds.
-});
-
 
 async function add2(x) {
-    const p_a = resolveAfter2Seconds(20);
-    const p_b = resolveAfter2Seconds(30);
-    return x + await p_a + await p_b;
+    // two tasks launched at once
+    const p_a = resolveAfter2Seconds(20); // launch a task
+    const p_b = resolveAfter2Seconds(30); // launch a task
+    return x + await p_a + await p_b; // wait for both tasks to finish
+    // returns after 2 seconds
 }
 
-add2(10).then(v => {
-    console.log(v);  // prints 60 after 2 seconds.
+console.log('1');
+add1(10).then(v => {
+    console.log('add1', v);  // prints 60 after 4 seconds.
 });
+
+console.log('2');
+add2(10).then(v => {
+    console.log('add2', v);  // prints 60 after 2 seconds.
+});
+
+console.log('3');
+resolveAfter2Seconds(20)
+    .then(v => resolveAfter2Seconds(30 + v))
+        .then(v => console.log('then() chaining:', v + 10));
+
+console.log('4');
+Promise.all([resolveAfter2Seconds(20), resolveAfter2Seconds(30)]).then(v => {
+    const result = v.reduce((a, b) => a + b, 0) + 10;
+    console.log('Promise.all:', result);
+});
+
+async function returnValue() {
+    return 5; // wraps value into a promise automatically
+}
+
+console.log(returnValue()); // Promise { 5 }
+returnValue().then(v => console.log(v)); // 5
