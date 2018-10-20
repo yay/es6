@@ -34,22 +34,28 @@ returned by the then's successCallback, failureCallback or generated automatical
 {
     function timeout(duration = 0) {
         return new Promise((resolve, reject) => {
-            setTimeout(resolve, duration);
+            setTimeout(() => {
+                resolve(5);
+            }, duration);
         });
     }
 
-    let p = timeout(1000).then(() => {
-        console.log(1);
-        return timeout(2000);
-    }).then((value) => { // on resolve
-        console.log(2);
-        throw new Error('dammit');
-    }).catch(reason => { // on reject
-        // Creates a Promise that is resolved with an array of results
-        // when all of the provided Promises resolve,
-        // or rejected when any Promise is rejected.
-        return Promise.all([timeout(100), timeout(200)]);
-    });
+    let p = timeout(1000)
+        .then(() => {
+            console.log(1);
+            return timeout(2000);
+        })
+        .then((value) => { // on resolve
+            console.log(2);
+            throw new Error('dammit');
+        })
+        .catch(reason => { // on reject
+            // Creates a Promise that is resolved with an array of results
+            // when all of the provided Promises resolve,
+            // or rejected when any Promise is rejected.
+            return Promise.all([timeout(100), timeout(200)]);
+        })
+        .then(v => console.log(v));
 
     console.log(p); // Promise { <pending> }
 }
