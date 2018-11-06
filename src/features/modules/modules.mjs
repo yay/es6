@@ -2,14 +2,29 @@
 
 // node --experimental-modules modules.mjs
 
-// imports are hoisted
-import me, {FamilyClass, FamilyObject as Family} from './names'; // default import followed by named imports
-import * as counter from './counter'; // namespace import: imports the module as an object
+// Imports are hoisted.
 
-import {Parents} from "./re-exporting";
-import {count} from "./re-exporting";
+// Default import followed by named imports.
+import me, { FamilyClass, FamilyObject as Family } from './names';
+// Namespace import: imports the module as an object.
+import * as counter from './counter';
+
+import { Parents } from "./re-exporting";
+import { count } from "./re-exporting";
 
 import './side-effects';
+
+import fs from 'fs';
+
+const counterText = fs.readFile('counter.mjs', 'utf-8', (err, contents) => {
+    console.log('-----file contents-----');
+    if (err) {
+        console.log(err.message);
+    } else {
+        console.log(contents);
+    }
+    console.log('----------');
+});
 
 console.log(me);
 console.log(FamilyClass.mom());
