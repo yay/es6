@@ -120,3 +120,55 @@ function* fn2() {
     const it = fn2();
     console.log(it.next().value);
 }
+console.log('---------------------');
+function* g1() {
+    yield 2;
+    yield 3;
+    yield 4;
+}
+
+function* g2() {
+    yield 1;
+    yield* g1();
+    yield 5;
+}
+{
+    const it = g2();
+    console.log(it.next()); // { value: 1, done: false }
+    console.log(it.next()); // { value: 2, done: false }
+    console.log(it.next()); // { value: 3, done: false }
+    console.log(it.next()); // { value: 4, done: false }
+    console.log(it.next()); // { value: 5, done: false }
+    console.log(it.next()); // { value: undefined, done: true }
+}
+console.log('---------------------');
+function* g3() {
+    yield* [1, 2];
+    yield* '34';
+    yield* Array.from(arguments);
+}
+{
+    const it = g3(5, 6);
+    console.log(it.next()); // { value: 1, done: false }
+    console.log(it.next()); // { value: 2, done: false }
+    console.log(it.next()); // { value: '3', done: false }
+    console.log(it.next()); // { value: '4', done: false }
+    console.log(it.next()); // { value: 5, done: false }
+    console.log(it.next()); // { value: 6, done: false }
+    console.log(it.next()); // { value: undefined, done: true }
+}
+console.log('---------------------');
+// yield* is an expression, not a statement, so it evaluates to a value.
+function* g4() {
+    yield* [1, 2];
+    return 'foo';
+}
+let result;
+function* g5() {
+    result = yield* g4();
+}
+const it = g5();
+console.log(it.next()); // { value: 1, done: false }
+console.log(it.next()); // { value: 2, done: false }
+console.log(it.next()); // { value: undefined, done: true }
+console.log(result);    // foo
