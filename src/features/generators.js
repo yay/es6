@@ -71,3 +71,16 @@ function* makeRangeIterator(start = 0, end = Infinity, step = 1) {
     }
 }
 console.log('---------------------');
+{
+    const iterable = {
+        *[Symbol.iterator]() {
+            yield 1;
+            yield 2;
+            yield 3;
+        }
+    };
+    for (let value of iterable) {
+        console.log(value);
+    }
+}
+console.log('---------------------');
