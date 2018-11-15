@@ -84,3 +84,39 @@ console.log('---------------------');
     }
 }
 console.log('---------------------');
+{
+    // Some statements and expressions are expecting iterables,
+    // for example the for-of loops, spread syntax, yield*,
+    // and destructuring assignment.
+    for (const value of ['a', 'b', 'c']) {
+        console.log(value);
+    }
+
+    console.log([...'abc']); // [ 'a', 'b', 'c' ]
+
+    // The yield* expression is used to delegate to another generator
+    // or iterable object.
+    function* gen() {
+        yield* ['a', 'b', 'c'];
+        return "That's it!";
+    }
+    const g = gen();
+    console.log(g.next()); // { value: 'a', done: false }
+    console.log(g.next()); // { value: 'b', done: false }
+    console.log(g.next()); // { value: 'c', done: false }
+    console.log(g.next()); // { value: "That's it!", done: true }
+
+    const [a, b, c] = new Set(['a', 'b', 'c']);
+    console.log(a, b, c); // a b c
+}
+console.log('---------------------');
+function* fn1() {
+    yield 42;
+}
+function* fn2() {
+    yield* fn1(); // delegate to another generator
+}
+{
+    const it = fn2();
+    console.log(it.next().value);
+}
