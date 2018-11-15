@@ -1,7 +1,27 @@
+/*
+
+Iteration is based on these duck-typed interfaces
+(using TypeScript type syntax for exposition only):
+
+interface Iterator {
+    next(): IteratorResult;
+}
+interface IteratorResult {
+    done: boolean;
+    value: any;
+}
+interface Iterable {
+    [Symbol.iterator](): Iterator
+}
+
+Iterators are consumed only as necessary and thus can express sequences
+of unlimited size, such as the range of integers between 0 and Infinity.
+
+*/
 {
     // For...of creates a loop iterating over iterable objects
     // (including Array, TypedArray, String, Map, Set,
-    // arguments object and so on).
+    // 'arguments' object and so on).
 
     let obj = {}; // NOT an iterable!
 
@@ -11,15 +31,28 @@
     // }
 }
 
+function iterate(iterable) {
+    // for (let n of iterable) {
+    //     if (n > 1000) break;
+    //     console.log(n);
+    // }
+    const it = iterable[Symbol.iterator]();
+    let result = it.next();
+    while (result.value < 1000) {
+        console.log(result.value);
+        result = it.next();
+    }
+}
+
 {
     let fibonacci = {
-        [Symbol.iterator]() {
-            let pre = 0, cur = 1;
-            return {
+        [Symbol.iterator]() { // setup function that returns the Iterator
+            let pre = 0;
+            let cur = 1;
+            return { // the actual Iterator
                 next() {
-                    // Looks cool, but not an efficient implementation.
                     [pre, cur] = [cur, pre + cur];
-                    return { done: false, value: cur }
+                    return { done: false, value: cur };
                 }
             }
         }
@@ -46,65 +79,18 @@
     */
 }
 
-{
-    let fibonacci = {
-        [Symbol.iterator]() {
-            let pre = 0, cur = 1;
-            return {
-                next() {
-                    let oldPre = pre;
-                    pre = cur;
-                    cur = oldPre + cur;
-                    return { done: false, value: cur }
-                }
-            }
-        }
-    };
-
-    iterate(fibonacci);
-}
-
-/*
-
-Iteration is based on these duck-typed interfaces
-(using TypeScript type syntax for exposition only):
-
-interface IteratorResult {
-    done: boolean;
-    value: any;
-}
-interface Iterator {
-    next(): IteratorResult;
-}
-interface Iterable {
-    [Symbol.iterator](): Iterator
-}
-
-*/
-
-function iterate(fibonacci) {
-    for (let n of fibonacci) {
-        // truncate the sequence at 1000
-        if (n > 1000)
-            break;
-        console.log(n);
-    }
-}
-
+console.log('---------------------');
 {
     let fibonacci = {
         a: 'hey',
         b: 'hi',
         [Symbol.iterator]() {
-            let pre = 0, cur = 1,
-                value;
-
+            let prev = 0;
+            let value = 1;
             return {
                 next() {
-                    value = pre;
-                    pre = cur;
-                    value = cur = value + cur;
-                    return { done: value > 1000, value }
+                    [prev, value] = [value, prev + value];
+                    return { done: value > 1000, value };
                 }
             }
         }
@@ -114,18 +100,16 @@ function iterate(fibonacci) {
         console.log(n);
     }
 }
-
+console.log('---------------------');
 {
-    let str = 'Hey';
-
-    for (let c of str) {
+    for (let c of 'Hey') {
         console.log(c);
     }
     // H
     // e
     // y
 }
-
+console.log('---------------------');
 {
     let iterable = new Uint8Array([0x00, 0xff]);
 
@@ -135,9 +119,13 @@ function iterate(fibonacci) {
     // 0
     // 255
 }
-
+console.log('---------------------');
 {
-    let iterable = new Map([['a', 1], ['b', 2], ['c', 3]]);
+    let iterable = new Map([
+        ['a', 1],
+        ['b', 2],
+        ['c', 3]
+    ]);
 
     for (let entry of iterable) {
         console.log(entry);
@@ -153,20 +141,20 @@ function iterate(fibonacci) {
     // 2
     // 3
 }
-
+console.log('---------------------');
 {
     (function() {
         for (let argument of arguments) {
             console.log(argument);
         }
-    })(1, 2, 3);
+    }(1, 2, 3));
     // 1
     // 2
     // 3
 }
-
+console.log('---------------------');
 {
-    // Note: This will only work in platforms that have
+    // Note: This will only work on platforms that have
     // implemented NodeList.prototype[Symbol.iterator]
     // let articleParagraphs = document.querySelectorAll('article > p');
     //
@@ -174,3 +162,32 @@ function iterate(fibonacci) {
     //     paragraph.classList.add('read');
     // }
 }
+
+function makeRangeIterator(start = 0, end = Infinity, step = 1) {
+    let index = start;
+    let iterationCount = 0;
+    return {
+        next() {
+            if (index <= end) {
+                const result = {
+                    value: index,
+                    done: false
+                };
+                index += step;
+                iterationCount++;
+                return result;
+            }
+            return { value: iterationCount, done: true };
+        }
+    };
+}
+
+{
+    const it = makeRangeIterator(0, 10, 2);
+    let result = it.next();
+    while (!result.done) {
+        console.log(result.value);
+        result = it.next();
+    }
+}
+console.log('---------------------');

@@ -14,8 +14,8 @@
 //     }
 // }
 
-// If you use the async keyword before a function definition,
-// you can then use await within the function.
+// If you use the `async` keyword before a function definition,
+// you can then use `await` within the function.
 //
 // When you await a promise, the function is paused in a non-blocking way
 // until the promise settles. If the promise fulfills, you get the value back.
@@ -28,7 +28,6 @@ function resolveAfter2Seconds(x) {
         }, 2000);
     });
 }
-
 
 async function add1(x) {
     // tasks are launched one by one
@@ -45,30 +44,29 @@ async function add2(x) {
     // returns after 2 seconds
 }
 
-console.log('1');
 add1(10).then(v => {
     console.log('add1', v);  // prints 60 after 4 seconds.
 });
 
-console.log('2');
 add2(10).then(v => {
     console.log('add2', v);  // prints 60 after 2 seconds.
 });
 
-console.log('3');
 resolveAfter2Seconds(20)
     .then(v => resolveAfter2Seconds(30 + v))
-        .then(v => console.log('then() chaining:', v + 10));
+    .then(v => console.log('then() chaining:', v + 10));
 
-console.log('4');
-Promise.all([resolveAfter2Seconds(20), resolveAfter2Seconds(30)]).then(v => {
+Promise.all([
+    resolveAfter2Seconds(20),
+    resolveAfter2Seconds(30)]
+).then(v => {
     const result = v.reduce((a, b) => a + b, 0) + 10;
     console.log('Promise.all:', result);
 });
 
 async function returnValue() {
-    return 5; // wraps value into a promise automatically
+    const seven = await 7; // = await Promise.resolve(7)
+    return 5 + seven; // wraps value into a promise automatically
 }
 
-console.log(returnValue()); // Promise { 5 }
-returnValue().then(v => console.log(v)); // 5
+returnValue().then(v => console.log(v)); // 12

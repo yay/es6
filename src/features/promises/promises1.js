@@ -59,3 +59,21 @@ returned by the then's successCallback, failureCallback or generated automatical
 
     console.log(p); // Promise { <pending> }
 }
+
+{
+    (new Promise((resolve, reject) => {
+        setTimeout(() => {
+            reject('Not in the mood.');
+        }, 3000);
+    })).then(() => {
+        console.log('Yay!');
+    }).catch(reason => console.log('Reason: ' + reason));
+
+    (new Promise((resolve, reject) => {
+        setTimeout(() => {
+            reject(new Error('Bad day.'));
+        }, 3500);
+    })).then(() => {
+        console.log('Yay!'); // never called
+    }).catch(e => console.log('Reason: ' + e.message));
+}

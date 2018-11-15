@@ -17,7 +17,7 @@
 {
     // list matching
     let [a, , b] = [1, 2, 3];
-    console.log(a, b);
+    console.log(a, b); // 1 3
 }
 
 {

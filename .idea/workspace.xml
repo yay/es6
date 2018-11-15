@@ -2,8 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="23422675-109f-4086-b5d6-3c7b029a7f41" name="Default" comment="Shadow DOM.">
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/vitalykravchenko.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/vitalykravchenko.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/fetch.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/fetch/fetch.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/async.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/async/async1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/destructuring.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/destructuring.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/generators.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/generators.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/iterators.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/iterators.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/promises/1.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/promises/promises1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/promises/2.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/promises/promises2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/promises/3.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/promises/promises3.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/promises/4.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/promises/promises4.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/promises/5.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/promises/promises5.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/symbols.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/symbols.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -18,41 +28,45 @@
     <session id="-1451176860">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="11" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.open.time.5" value="2" />
+          <entry key="project.open.time.6" value="4" />
+          <entry key="project.open.time.7" value="2" />
+          <entry key="project.open.time.8" value="1" />
+          <entry key="project.opened" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="html" value="1" />
-          <entry key="js" value="13" />
-          <entry key="mjs" value="1" />
+          <entry key="js" value="24" />
+          <entry key="mjs" value="2" />
           <entry key="png" value="3" />
-          <entry key="ts" value="2" />
+          <entry key="ts" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="ECMAScript 6" value="1" />
+          <entry key="ECMAScript 6" value="2" />
           <entry key="HTML" value="1" />
           <entry key="Image" value="3" />
-          <entry key="JavaScript" value="13" />
-          <entry key="TypeScript" value="2" />
+          <entry key="JavaScript" value="24" />
+          <entry key="TypeScript" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="422" />
-          <entry key="js" value="980" />
+          <entry key="js" value="7344" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="422" />
-          <entry key="JavaScript" value="980" />
+          <entry key="JavaScript" value="7344" />
         </counts>
       </usages-collector>
     </session>
@@ -109,14 +123,14 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5147059">
+    <splitter split-orientation="horizontal" split-proportion="0.52916664">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/features/fetch/fetch.js">
+            <entry file="file://$PROJECT_DIR$/src/features/symbols.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="114">
-                  <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+                <state relative-caret-position="687">
+                  <caret line="52" column="37" selection-start-line="52" selection-start-column="37" selection-end-line="52" selection-end-column="37" />
                   <folding>
                     <element signature="n#!!doc" expanded="true" />
                   </folding>
@@ -125,19 +139,43 @@
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/features/iterators.js">
+            <entry file="file://$PROJECT_DIR$/src/features/promises/promises1.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-596">
-                  <caret line="3" column="35" selection-start-line="3" selection-start-column="35" selection-end-line="3" selection-end-column="35" />
+                <state relative-caret-position="119">
+                  <caret line="38" column="25" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="25" />
+                  <folding>
+                    <element signature="n#!!doc" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/features/async/async1.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="102">
+                  <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/features/fetch/index.html">
+            <entry file="file://$PROJECT_DIR$/src/features/generators.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="136">
-                  <caret line="8" column="6" lean-forward="true" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+                <state relative-caret-position="538">
+                  <caret line="65" column="43" lean-forward="true" selection-start-line="65" selection-start-column="43" selection-end-line="65" selection-end-column="43" />
+                  <folding>
+                    <element signature="n#!!doc" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/features/async/async_errors.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="391">
+                  <caret line="23" column="37" lean-forward="true" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
                 </state>
               </provider>
             </entry>
@@ -147,15 +185,6 @@
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/features/async.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="85">
-                  <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/features/regexp.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="340">
@@ -164,13 +193,25 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/features/modules/modules.mjs">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="402">
-                  <caret line="30" column="24" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
+                <state relative-caret-position="323">
+                  <caret line="19" column="43" lean-forward="true" selection-start-line="19" selection-start-column="43" selection-end-line="19" selection-end-column="43" />
                   <folding>
                     <element signature="e#282#319#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/features/iterators.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="538">
+                  <caret line="185" column="43" lean-forward="true" selection-start-line="185" selection-start-column="43" selection-end-line="185" selection-end-column="43" />
+                  <folding>
+                    <element signature="n#!!doc" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -191,12 +232,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>.dfs(</find>
-      <find>.dfs</find>
-      <find>'dfs'</find>
-      <find>...</find>
-      <find>depth</find>
-      <find>Given an array of n positive integers</find>
       <find>level order</find>
       <find>in-order</find>
       <find>when to use</find>
@@ -221,6 +256,12 @@
       <find>dots</find>
       <find>url</find>
       <find>createImage</find>
+      <find>get</find>
+      <find>es6features</find>
+      <find>reject</find>
+      <find>Promise.all</find>
+      <find>side</find>
+      <find>pending</find>
     </findStrings>
     <replaceStrings>
       <replace>'</replace>
@@ -234,6 +275,9 @@
       <dir>$PROJECT_DIR$/src/algorithm</dir>
       <dir>$PROJECT_DIR$/src</dir>
       <dir>$PROJECT_DIR$/src/features</dir>
+      <dir>$PROJECT_DIR$</dir>
+      <dir>$PROJECT_DIR$/src/features/promises</dir>
+      <dir>$PROJECT_DIR$/src/features/modules</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -242,15 +286,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/interview/distanceTreeElements.js" />
-        <option value="$PROJECT_DIR$/src/interview/combinationOfLetters.js" />
-        <option value="$PROJECT_DIR$/src/algorithm/sort/nonRecursiveMergeSort.js" />
-        <option value="$PROJECT_DIR$/src/algorithm/sort/stackMergeSort.js" />
-        <option value="$PROJECT_DIR$/src/algorithm/sort/mergeSortQueue.js" />
-        <option value="$PROJECT_DIR$/src/algorithm/sort/mergeSortStack.js" />
-        <option value="$PROJECT_DIR$/src/algorithm/sort/performance.js" />
-        <option value="$PROJECT_DIR$/src/algorithm/sort/quicksort.js" />
-        <option value="$PROJECT_DIR$/src/algorithm/sort/mergesort.js" />
         <option value="$PROJECT_DIR$/src/algorithm/combinatorial/backtracking.js" />
         <option value="$PROJECT_DIR$/src/algorithm/combinatorial/sudoku.js" />
         <option value="$PROJECT_DIR$/src/features/set.js" />
@@ -279,7 +314,6 @@
         <option value="$PROJECT_DIR$/src/features/modules/names.mjs" />
         <option value="$PROJECT_DIR$/src/features/modules/re-exporting.mjs" />
         <option value="$PROJECT_DIR$/src/features/modules/counter.mjs" />
-        <option value="$PROJECT_DIR$/src/features/destructuring.js" />
         <option value="$PROJECT_DIR$/src/features/promises/2.js" />
         <option value="$PROJECT_DIR$/src/features/promises/3.js" />
         <option value="$PROJECT_DIR$/src/features/promises.js" />
@@ -293,6 +327,16 @@
         <option value="$PROJECT_DIR$/src/features/modules/modules.mjs" />
         <option value="$PROJECT_DIR$/src/features/fetch/fetch.js" />
         <option value="$PROJECT_DIR$/src/features/fetch/index.html" />
+        <option value="$PROJECT_DIR$/src/features/casting.js" />
+        <option value="$PROJECT_DIR$/src/features/get_set.js" />
+        <option value="$PROJECT_DIR$/src/features/strict.js" />
+        <option value="$PROJECT_DIR$/src/features/symbols.js" />
+        <option value="$PROJECT_DIR$/src/features/promises/promises1.js" />
+        <option value="$PROJECT_DIR$/src/features/destructuring.js" />
+        <option value="$PROJECT_DIR$/src/features/async/async1.js" />
+        <option value="$PROJECT_DIR$/src/features/async/async_errors.js" />
+        <option value="$PROJECT_DIR$/src/features/generators.js" />
+        <option value="$PROJECT_DIR$/src/features/iterators.js" />
       </list>
     </option>
   </component>
@@ -317,9 +361,9 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="23" />
-    <option name="width" value="1217" />
+    <option name="width" value="1440" />
     <option name="height" value="877" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -372,6 +416,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -395,7 +440,7 @@
               <item name="es6" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="features" type="462c0819:PsiDirectoryNode" />
-              <item name="fetch" type="462c0819:PsiDirectoryNode" />
+              <item name="async" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="es6" type="b2602c69:ProjectViewProjectNode" />
@@ -404,11 +449,17 @@
               <item name="features" type="462c0819:PsiDirectoryNode" />
               <item name="modules" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="es6" type="b2602c69:ProjectViewProjectNode" />
+              <item name="es6" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="features" type="462c0819:PsiDirectoryNode" />
+              <item name="promises" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -422,20 +473,20 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
-    <property name="settings.editor.splitter.proportion" value="0.27764976" />
+    <property name="settings.editor.splitter.proportion" value="0.27009645" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/algorithm/graph" />
-      <recent name="$PROJECT_DIR$/img" />
-      <recent name="$PROJECT_DIR$/src" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/features/async" />
       <recent name="$PROJECT_DIR$/src/features/fetch" />
       <recent name="$PROJECT_DIR$/img" />
       <recent name="$PROJECT_DIR$/src/features/modules" />
       <recent name="$PROJECT_DIR$/src/other" />
-      <recent name="$PROJECT_DIR$/src/helper" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/algorithm/graph" />
+      <recent name="$PROJECT_DIR$/img" />
+      <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -450,36 +501,36 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Node.js.fetch.js">
-    <configuration name="1.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="1.js" working-dir="$PROJECT_DIR$/src/features/promises">
+  <component name="RunManager" selected="Node.js.iterators.js">
+    <configuration name="async1.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="async1.js" working-dir="$PROJECT_DIR$/src/features/async">
       <method v="2" />
     </configuration>
-    <configuration name="5.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="5.js" working-dir="$PROJECT_DIR$/src/features/promises">
+    <configuration name="async_errors.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="async_errors.js" working-dir="$PROJECT_DIR$/src/features/async">
       <method v="2" />
     </configuration>
-    <configuration name="fetch.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/features/fetch/fetch.js" working-dir="$PROJECT_DIR$/src/features">
+    <configuration name="destructuring.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="destructuring.js" working-dir="$PROJECT_DIR$/src/features">
       <method v="2" />
     </configuration>
-    <configuration name="modules.mjs" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" node-parameters="--experimental-modules" path-to-js-file="modules.mjs" working-dir="$PROJECT_DIR$/src/features/modules">
+    <configuration name="generators.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="generators.js" working-dir="$PROJECT_DIR$/src/features">
       <method v="2" />
     </configuration>
-    <configuration name="regexp.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="regexp.js" working-dir="$PROJECT_DIR$/src/features">
+    <configuration name="iterators.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="iterators.js" working-dir="$PROJECT_DIR$/src/features">
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Node.js.5.js" />
-      <item itemvalue="Node.js.modules.mjs" />
-      <item itemvalue="Node.js.1.js" />
-      <item itemvalue="Node.js.regexp.js" />
-      <item itemvalue="Node.js.fetch.js" />
+      <item itemvalue="Node.js.destructuring.js" />
+      <item itemvalue="Node.js.iterators.js" />
+      <item itemvalue="Node.js.async1.js" />
+      <item itemvalue="Node.js.async_errors.js" />
+      <item itemvalue="Node.js.generators.js" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Node.js.fetch.js" />
-        <item itemvalue="Node.js.modules.mjs" />
-        <item itemvalue="Node.js.regexp.js" />
-        <item itemvalue="Node.js.5.js" />
-        <item itemvalue="Node.js.1.js" />
+        <item itemvalue="Node.js.iterators.js" />
+        <item itemvalue="Node.js.generators.js" />
+        <item itemvalue="Node.js.async_errors.js" />
+        <item itemvalue="Node.js.async1.js" />
+        <item itemvalue="Node.js.destructuring.js" />
       </list>
     </recent_temporary>
   </component>
@@ -536,12 +587,21 @@
       <workItem from="1541796349108" duration="35000" />
       <workItem from="1541796435118" duration="594000" />
       <workItem from="1541862940005" duration="2954000" />
-      <workItem from="1541877141462" duration="6948000" />
+      <workItem from="1541877141462" duration="7069000" />
+      <workItem from="1541901615846" duration="1734000" />
+      <workItem from="1541964300230" duration="795000" />
+      <workItem from="1542013228756" duration="11872000" />
+      <workItem from="1542049629298" duration="531000" />
+      <workItem from="1542057834330" duration="597000" />
+      <workItem from="1542100648657" duration="7631000" />
+      <workItem from="1542117184966" duration="2668000" />
+      <workItem from="1542237554153" duration="681000" />
+      <workItem from="1542259094019" duration="9527000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70964000" />
+    <option name="totallyTimeSpent" value="107121000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -553,17 +613,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1217" height="877" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="877" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" id="Project" order="0" visible="true" weight="0.1906327" />
+      <window_info id="Project" order="0" weight="0.17222223" />
       <window_info id="Structure" order="1" weight="0.18957011" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info x="415" y="258" width="556" height="514" id="Documentation" order="3" type="FLOATING" />
-      <window_info id="Run" order="4" weight="0.19722222" />
+      <window_info id="Run" order="4" weight="0.19791667" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3540091" />
-      <window_info anchor="bottom" id="Debug" order="2" weight="0.5347044" />
+      <window_info anchor="bottom" id="Debug" order="2" weight="0.37220845" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="5" weight="0.32889965" />
@@ -573,7 +633,7 @@
       <window_info anchor="bottom" id="Messages" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50528544" side_tool="true" weight="0.27830687" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.3688946" />
-      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4947146" weight="0.3126551" />
+      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4947146" weight="0.3114144" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -676,30 +736,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.js" />
-    <entry file="file://$PROJECT_DIR$/src/features/spread.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="11" column="19" lean-forward="true" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webpack.config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="18" lean-forward="true" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/other/businessDaysFromNow.js" />
-    <entry file="file://$PROJECT_DIR$/src/other/medianTwoSortedArrays.js" />
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="4" lean-forward="true" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/features/string.js" />
     <entry file="file://$PROJECT_DIR$/build/index.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -807,42 +843,28 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/features/promises.js" />
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es2015.promise.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="455">
-          <caret line="196" column="57" lean-forward="true" selection-start-line="196" selection-start-column="57" selection-end-line="196" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/features/promises/5.js">
+    <entry file="file://$PROJECT_DIR$/src/features/promises/promises5.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/features/promises/1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="37" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/features/promises/2.js">
+    <entry file="file://$PROJECT_DIR$/src/features/promises/promises2.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="18" lean-forward="true" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/features/promises/3.js">
+    <entry file="file://$PROJECT_DIR$/src/features/promises/promises3.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/features/promises/4.js">
+    <entry file="file://$PROJECT_DIR$/src/features/promises/promises4.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
           <caret line="31" column="27" selection-start-line="31" selection-start-column="27" selection-end-line="31" selection-end-column="27" />
@@ -853,34 +875,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="246" column="48" selection-start-line="246" selection-start-column="48" selection-end-line="246" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es5.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="45" column="4" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../starter-projects/babel-react-cdn/react-dom.development.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138550">
-          <caret line="8150" column="62" lean-forward="true" selection-start-line="8150" selection-start-column="62" selection-end-line="8150" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/features/async.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/features/regexp.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="2" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="2" />
         </state>
       </provider>
     </entry>
@@ -926,13 +920,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/features/modules/side-effects.mjs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="31" selection-start-column="31" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/features/modules/re-exporting.mjs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -954,13 +941,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/features/destructuring.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3213">
-          <caret line="189" column="30" selection-start-line="189" selection-start-column="30" selection-end-line="189" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/features/fetch/img/logo.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -971,37 +951,141 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/features/iterators.js">
+    <entry file="file://$PROJECT_DIR$/src/features/fetch/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-596">
-          <caret line="3" column="35" selection-start-line="3" selection-start-column="35" selection-end-line="3" selection-end-column="35" />
+        <state relative-caret-position="170">
+          <caret line="10" column="7" lean-forward="true" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/features/modules/modules.mjs">
+    <entry file="file://$PROJECT_DIR$/src/features/casting.js" />
+    <entry file="file://$PROJECT_DIR$/src/features/get_set.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="30" column="24" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
-          <folding>
-            <element signature="e#282#319#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="119">
+          <caret line="7" column="36" lean-forward="true" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/features/strict.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="59">
+          <caret line="6" column="35" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/features/modules/side-effects.mjs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="23" selection-start-column="23" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/features/regexp.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="2" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es5.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="1342" column="13" lean-forward="true" selection-start-line="1342" selection-start-column="13" selection-end-line="1342" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es2015.promise.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="21" column="7" lean-forward="true" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/features/async/async_errors.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="37" lean-forward="true" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/features/async/async1.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/features/destructuring.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="742">
+          <caret line="200" column="18" selection-start-line="200" selection-start-column="18" selection-end-line="200" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/features/fetch/fetch.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+        <state relative-caret-position="-81">
+          <caret line="61" column="21" selection-start-line="61" selection-start-column="21" selection-end-line="61" selection-end-column="21" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/features/fetch/index.html">
+    <entry file="file://$PROJECT_DIR$/src/features/symbols.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="6" lean-forward="true" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+        <state relative-caret-position="687">
+          <caret line="52" column="37" selection-start-line="52" selection-start-column="37" selection-end-line="52" selection-end-column="37" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/features/map.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/features/promises/promises1.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="38" column="25" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="25" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/features/modules/modules.mjs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="43" lean-forward="true" selection-start-line="19" selection-start-column="43" selection-end-line="19" selection-end-column="43" />
+          <folding>
+            <element signature="e#282#319#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/features/generators.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="538">
+          <caret line="65" column="43" lean-forward="true" selection-start-line="65" selection-start-column="43" selection-end-line="65" selection-end-column="43" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/features/iterators.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="538">
+          <caret line="185" column="43" lean-forward="true" selection-start-line="185" selection-start-column="43" selection-end-line="185" selection-end-column="43" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
