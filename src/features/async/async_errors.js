@@ -46,8 +46,11 @@ async function test_handled_reject() {
 
 async function test_handle_throw() {
     const v = await new Promise(() => { throw 'bla' })
-        .catch(reason => console.log(`reason: ${reason}`)); // reason: bla
-    console.log(`v: ${v}`); // v: undefined
+        .catch(reason => {
+            console.log(`reason: ${reason}`); // reason: bla
+            return 'defaultValue';
+        });
+    console.log(`v: ${v}`); // v: defaultValue
 }
 
 test_handled_reject();
