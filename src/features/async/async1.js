@@ -17,6 +17,7 @@
 // If you use the `async` keyword before a function definition,
 // you can then use `await` within the function.
 //
+// `await` calls operate sequentially.
 // When you await a promise, the function is paused in a non-blocking way
 // until the promise settles. If the promise fulfills, you get the value back.
 // If the promise rejects, the rejected value is thrown.
