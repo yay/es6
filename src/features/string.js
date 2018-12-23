@@ -15,3 +15,10 @@ const results = [
 ];
 
 console.log(results);
+
+{
+    // language sensitive string comparison
+    const chars = ['e', 'a', 'é', 'f'];
+    console.log(chars.sort()); // [ 'a', 'e', 'f', 'é' ]
+    console.log(chars.sort(Intl.Collator().compare)); // [ 'a', 'e', 'é', 'f' ]
+}
