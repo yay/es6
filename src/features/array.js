@@ -48,3 +48,8 @@ function log(...args) {
     let brr = [].fill.call({length: 3}, 1);
     console.log(brr); // { '0': 1, '1': 1, '2': 1, length: 3 }
 }
+
+{
+    const years = Array.apply(null, {length: 10}).map((_, i) => i + 2000);
+    console.log(years);
+}

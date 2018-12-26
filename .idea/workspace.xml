@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="23422675-109f-4086-b5d6-3c7b029a7f41" name="Default" comment="Shadow DOM.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/string.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/string.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/array.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/array.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -42,17 +42,17 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/features/async/async3.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="110">
+                <state relative-caret-position="306">
                   <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/features/string.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="323">
-                  <caret line="19" column="43" lean-forward="true" selection-start-line="19" selection-start-column="43" selection-end-line="19" selection-end-column="43" />
+                <state relative-caret-position="119">
+                  <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
                 </state>
               </provider>
             </entry>
@@ -141,11 +141,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/features/array.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="323">
-                  <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+                <state relative-caret-position="575">
+                  <caret line="53" column="23" lean-forward="true" selection-start-line="53" selection-start-column="23" selection-end-line="53" selection-end-column="23" />
                 </state>
               </provider>
             </entry>
@@ -247,7 +247,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>bfs</find>
       <find>bfs(</find>
       <find>BfsResult</find>
       <find>for * of</find>
@@ -277,6 +276,7 @@
       <find>sequen</find>
       <find>p</find>
       <find>await Promise.all</find>
+      <find>apply</find>
     </findStrings>
     <replaceStrings>
       <replace>'</replace>
@@ -301,7 +301,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.js" />
         <option value="$PROJECT_DIR$/src/features/closures.js" />
         <option value="$PROJECT_DIR$/src/d3/basicExample.js" />
         <option value="$PROJECT_DIR$/src/other/businessDaysFromNow.js" />
@@ -352,6 +351,7 @@
         <option value="$PROJECT_DIR$/src/features/async/async1.js" />
         <option value="$PROJECT_DIR$/src/features/async/async3.js" />
         <option value="$PROJECT_DIR$/src/features/string.js" />
+        <option value="$PROJECT_DIR$/src/features/array.js" />
       </list>
     </option>
   </component>
@@ -363,8 +363,7 @@
     <auto-save>true</auto-save>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1461" />
-    <option name="y" value="-51" />
+    <option name="y" value="54" />
     <option name="width" value="1265" />
     <option name="height" value="830" />
   </component>
@@ -418,7 +417,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -462,6 +460,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -630,12 +629,13 @@
       <workItem from="1544897028143" duration="3176000" />
       <workItem from="1544921343783" duration="729000" />
       <workItem from="1544962520801" duration="5625000" />
-      <workItem from="1545599677485" duration="166000" />
+      <workItem from="1545599677485" duration="501000" />
+      <workItem from="1545821991512" duration="41000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="141126000" />
+    <option name="totallyTimeSpent" value="141502000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -647,10 +647,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1461" y="-51" width="1265" height="830" extended-state="0" />
+    <frame x="0" y="54" width="1265" height="830" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" order="0" weight="0.18181819" />
+      <window_info active="true" id="Project" order="0" visible="true" weight="0.18181819" />
       <window_info id="Structure" order="1" weight="0.18957011" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info x="415" y="258" width="556" height="514" id="Documentation" order="3" type="FLOATING" />
@@ -864,13 +864,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/features/casting.js" />
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es5.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="1342" column="13" lean-forward="true" selection-start-line="1342" selection-start-column="13" selection-end-line="1342" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es2015.promise.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -972,6 +965,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es5.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="4118" column="32" selection-start-line="4118" selection-start-column="32" selection-end-line="4118" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/features/promises/promises1.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="629">
@@ -986,6 +986,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1003">
           <caret line="59" column="1" selection-start-line="59" selection-end-line="59" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/features/async/async3.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
         </state>
       </provider>
     </entry>
@@ -1055,13 +1062,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/features/array.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/features/regexp.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -1124,17 +1124,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/features/async/async3.js">
+    <entry file="file://$PROJECT_DIR$/src/features/string.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
+        <state relative-caret-position="119">
+          <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/features/string.js">
+    <entry file="file://$PROJECT_DIR$/src/features/array.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="43" lean-forward="true" selection-start-line="19" selection-start-column="43" selection-end-line="19" selection-end-column="43" />
+        <state relative-caret-position="575">
+          <caret line="53" column="23" lean-forward="true" selection-start-line="53" selection-start-column="23" selection-end-line="53" selection-end-column="23" />
         </state>
       </provider>
     </entry>
