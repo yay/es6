@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="23422675-109f-4086-b5d6-3c7b029a7f41" name="Default" comment="Shadow DOM.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/array.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/array.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/object.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/object.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -15,7 +14,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.54071146">
+    <splitter split-orientation="horizontal" split-proportion="0.37380192">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
@@ -123,11 +122,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/features/promises/microtaskQueue.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="153">
-                  <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
+                <state relative-caret-position="17">
+                  <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
                 </state>
               </provider>
             </entry>
@@ -141,11 +140,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/features/array.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="575">
-                  <caret line="53" column="23" lean-forward="true" selection-start-line="53" selection-start-column="23" selection-end-line="53" selection-end-column="23" />
+                <state relative-caret-position="119">
+                  <caret line="7" column="25" lean-forward="true" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
                 </state>
               </provider>
             </entry>
@@ -163,7 +162,7 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/features/modules/modules.mjs">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="153">
@@ -171,6 +170,15 @@
                   <folding>
                     <element signature="e#282#319#0" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/features/symbols.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="17">
+                  <caret line="3" column="40" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
                 </state>
               </provider>
             </entry>
@@ -196,8 +204,17 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/features/objectLiterals.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="51">
-                  <caret line="3" column="36" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
+                <state relative-caret-position="314">
+                  <caret line="26" column="11" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/features/object.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="204">
+                  <caret line="12" column="58" lean-forward="true" selection-start-line="12" selection-start-column="58" selection-end-line="12" selection-end-column="58" />
                 </state>
               </provider>
             </entry>
@@ -301,7 +318,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/features/closures.js" />
         <option value="$PROJECT_DIR$/src/d3/basicExample.js" />
         <option value="$PROJECT_DIR$/src/other/businessDaysFromNow.js" />
         <option value="$PROJECT_DIR$/src/interview/mergeIntervals.js" />
@@ -352,6 +368,7 @@
         <option value="$PROJECT_DIR$/src/features/async/async3.js" />
         <option value="$PROJECT_DIR$/src/features/string.js" />
         <option value="$PROJECT_DIR$/src/features/array.js" />
+        <option value="$PROJECT_DIR$/src/features/object.js" />
       </list>
     </option>
   </component>
@@ -363,7 +380,8 @@
     <auto-save>true</auto-save>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="54" />
+    <option name="x" value="9" />
+    <option name="y" value="23" />
     <option name="width" value="1265" />
     <option name="height" value="830" />
   </component>
@@ -503,36 +521,36 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Node.js.string.js">
-    <configuration name="async3.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/features/async/async3.js" working-dir="$PROJECT_DIR$">
+  <component name="RunManager" selected="Node.js.object.js">
+    <configuration name="array.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/features/array.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
-    <configuration name="blocking.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/features/promises/blocking.js" working-dir="$PROJECT_DIR$">
+    <configuration name="async3.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/features/async/async3.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
     <configuration name="errors.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/features/generators/errors.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
-    <configuration name="microtaskQueue.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/features/promises/microtaskQueue.js" working-dir="$PROJECT_DIR$">
+    <configuration name="object.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/features/object.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
     <configuration name="string.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/features/string.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Node.js.microtaskQueue.js" />
-      <item itemvalue="Node.js.blocking.js" />
       <item itemvalue="Node.js.errors.js" />
       <item itemvalue="Node.js.async3.js" />
       <item itemvalue="Node.js.string.js" />
+      <item itemvalue="Node.js.array.js" />
+      <item itemvalue="Node.js.object.js" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Node.js.object.js" />
+        <item itemvalue="Node.js.array.js" />
         <item itemvalue="Node.js.string.js" />
         <item itemvalue="Node.js.async3.js" />
         <item itemvalue="Node.js.errors.js" />
-        <item itemvalue="Node.js.blocking.js" />
-        <item itemvalue="Node.js.microtaskQueue.js" />
       </list>
     </recent_temporary>
   </component>
@@ -630,12 +648,15 @@
       <workItem from="1544921343783" duration="729000" />
       <workItem from="1544962520801" duration="5625000" />
       <workItem from="1545599677485" duration="501000" />
-      <workItem from="1545821991512" duration="41000" />
+      <workItem from="1545821991512" duration="67000" />
+      <workItem from="1546605424751" duration="622000" />
+      <workItem from="1546628697622" duration="22000" />
+      <workItem from="1546765652860" duration="265000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="141502000" />
+    <option name="totallyTimeSpent" value="142437000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -647,14 +668,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="54" width="1265" height="830" extended-state="0" />
+    <frame x="9" y="23" width="1265" height="830" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" id="Project" order="0" visible="true" weight="0.18181819" />
+      <window_info id="Project" order="0" weight="0.18181819" />
       <window_info id="Structure" order="1" weight="0.18957011" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info x="415" y="258" width="556" height="514" id="Documentation" order="3" type="FLOATING" />
-      <window_info id="Run" order="4" weight="0.2577075" />
+      <window_info active="true" id="Run" order="4" visible="true" weight="0.2577075" />
       <window_info id="npm" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3530962" />
@@ -668,7 +689,7 @@
       <window_info anchor="bottom" id="Messages" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50528544" side_tool="true" weight="0.27830687" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.3688946" />
-      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4947146" weight="0.31093544" />
+      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4947146" visible="true" weight="0.31093544" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -782,13 +803,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/algorithm/graph/listGraph.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3621">
-          <caret line="213" column="27" lean-forward="true" selection-start-line="213" selection-start-column="27" selection-end-line="213" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/features/reflect.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -875,13 +889,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="334">
           <caret line="312" column="8" lean-forward="true" selection-start-line="312" selection-start-column="8" selection-end-line="312" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/features/symbols.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="40" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -996,6 +1003,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/features/string.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/features/async/async2.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -1048,13 +1062,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/features/promises/microtaskQueue.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/features/promises/blocking.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -1062,10 +1069,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/features/array.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="25" lean-forward="true" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/features/promises/microtaskQueue.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/features/regexp.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="20" column="2" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/features/modules/modules.mjs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+          <folding>
+            <element signature="e#282#319#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1080,13 +1111,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="26" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/features/objectLiterals.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="36" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -1114,27 +1138,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/features/modules/modules.mjs">
+    <entry file="file://$PROJECT_DIR$/src/features/symbols.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
-          <folding>
-            <element signature="e#282#319#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="17">
+          <caret line="3" column="40" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/features/string.js">
+    <entry file="file://$PROJECT_DIR$/src/features/objectLiterals.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
+        <state relative-caret-position="314">
+          <caret line="26" column="11" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/features/array.js">
+    <entry file="file://$PROJECT_DIR$/src/features/object.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="53" column="23" lean-forward="true" selection-start-line="53" selection-start-column="23" selection-end-line="53" selection-end-column="23" />
+        <state relative-caret-position="204">
+          <caret line="12" column="58" lean-forward="true" selection-start-line="12" selection-start-column="58" selection-end-line="12" selection-end-column="58" />
         </state>
       </provider>
     </entry>
