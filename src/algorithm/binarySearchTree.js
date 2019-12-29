@@ -1,4 +1,4 @@
-class BNode {
+export class BNode {
     constructor(data) {
         this.data = data;
         this.left = null;
@@ -6,7 +6,7 @@ class BNode {
     }
 }
 
-class BTree {
+export class BTree {
     constructor() {
         this.root = null;
     }
@@ -145,5 +145,3 @@ class BTree {
         this._postOrder(this.root);
     }
 }
-
-export { BNode, BTree };

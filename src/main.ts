@@ -1,4 +1,3 @@
-// import {sum, pi} from "../lib/math";
 // import { BTree } from "./algorithm/binarySearchTree";
 // import './features/objectLiterals';
 // import './features/iterators';
@@ -6,7 +5,6 @@
 // import './features/promises';
 // import './algorithm/graph/listGraph';
 // import './interview/distanceFarthestTreeElements';
-import './algorithm/graph/listGraphExample';
 // import './features/shadowDom';
 
 // console.log("2π = " + sum(pi, pi));
