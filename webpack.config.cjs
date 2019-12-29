@@ -34,8 +34,10 @@ const moduleExports = env => {
     // on a single example at a time. This example is supposed to be
     // in the `_` directory that should be given a proper name when
     // one is done working on the example.
-    // To run a specific example in watch mode:
-    // npm run bundle -- --env.example=test-example
+    // To bundle a specific example and auto-rebundle on changes:
+    // npm run bundle -- --env.example=btree
+    // To bundle and start a development server with live reloading:
+    // npm run dev-server -- --env.example=btree
     const defaultExampleName = '_';
     const activeExampleName = env && env.example ? env.example : defaultExampleName;
     const hasActiveExample = existsSync(join(examplesPath, activeExampleName));
@@ -63,6 +65,9 @@ const moduleExports = env => {
             watch: hasActiveExample,
             resolve: {
                 extensions: ['.ts', '.tsx', '.js', '.json']
+            },
+            devServer: {
+                open: true
             },
             module: {
                 rules: [{

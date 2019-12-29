@@ -10,6 +10,7 @@
   "devDependencies": {
     "webpack": "^4.22.0",
     "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "3.10.1",
     "html-webpack-plugin": "^3.2.0",
     "typescript": "^3.7.4",
     "electron": "^7.1.7",
@@ -25,7 +26,8 @@
     "@types/react-dom": "^16.9.4"
   },
   "scripts": {
-    "bundle": "npx webpack --config ./webpack.config.cjs --progress"
+    "bundle": "npx webpack --config ./webpack.config.cjs --progress",
+    "dev-server": "npx webpack-dev-server --config ./webpack.config.cjs"
   },
   "keywords": [],
   "author": "",

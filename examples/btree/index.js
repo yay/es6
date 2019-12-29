@@ -1,4 +1,3 @@
-// import '../../src/algorithm/graph/listGraphExample';
 import { BNode, BTree } from '../../src/algorithm/binarySearchTree';
 
 window.onload = function () {
