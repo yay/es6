@@ -5,14 +5,11 @@ In merge sort, the divide step does hardly anything,
 and all the real work happens in the combine step.
 Quicksort is the opposite: all the real work happens in the divide step.
 In fact, the combine step in quicksort does absolutely nothing.
+Quicksort is not stable, unlike merge sort.
 
 Quicksort has a couple of other differences from merge sort. Quicksort works in place.
 And its worst-case running time is as bad as selection sort's and insertion sort's: O(n^2).
 But its average-case running time is as good as merge sort's: O(n * log2(n)).
-
-Each partitioning operation takes O(n) operations (one pass on the array).
-On average, each partitioning divides the array into two parts (which sums up to log2(n) operations).
-In total we have O(n * log n) operations.
 
 So why think about quicksort when merge sort is at least as good?
 That's because the constant factor hidden in the big-Θ notation for quicksort is quite good.
@@ -20,7 +17,18 @@ In practice, quicksort outperforms merge sort, and it significantly outperforms 
 and insertion sort. Another reason quicksort is fast is cache efficiency.
 Quicksort linearly scans the input and linearly partitions the input.
 
-Not stable, unlike merge sort.
+Why quicksort is O(n * log2(n))?
+Because on each divide step we divide the array into two parts, which sums up to log2(n) operations.
+(It's like the depth of the recursive call tree).
+And on every conquer step we pass through the whole array, O(n) operations.
+
+Why quicksort is O(n^2) in the worst case scenario?
+The worst case is a pivot that's actually the smallest or largest element in the input.
+If the input array is already sorted, we'll be subdividing the array n times in the divide step.
+That is because the array is not split in half, but at the very edge, where one part has
+one element and the other the rest of the elements.
+
+The worst case is a pivot that's actually the smallest or largest element in the input. In this case, we do an O(N) partitioning level, but instead of getting two halves of equal size, we've ended up with one partition of one element, and one partition of N-1 elements.
 
 - Pick an element as pivot
 - Partition the given array around the picked pivot, so that
@@ -49,9 +57,8 @@ function quicksort(A, lo, hi) {
     }
 }
 
-// Picks the first element as pivot.
-function partition(A, lo, hi) { // [lo, hi]
-    const pivot = A[lo];
+function partition(A, lo, hi) {
+    const pivot = A[Math.floor((lo + hi) / 2)];
     let i = lo - 1;
     let j = hi + 1;
 
@@ -81,10 +88,11 @@ function quicksortEdu(A, lo, hi, depth = 0) {
     if (lo < hi) {
         const p = partitionEdu(A, lo, hi, depth);
         console.log(pad + `subdivide: (${lo}, ${p}) and (${p + 1}, ${hi})`);
+        console.log('-'.repeat(50));
         quicksortEdu(A, lo, p, depth + 1);
         quicksortEdu(A, p + 1, hi, depth + 1);
     } else {
-        console.log(pad + `Nothing to do: ${lo}:${hi}`);
+        console.log(pad + `--> don't partition ${lo}:${hi}`);
     }
 }
 
@@ -114,13 +122,13 @@ function printIJ(arr, i, j, padStr) {
 }
 
 function partitionEdu(A, lo, hi, depth) {
-    // const pivot = A[lo];
-    const pivot = A[Math.floor((lo + hi) / 2)];
+    const pivot = A[lo];
+    // const pivot = A[Math.floor((lo + hi) / 2)];
     let i = lo - 1;
     let j = hi + 1;
 
     let padStr = ' '.repeat(depth * 4);
-    console.log(padStr + `partition - pivot:${pivot}, lo:${lo}, hi:${hi}`);
+    console.log(padStr + `--> partition ${lo}:${hi} around ${pivot}`);
 
     for (;;) {
         console.log(padStr + `i++ while A[i] < ${pivot}`);
@@ -162,7 +170,7 @@ function partitionEdu(A, lo, hi, depth) {
 // console.log('\r');
 {
     // let arr = [7, 1, 5, 2, 9, 3];
-    let arr = [1, 3, 3, 3, 5];
+    let arr = [1, 2, 3, 4, 5];
     quicksortEdu(arr, 0, arr.length - 1);
     console.log(arr);
 }
