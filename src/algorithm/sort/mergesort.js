@@ -5,7 +5,7 @@ of equal elements in the sorted output.
 
 Does not work in place (unlike selection, insertion, quick sorts etc.)
 
-Merge sort has an average and worst-case performance of O(n log n).
+Merge sort has an average and worst-case performance of O(n * log(n)).
 If the running time of merge sort for a list of length n is T(n),
 then the recurrence T(n) = 2T(n/2) + n follows from the definition
 of the algorithm (apply the algorithm to two lists of half the size
@@ -34,8 +34,9 @@ function mergesort(A, lo, hi) {
 
 // [lo, hi)
 function splitMerge(B, A, lo, hi) {
-    if (hi - lo < 2)
+    if (hi - lo < 2) {
         return;
+    }
 
     let mid = Math.floor((lo + hi) / 2);
 
