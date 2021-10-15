@@ -9,7 +9,7 @@
     </head>
     <body>
         <input type="text" name="" id="search">
-        <input type="button" value="Search">
+        <input type="button" value="Search" onclick="onSearchClick()">
         <br>
         <script>
             const words = [
@@ -52,7 +52,7 @@
                                 break; // found child, continue to the next letter in str
                             }
                         }
-                        if (!found) {
+                        if (!found) { // insert a node for the letter we couldn't find
                             child = {
                                 children: [],
                                 char: c,
@@ -68,7 +68,17 @@
                 }
 
                 search(str) {
-
+                    let { root } = this;
+                    let child;
+                    for (let c of str) {
+                        for (child of root.children) {
+                            if (child.char === c) {
+                                root = child;
+                                break;
+                            }
+                        }
+                    }
+                    return child && child.isWord;
                 }
 
                 delete(str) {
@@ -81,6 +91,13 @@
             console.log(words);
             console.log(trie.root);
             renderTree(trie.root);
+
+            function onSearchClick() {
+                const input = document.getElementById('search');
+                if (input) {
+                    alert('Found: ' + trie.search(input.value));
+                }
+            }
 
             function renderTree(root) {
                 const width = 1200;
