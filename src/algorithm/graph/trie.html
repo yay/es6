@@ -11,6 +11,7 @@
         <input type="text" name="" id="search">
         <input type="button" value="Search" onclick="onSearchClick()">
         <input type="button" value="Delete" onclick="onDeleteClick()">
+        <input type="button" value="Insert" onclick="onInsertClick()">
         <br>
         <script>
             const words = [
@@ -131,6 +132,14 @@
                     svg = renderTree(trie.root);
                 }
             }
+
+            function onInsertClick() {
+                    if (input) {
+                        trie.insert(input.value);
+                        svg.remove();
+                        svg = renderTree(trie.root);
+                    }
+                }
 
             function renderTree(root) {
                 const width = 1200;
