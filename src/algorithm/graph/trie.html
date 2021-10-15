@@ -1,0 +1,136 @@
+<html>
+    <head>
+        <style>
+            #search {
+                width: 200px;
+            }
+        </style>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.1.1/d3.js"></script>
+    </head>
+    <body>
+        <input type="text" name="" id="search">
+        <input type="button" value="Search">
+        <br>
+        <script>
+            const words = [
+                'boolean',
+                'booklet',
+                'book',
+                'boost',
+                'board',
+                'cartesian',
+                'car',
+                'carousel',
+                'cardiac',
+                'calm'
+            ];
+
+            /*
+            interface Node {
+                children: Node[];
+                char: string;
+                isWord: boolean;
+            }
+            */
+
+            class Trie {
+                root = {
+                    children: [],
+                    char: '',
+                    isWord: false
+                };
+
+                insert(str) {
+                    let { root } = this;
+                    let child;
+                    for (let c of str) {
+                        let found = false;
+                        for (child of root.children) {
+                            if (child.char === c) {
+                                root = child;
+                                found = true;
+                                break; // found child, continue to the next letter in str
+                            }
+                        }
+                        if (!found) {
+                            child = {
+                                children: [],
+                                char: c,
+                                isWord: false
+                            };
+                            root.children.push(child);
+                            root = child;
+                        }
+                    }
+                    if (child) {
+                        child.isWord = true;
+                    }
+                }
+
+                search(str) {
+
+                }
+
+                delete(str) {
+
+                }
+            }
+
+            const trie = new Trie();
+            words.forEach(word => trie.insert(word));
+            console.log(words);
+            console.log(trie.root);
+            renderTree(trie.root);
+
+            function renderTree(root) {
+                const width = 1200;
+                const height = 600;
+                const padding = {
+                    top: 50,
+                    right: 50,
+                    bottom: 50,
+                    left: 50
+                };
+
+                const tree = d3.tree().size([
+                    width - padding.left - padding.right,
+                    height - padding.top - padding.bottom
+                ]);
+                let nodes = d3.hierarchy(root, node => node.children);
+                nodes = tree(nodes);
+
+                const svg = d3.select('body').append('svg')
+                    .attr('width', width)
+                    .attr('height', height);
+                const g = svg.append('g')
+                    .attr('transform', `translate(${padding.left}, ${padding.top})`);
+
+                const descendants = nodes.descendants();
+
+                var link = g.selectAll('.link')
+                    .data(descendants.slice(1))
+                    .enter().append('path')
+                    .attr('class', 'link')
+                    .style('stroke', 'black')
+                    .style('fill-opacity', 0)
+                    .attr('d', d => `M${d.x},${d.y}C${d.x},${(d.y + d.parent.y) / 2} ${d.parent.x},${(d.y + d.parent.y) / 2} ${d.parent.x},${d.parent.y}`);
+
+                const node = g.selectAll('.node')
+                    .data(descendants)
+                    .enter().append('g')
+                    .attr('class', d => `node ${d.children ? 'node--internal' : 'node--leaf'}`)
+                    .attr('transform', d => `translate(${d.x}, ${d.y})`);
+
+                node.append('circle')
+                    .attr('r', 15)
+                    .style('fill', d => d.data.isWord ? 'lightgreen' : 'gold');
+
+                node.append('text')
+                    .text(d => d.data.char)
+                    .attr('text-anchor', 'middle') // center horizontally
+                    .attr('alignment-baseline', 'middle') // center vertically
+                    .style('fill-opacity', 1);
+            }
+        </script>
+    </body>
+</html>
