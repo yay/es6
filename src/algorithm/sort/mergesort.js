@@ -11,6 +11,14 @@ then the recurrence T(n) = 2T(n/2) + n follows from the definition
 of the algorithm (apply the algorithm to two lists of half the size
 of the original list, and add the n steps taken to merge the resulting two lists).
 
+Algorithm:
+1. Divide the unsorted list into n sublists, each containing one element
+  (a list of one element is considered sorted).
+2. Repeatedly merge sublists to produce new sorted sublists
+   until there is only one sublist remaining. This will be the sorted list.
+
+Time complexity analysis:
+
 1) divide step (finding the midpoint) takes O(1) time
 2) merging the arrays takes O(n) time at each level of recursion
    whether it's merging 2 sub-arrays of size n/2 each
@@ -21,7 +29,7 @@ of the original list, and add the n steps taken to merge the resulting two lists
    n + n/2 + n/4 + n/8 + ... + 1 = log2(n) + 1
 
    1 + 2 + 4 + 8 + ... = 2^0 + 2^1 + 2^2 + 2^3 + ...
-   log2(n) = k basically means that we need to take k-th root or n to get 2,
+   log2(n) = k basically means that we need to take k-th root of n to get 2,
    and we have k + 1 summands, the remaining one being 1.
 */
 
@@ -29,6 +37,7 @@ of the original list, and add the n steps taken to merge the resulting two lists
 function mergesort(A, lo, hi) {
     let B = A.slice();        // work array
     splitMerge(B, A, lo, hi); // sort data from B into A
+    // B will be almost sorted at this point (two sorted but not merged halfs)
     return A;
 }
 

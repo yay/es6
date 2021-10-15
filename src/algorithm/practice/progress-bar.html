@@ -1,0 +1,75 @@
+<html>
+
+<head>
+    <style type="text/css">
+        .pb-gutter {
+            border: 1px solid black;
+            background-color: lightgray;
+        }
+
+        .pb-progress {
+            height: 100%;
+            background-color: lawngreen;
+            transition: width 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="onButtonClick()">Click</button>
+    <script>
+        class ProgressBar {
+            #gutterEl;
+            #progressEl;
+
+            constructor(container) {
+                this.#gutterEl = document.createElement('div');
+                this.#progressEl = document.createElement('div');
+                this.#gutterEl.classList.add('pb-gutter');
+                this.#progressEl.classList.add('pb-progress');
+                this.#gutterEl.appendChild(this.#progressEl);
+                container.appendChild(this.#gutterEl);
+
+                this.width = 100;
+                this.height = 20;
+            }
+
+            #progress;
+            set progress(value) {
+                value = Math.max(Math.min(100, value), 0);
+                this.#progress = value;
+                this.#progressEl.style.width = `${value}%`;
+            }
+            get progress() {
+                return this.#progress;
+            }
+
+            #width;
+            set width(value) {
+                this.#width = value;
+                this.#gutterEl.style.width = `${value}px`;
+            }
+            get width() {
+                return this.#width;
+            }
+
+            #height;
+            set height(value) {
+                this.#height = value;
+                this.#gutterEl.style.height = `${value}px`;
+            }
+            get height() {
+                return this.#height;
+            }
+        }
+
+        const pb = new ProgressBar(document.body);
+        pb.progress = 30;
+
+        function onButtonClick() {
+            pb.progress = 80;
+        }
+    </script>
+</body>
+
+</html>
