@@ -10,6 +10,7 @@
     <body>
         <input type="text" name="" id="search">
         <input type="button" value="Search" onclick="onSearchClick()">
+        <input type="button" value="Delete" onclick="onDeleteClick()">
         <br>
         <script>
             const words = [
@@ -82,7 +83,30 @@
                 }
 
                 delete(str) {
-
+                    let { root } = this;
+                    let child;
+                    let stack = [];
+                    for (let c of str) {
+                        for (child of root.children) {
+                            if (child.char === c) {
+                                stack.push(root);
+                                root = child;
+                                break;
+                            }
+                        }
+                    }
+                    if (child && child.isWord) {
+                        if (child.children.length) { // can't delete
+                            child.isWord = false;
+                        } else {
+                            while (child) {
+                                const parent = stack.pop();
+                                const index = parent.children.indexOf(child);
+                                parent.children.splice(index, 1);
+                                child = !parent.children.length ? parent : undefined;
+                            }
+                        }
+                    }
                 }
             }
 
@@ -90,12 +114,21 @@
             words.forEach(word => trie.insert(word));
             console.log(words);
             console.log(trie.root);
-            renderTree(trie.root);
+            let svg = renderTree(trie.root);
+
+            const input = document.getElementById('search');
 
             function onSearchClick() {
-                const input = document.getElementById('search');
                 if (input) {
                     alert('Found: ' + trie.search(input.value));
+                }
+            }
+
+            function onDeleteClick() {
+                if (input) {
+                    trie.delete(input.value);
+                    svg.remove();
+                    svg = renderTree(trie.root);
                 }
             }
 
@@ -147,6 +180,8 @@
                     .attr('text-anchor', 'middle') // center horizontally
                     .attr('alignment-baseline', 'middle') // center vertically
                     .style('fill-opacity', 1);
+
+                return svg;
             }
         </script>
     </body>
