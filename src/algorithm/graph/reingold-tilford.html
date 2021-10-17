@@ -1,0 +1,257 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <script>
+            const canvas = document.createElement('canvas');
+            document.body.appendChild(canvas);
+            const width = 1200;
+            const height = 800;
+            canvas.width = width * 2;
+            canvas.height = height * 2;
+            canvas.style.width = `${width}px`;
+            canvas.style.height = `${height}px`;
+            const ctx = canvas.getContext('2d');
+            ctx.translate(width, 100);
+            ctx.scale(2, 2);
+
+            const tree = {
+                value: 12,
+                children: [{
+                    value: 7,
+                    children: [{
+                        value: 2,
+                        children: [{
+                            value: 1,
+                            children: [{
+                                value: 0
+                            }]
+                        }]
+                    },
+                    {
+                        value: 6,
+                        children: [{
+                            value: 4,
+                            children: [{
+                                value: 3
+                            }]
+                        }, {
+                            value: 5
+                        }]
+                    }]
+                },
+                {
+                    value: 11,
+                    children: [{
+                        value: 8
+                    }, {
+                        value: 10,
+                        children: [{
+                            value: 9
+                        }]
+                    }]
+                }]
+            };
+
+            const dy = 100;
+            function renderTree(tree) {
+                ctx.font = '12px Verdana';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+
+                function traverse(node, parent = undefined, depth = 0) {
+                    if (!node) {
+                        return;
+                    }
+                    if (node.children) {
+                        node.children.forEach(child => traverse(child, node, depth + 1));
+                    }
+                    const x = node.x;
+                    const y = node.y * dy;
+                    ctx.fillStyle = 'gold';
+                    ctx.strokeStyle = 'black';
+                    if (parent) {
+                        ctx.beginPath();
+                        ctx.moveTo(parent.x, parent.y * dy);
+                        ctx.lineTo(x, y);
+                        ctx.stroke();
+                    }
+                    ctx.beginPath();
+                    ctx.arc(x, y, 25, 0, Math.PI * 2, false);
+                    ctx.fill();
+                    ctx.stroke();
+                    ctx.fillStyle = 'black';
+                    ctx.fillText(String(node.value), x, y);
+                }
+                traverse(tree);
+            }
+            renderTree();
+
+            /*
+            interface Node {
+                x: number;
+                y: number;
+                offset: number;
+                thread: Node;
+            }
+
+            // Keep track of the leftmost and rightmost nodes on the lowest level of the subtree.
+            // Only these nodes could ever be threaded.
+            interface Extreme {
+                node: Node;
+                level: number;
+                offset: number; // offset from the root of the subtree
+            }
+
+            Two subtrees of a node should be formed independently, and then placed as close together as possible.
+            By requiring that the subtrees be rigid at the time they are put together,
+            we avoid the undesirable effects that can accrue from positioning nodes rather than subtrees.
+
+            The above heuristic is applied during a postorder traversal as follows.
+            At each node T, imagine that its two subtrees have been drawn and cut out of paper along their contours.
+            We then superimpose the two subtrees at their roots and move them apart until no two points are touching.
+             Initialy their roots are separated by some agreed upon minimum distance; then at the next lower level,
+            we push them apart until minimum separation is established there. This process continues at successively
+            lower levels until we get to the bottom of the shorter subtree. At some levels no movement maybe necessary;
+            but at no level are the two subtrees moved closer together. When the process is complete, we fix the position
+            of the subtrees relative to their parent, which is centered over them. Assured that the subtrees cannot be
+            placed closer together, we continue the postorder traversal. After this traversal, a pre-ordertraversal
+            converts the relative positionings into absolute coordinates.
+
+            Although the idea behind the algorithm is simple, implementation is somewhat tricky,
+            because we need an efficient way to follow the contour of a subtree as it is compared to its brother subtree.
+            Simply following left and right links does not suffice.
+            Note, however, that when the next node on the contour is not a child of the current node,
+            the current node must be a leaf. We can use one of these fields to store a temporary pointer
+            to the next node on the contour, as long as we reserve an additional bit to distinguish it from a regular pointer.
+            */
+
+            function llink(T) {
+                return T.children ? T.children[0] : T.thread;
+            }
+            function rlink(T) {
+                return T.children ? T.children[T.children.length - 1] : T.thread;
+            }
+
+            const minsep = 50;
+
+            function setup(T, level) {
+                let rmost = { offset: 0 };
+                let lmost = { offset: 0 };
+
+                if (!T) {
+                    rmost.level = -1;
+                    lmost.level = -1;
+                    return [rmost, lmost];
+                }
+
+                let L = llink(T); // follows contour of left subtree
+                let R = rlink(T); // follows contour of right subtree
+
+                // LR - rightmost node on the lowest level of the left subtree (and so on)
+                const [LR, LL] = setup(L, level + 1);
+                const [RR, RL] = setup(R, level + 1);
+
+                T.y = level;
+
+                if (!R && !L) { // T is a leaf
+                    T.offset = 0;
+                    rmost.node = T;
+                    lmost.node = T;
+                    rmost.level = level;
+                    lmost.level = level;
+                    rmost.offset = 0;
+                    lmost.offset = 0;
+                } else {
+                    // Set up for subtree pushing. Place roots of subtree minimum distance apart.
+                    let cursep = minsep;
+                    let rootsep = minsep;
+                    let loffsum = 0;
+                    let roffsum = 0;
+
+                    // Consider each level in turn until one subtree is exhausted,
+                    // pushing subtrees apart  when necessary.
+                    while (L && R) {
+                        if (cursep < minsep) {
+                            rootsep += minsep - cursep;
+                            cursep = minsep;
+                        }
+                        if (rlink(L)) {
+                            loffsum += L.offset;
+                            cursep -= L.offset;
+                            L = rlink(L);
+                        } else {
+                            loffsum -= L.offset;
+                            cursep += L.offset;
+                            L = llink(L);
+                        }
+                        if (llink(R)) {
+                            roffsum -= R.offset;
+                            cursep -= R.offset;
+                            R = llink(R);
+                        } else {
+                            roffsum += R.offset;
+                            cursep += R.offset;
+                            R = rlink(R);
+                        }
+                    }
+
+                    // Set the offset in node T, and include it in accumulated offsets for L and R.
+                    T.offset = (rootsep + 1) / 2;
+                    loffsum -= T.offset;
+                    roffsum += T.offset;
+
+                    // Update extreme descendants information.
+                    if (RL.level > LL.level || !llink(T)) {
+                        lmost = RL;
+                        lmost.offset += T.offset;
+                    } else {
+                        lmost = LL;
+                        lmost.offset -= T.offset;
+                    }
+                    if (LR.level > RR.level || !rlink(T)) {
+                        rmost = LR;
+                        rmost.offset -= T.offset;
+                    } else {
+                        rmost = RR;
+                        rmost.offset += T.offset;
+                    }
+
+                    // If subtrees of T were of uneven heights, check to see if threading is necessary.
+                    // At most one thread needs to be inserted.
+                    if (L && L !== llink(T)) {
+                        RR.node.thread = true;
+                        RR.node.offset = Math.abs((RR.offset + T.offset) - loffsum);
+                        if (loffsum - T.offset <= RR.offset) {
+                            RR.node.llink = L;
+                        } else {
+                            RR.node.rlink = L;
+                        }
+                    } else if (R && R !== rlink(T)) {
+                        LL.node.thread = true;
+                        LL.node.offset = Math.abs((LL.offset - T.offset) - loffsum);
+                        if (roffsum + T.offset >= LL.offset) {
+                            LL.node.rlink = R;
+                        } else {
+                            LL.node.llink = R;
+                        }
+                    }
+                }
+                return [rmost, lmost];
+            }
+
+            // Convert the relative offsets to absolute coordinates in a pre-order traversal.
+            function petrify(T, x) {
+                if (T) {
+                    T.x = x;
+                    petrify(llink(T), x - T.offset);
+                    petrify(rlink(T), x + T.offset);
+                }
+            }
+
+            setup(tree, 0);
+            petrify(tree, 0);
+            renderTree(tree);
+        </script>
+    </body>
+</html>

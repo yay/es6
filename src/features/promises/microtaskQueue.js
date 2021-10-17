@@ -21,7 +21,7 @@ Promise.resolve(5)
     })
     .then(value => {
         console.log(value);
-        return fetch(url, {mode: "cors"}); // Promise {<pending>}
+        return fetch(url, { mode: "cors" }); // Promise {<pending>}
     })
     .then(response => response.blob())
     .then(blob => console.log(blob))
