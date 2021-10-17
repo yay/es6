@@ -92,7 +92,7 @@
                 x: number;
                 y: number;
                 offset: number;
-                thread: Node;
+                thread: Node; // next node on the contour
             }
 
             // Keep track of the leftmost and rightmost nodes on the lowest level of the subtree.
@@ -110,27 +110,27 @@
             The above heuristic is applied during a postorder traversal as follows.
             At each node T, imagine that its two subtrees have been drawn and cut out of paper along their contours.
             We then superimpose the two subtrees at their roots and move them apart until no two points are touching.
-             Initialy their roots are separated by some agreed upon minimum distance; then at the next lower level,
+            Initialy their roots are separated by some agreed upon minimum distance; then at the next lower level,
             we push them apart until minimum separation is established there. This process continues at successively
             lower levels until we get to the bottom of the shorter subtree. At some levels no movement maybe necessary;
             but at no level are the two subtrees moved closer together. When the process is complete, we fix the position
             of the subtrees relative to their parent, which is centered over them. Assured that the subtrees cannot be
-            placed closer together, we continue the postorder traversal. After this traversal, a pre-ordertraversal
+            placed closer together, we continue the postorder traversal. After this traversal, a pre-order traversal
             converts the relative positionings into absolute coordinates.
 
             Although the idea behind the algorithm is simple, implementation is somewhat tricky,
             because we need an efficient way to follow the contour of a subtree as it is compared to its brother subtree.
             Simply following left and right links does not suffice.
             Note, however, that when the next node on the contour is not a child of the current node,
-            the current node must be a leaf. We can use one of these fields to store a temporary pointer
-            to the next node on the contour, as long as we reserve an additional bit to distinguish it from a regular pointer.
+            the current node must be a leaf.
             */
 
+            // llink/rlink returns next node on the left/right contour
             function llink(T) {
-                return T.children ? T.children[0] : T.thread;
+                return T.children && T.children.length ? T.children[0] : T.thread;
             }
             function rlink(T) {
-                return T.children ? T.children[T.children.length - 1] : T.thread;
+                return T.children && T.children.length > 1 ? T.children[T.children.length - 1] : T.thread;
             }
 
             const minsep = 50;
