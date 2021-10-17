@@ -127,7 +127,7 @@
 
             // llink/rlink returns next node on the left/right contour
             function llink(T) {
-                return T.children && T.children.length ? T.children[0] : T.thread;
+                return T.children && T.children.length > 0 ? T.children[0] : T.thread;
             }
             function rlink(T) {
                 return T.children && T.children.length > 1 ? T.children[T.children.length - 1] : T.thread;
