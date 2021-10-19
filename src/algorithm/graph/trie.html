@@ -134,12 +134,12 @@
             }
 
             function onInsertClick() {
-                    if (input) {
-                        trie.insert(input.value);
-                        svg.remove();
-                        svg = renderTree(trie.root);
-                    }
+                if (input) {
+                    trie.insert(input.value);
+                    svg.remove();
+                    svg = renderTree(trie.root);
                 }
+            }
 
             function renderTree(root) {
                 const width = 1200;
@@ -182,10 +182,13 @@
 
                 node.append('circle')
                     .attr('r', 15)
-                    .style('fill', d => d.data.isWord ? 'lightgreen' : 'gold');
+                    .style('fill', d => d.data.isWord ? 'lightgreen' : 'gold')
+                    .style('stroke', 'black');
 
                 node.append('text')
                     .text(d => d.data.char)
+                    .attr('font-size', '12')
+                    .attr('font-family', 'Tahoma')
                     .attr('text-anchor', 'middle') // center horizontally
                     .attr('alignment-baseline', 'middle') // center vertically
                     .style('fill-opacity', 1);
