@@ -144,7 +144,9 @@
 
         function onBuildClick() {
             if (input) {
-                const numbers = input.value.split(',').map(s => +s);
+                const numbers = input.value.split(',')
+                    .map(s => parseFloat(s))
+                    .filter(n => !Number.isNaN(n) && Number.isFinite(n));
                 heap.build(numbers);
                 renderHeap(heap.heap);
             }
@@ -152,9 +154,12 @@
 
         function onInsertClick(e) {
             if (input) {
-                heap.insert(+input.value);
+                const value = parseFloat(input.value);
                 input.value = '';
-                renderHeap(heap.heap);
+                if (!Number.isNaN(value) && Number.isFinite(value)) {
+                    heap.insert(value);
+                    renderHeap(heap.heap);
+                }
             }
         }
 
