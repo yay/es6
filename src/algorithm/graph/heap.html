@@ -73,8 +73,8 @@
 
                 heapifyDown(i = 0) {
                     const { heap } = this;
-                    const left = (i * 2) + 1;
-                    const right = (i * 2) + 2;
+                    const left = i * 2 + 1;
+                    const right = i * 2 + 2;
                     let largest = i;
                     if (left < heap.length) { // if there's no left child, there's no right child
                         if (heap[left] > heap[largest]) {
@@ -107,8 +107,8 @@
 
                 heapifyDown(i = 0) {
                     const { heap } = this;
-                    const left = (i * 2) + 1;
-                    const right = (i * 2) + 2;
+                    const left = i * 2 + 1;
+                    const right = i * 2 + 2;
                     let smallest = i;
                     if (left < heap.length) { // if there's no left child, there's no right child
                         if (heap[left] < heap[smallest]) {
