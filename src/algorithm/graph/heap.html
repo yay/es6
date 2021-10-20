@@ -1,279 +1,282 @@
 <html>
-    <head>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.1.1/d3.js"></script>
-    </head>
-    <body>
-        <div style="height: 34px">
-            <input type="text" name="" id="input">
-            <input type="button" value="Insert" onclick="onInsertClick()">
-            <input type="button" value="Build (comma separated)" onclick="onBuildClick()">
-            <input type="button" value="Remove root" onclick="onRemoveRootClick()">
-        </div>
-        <br>
-        <script>
-            class MaxHeap {
 
-                heap = [];
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.1.1/d3.js"></script>
+</head>
 
-                constructor(arr) {
-                    if (arr) {
-                        this.build(arr);
-                    }
-                }
+<body>
+    <div style="height: 34px">
+        <input type="text" name="" id="input">
+        <input type="button" value="Insert" onclick="onInsertClick()">
+        <input type="button" value="Build (comma separated)" onclick="onBuildClick()">
+        <input type="button" value="Remove root" onclick="onRemoveRootClick()">
+    </div>
+    <br>
+    <script>
+        class MaxHeap {
 
-                build(arr) {
-                    this.heap = arr.slice();
-                    // Start with the last node that has children.
-                    // The index of this node is the same as the index of the parent of the very last node.
-                    for (let i = Math.floor((arr.length - 2) / 2); i >= 0; i--) {
-                        this.heapifyDown(i);
-                    }
-                }
+            heap = [];
 
-                getRoot() { // get max (min in MinHeap)
-                    if (this.heap.length > 0) {
-                        return this.heap[0];
-                    }
-                }
-
-                insert(value) {
-                    this.heap.push(value);
-                    this.heapifyUp();
-                }
-
-                removeRoot() { // remove max (min in MinHeap)
-                    const n = this.heap.length;
-
-                    if (n === 1) {
-                        return this.heap.shift();
-                    }
-
-                    if (n > 1) {
-                        const root = this.heap[0];
-                        // make the last added element (guaranteed to be smaller than all nodes above it) root
-                        this.heap[0] = this.heap.pop();
-                        this.heapifyDown();
-                        return root;
-                    }
-                }
-
-                // 1) calculate the parent index of the current element and compare current element with the parent
-                // 2) if current element > parent, swap it with the parent and go to step 1 with parent as current element
-                heapifyUp(i = this.heap.length - 1) {
-                    if (i <= 0) { // already at the top
-                        return;
-                    }
-                    const { heap } = this;
-                    const p = Math.floor((i - 1) / 2); // parent index
-                    if (heap[i] > heap[p]) {
-                        [heap[p], heap[i]] = [heap[i], heap[p]];
-                        this.heapifyUp(p);
-                    }
-                }
-
-                heapifyDown(i = 0) {
-                    const { heap } = this;
-                    const left = i * 2 + 1;
-                    const right = i * 2 + 2;
-                    let largest = i;
-                    if (left < heap.length) { // if there's no left child, there's no right child
-                        if (heap[left] > heap[largest]) {
-                            largest = left;
-                        }
-                        if (right < heap.length && heap[right] > heap[largest]) {
-                            largest = right;
-                        }
-                    }
-                    if (i !== largest) {
-                        [heap[i], heap[largest]] = [heap[largest], heap[i]];
-                        this.heapifyDown(largest);
-                    }
+            constructor(arr) {
+                if (arr) {
+                    this.build(arr);
                 }
             }
 
-            class MinHeap extends MaxHeap {
-
-                heapifyUp(i = this.heap.length - 1) {
-                    if (i <= 0) { // already at the top
-                        return;
-                    }
-                    const { heap } = this;
-                    const p = Math.floor((i - 1) / 2); // parent index
-                    if (heap[i] < heap[p]) { // !!! the only difference from MaxHeap
-                        [heap[p], heap[i]] = [heap[i], heap[p]];
-                        this.heapifyUp(p);
-                    }
-                }
-
-                heapifyDown(i = 0) {
-                    const { heap } = this;
-                    const left = i * 2 + 1;
-                    const right = i * 2 + 2;
-                    let smallest = i;
-                    if (left < heap.length) { // if there's no left child, there's no right child
-                        if (heap[left] < heap[smallest]) {
-                            smallest = left;
-                        }
-                        if (right < heap.length && heap[right] < heap[smallest]) {
-                            smallest = right;
-                        }
-                    }
-                    if (i !== smallest) {
-                        [heap[i], heap[smallest]] = [heap[smallest], heap[i]];
-                        this.heapifyDown(smallest);
-                    }
+            build(arr) {
+                this.heap = arr.slice();
+                // Start with the last node that has children.
+                // The index of this node is the same as the index of the parent of the very last node.
+                for (let i = Math.floor((arr.length - 2) / 2); i >= 0; i--) {
+                    this.heapifyDown(i);
                 }
             }
 
-            // const arr = [2, 3, 8, 4, 7, 10, 9, 15, 9, 13, 9, 14, 20, 11, 19, 20, 17, 20];
-            const arr = [];
-            const heap = new MaxHeap(arr);
-            // const heap = new MinHeap(arr);
-            renderHeap(heap.heap);
-
-            const input = document.getElementById('input');
-
-            function onRemoveRootClick() {
-                if (input) {
-                    heap.removeRoot();
-                    renderHeap(heap.heap);
+            getRoot() { // get max (min in MinHeap)
+                if (this.heap.length > 0) {
+                    return this.heap[0];
                 }
             }
 
-            function onBuildClick() {
-                    if (input) {
-                        const numbers = input.value.split(',').map(s => +s);
-                        heap.build(numbers);
-                        renderHeap(heap.heap);
-                    }
+            insert(value) {
+                this.heap.push(value);
+                this.heapifyUp();
+            }
+
+            removeRoot() { // remove max (min in MinHeap)
+                const n = this.heap.length;
+
+                if (n === 1) {
+                    return this.heap.shift();
                 }
 
-            function onInsertClick(e) {
-                if (input) {
-                    heap.insert(+input.value);
-                    input.value = '';
-                    renderHeap(heap.heap);
+                if (n > 1) {
+                    const root = this.heap[0];
+                    // make the last added element (guaranteed to be smaller than all nodes above it) root
+                    this.heap[0] = this.heap.pop();
+                    this.heapifyDown();
+                    return root;
                 }
             }
 
-            function heapArrayToTree(arr) {
-                let root;
-
-                // Recursive version (depth-first).
-                function traverse(i = 0, parent) {
-                    const value = arr[i];
-                    if (value === undefined) {
-                        return;
-                    }
-                    const node = {
-                        value,
-                        children: []
-                    };
-                    if (i === 0) {
-                        root = node;
-                    }
-                    if (parent) {
-                        parent.children.push(node);
-                    }
-                    traverse(i * 2 + 1, node); // left child
-                    traverse(i * 2 + 2, node); // right child
+            // 1) calculate the parent index of the current element and compare current element with the parent
+            // 2) if current element > parent, swap it with the parent and go to step 1 with parent as current element
+            heapifyUp(i = this.heap.length - 1) {
+                if (i <= 0) { // already at the top
+                    return;
                 }
-                // traverse();
-
-                // Iterative version (breadth-first).
-                const stack = [[0, undefined]];
-                while (stack.length) {
-                    const [i, parent] = stack.pop();
-
-                    const value = arr[i];
-                    if (value === undefined) {
-                        continue;
-                    }
-                    const node = {
-                        value,
-                        children: []
-                    };
-                    if (i === 0) {
-                        root = node;
-                    }
-                    if (parent) {
-                        parent.children.push(node);
-                    }
-
-                    // Warning: the order here has to be reversed compared to the recursive
-                    // version, otherwise we'll be popping the right child on the next iteration
-                    // and build a different (mirrored) looking tree.
-                    stack.push([i * 2 + 2, node]); // right child
-                    stack.push([i * 2 + 1, node]); // left child
+                const { heap } = this;
+                const p = Math.floor((i - 1) / 2); // parent index
+                if (heap[i] > heap[p]) {
+                    [heap[p], heap[i]] = [heap[i], heap[p]];
+                    this.heapifyUp(p);
                 }
-
-                return root;
             }
 
-            function renderHeap(arr) {
-                const width = 1200;
-                const height = 600;
-                const padding = {
-                    top: 50,
-                    right: 50,
-                    bottom: 50,
-                    left: 50
+            heapifyDown(i = 0) {
+                const { heap } = this;
+                const left = i * 2 + 1;
+                const right = i * 2 + 2;
+                let largest = i;
+                if (left < heap.length) { // if there's no left child, there's no right child
+                    if (heap[left] > heap[largest]) {
+                        largest = left;
+                    }
+                    if (right < heap.length && heap[right] > heap[largest]) {
+                        largest = right;
+                    }
+                }
+                if (i !== largest) {
+                    [heap[i], heap[largest]] = [heap[largest], heap[i]];
+                    this.heapifyDown(largest);
+                }
+            }
+        }
+
+        class MinHeap extends MaxHeap {
+
+            heapifyUp(i = this.heap.length - 1) {
+                if (i <= 0) { // already at the top
+                    return;
+                }
+                const { heap } = this;
+                const p = Math.floor((i - 1) / 2); // parent index
+                if (heap[i] < heap[p]) { // !!! the only difference from MaxHeap
+                    [heap[p], heap[i]] = [heap[i], heap[p]];
+                    this.heapifyUp(p);
+                }
+            }
+
+            heapifyDown(i = 0) {
+                const { heap } = this;
+                const left = i * 2 + 1;
+                const right = i * 2 + 2;
+                let smallest = i;
+                if (left < heap.length) { // if there's no left child, there's no right child
+                    if (heap[left] < heap[smallest]) {
+                        smallest = left;
+                    }
+                    if (right < heap.length && heap[right] < heap[smallest]) {
+                        smallest = right;
+                    }
+                }
+                if (i !== smallest) {
+                    [heap[i], heap[smallest]] = [heap[smallest], heap[i]];
+                    this.heapifyDown(smallest);
+                }
+            }
+        }
+
+        // const arr = [2, 3, 8, 4, 7, 10, 9, 15, 9, 13, 9, 14, 20, 11, 19, 20, 17, 20];
+        const arr = [];
+        const heap = new MaxHeap(arr);
+        // const heap = new MinHeap(arr);
+        renderHeap(heap.heap);
+
+        const input = document.getElementById('input');
+
+        function onRemoveRootClick() {
+            if (input) {
+                heap.removeRoot();
+                renderHeap(heap.heap);
+            }
+        }
+
+        function onBuildClick() {
+            if (input) {
+                const numbers = input.value.split(',').map(s => +s);
+                heap.build(numbers);
+                renderHeap(heap.heap);
+            }
+        }
+
+        function onInsertClick(e) {
+            if (input) {
+                heap.insert(+input.value);
+                input.value = '';
+                renderHeap(heap.heap);
+            }
+        }
+
+        function heapArrayToTree(arr) {
+            let root;
+
+            // Recursive version (depth-first).
+            function traverse(i = 0, parent) {
+                const value = arr[i];
+                if (value === undefined) {
+                    return;
+                }
+                const node = {
+                    value,
+                    children: []
                 };
+                if (i === 0) {
+                    root = node;
+                }
+                if (parent) {
+                    parent.children.push(node);
+                }
+                traverse(i * 2 + 1, node); // left child
+                traverse(i * 2 + 2, node); // right child
+            }
+            // traverse();
 
-                let svg = window.svg;
-                if (svg) {
-                    svg.remove();
+            // Iterative version (breadth-first).
+            const stack = [[0, undefined]];
+            while (stack.length) {
+                const [i, parent] = stack.pop();
+
+                const value = arr[i];
+                if (value === undefined) {
+                    continue;
+                }
+                const node = {
+                    value,
+                    children: []
+                };
+                if (i === 0) {
+                    root = node;
+                }
+                if (parent) {
+                    parent.children.push(node);
                 }
 
-                if (!arr.length) {
-                    return svg;
-                }
+                // Warning: the order here has to be reversed compared to the recursive
+                // version, otherwise we'll be popping the right child on the next iteration
+                // and build a different (mirrored) looking tree.
+                stack.push([i * 2 + 2, node]); // right child
+                stack.push([i * 2 + 1, node]); // left child
+            }
 
-                const tree = d3.tree().size([
-                    width - padding.left - padding.right,
-                    height - padding.top - padding.bottom
-                ]);
-                const root = heapArrayToTree(arr);
-                let nodes = d3.hierarchy(root, node => node.children);
-                nodes = tree(nodes);
+            return root;
+        }
 
-                window.svg = svg = d3.select('body').append('svg')
-                    .attr('width', width)
-                    .attr('height', height);
-                const g = svg.append('g')
-                    .attr('transform', `translate(${padding.left}, ${padding.top})`);
+        function renderHeap(arr) {
+            const width = 1200;
+            const height = 600;
+            const padding = {
+                top: 50,
+                right: 50,
+                bottom: 50,
+                left: 50
+            };
 
-                const descendants = nodes.descendants();
+            let svg = window.svg;
+            if (svg) {
+                svg.remove();
+            }
 
-                var link = g.selectAll('.link')
-                    .data(descendants.slice(1))
-                    .enter().append('path')
-                    .attr('class', 'link')
-                    .style('stroke', 'black')
-                    .style('fill-opacity', 0)
-                    .attr('d', d => `M${d.x},${d.y}C${d.x},${(d.y + d.parent.y) / 2} ${d.parent.x},${(d.y + d.parent.y) / 2} ${d.parent.x},${d.parent.y}`);
-
-                const node = g.selectAll('.node')
-                    .data(descendants)
-                    .enter().append('g')
-                    .attr('class', d => `node ${d.children ? 'node--internal' : 'node--leaf'}`)
-                    .attr('transform', d => `translate(${d.x}, ${d.y})`);
-
-                node.append('circle')
-                    .attr('r', '15')
-                    .style('fill', 'gold')
-                    .style('stroke', 'black');
-
-                node.append('text')
-                    .text(d => d.data.value)
-                    .attr('font-size', '12')
-                    .attr('font-family', 'Tahoma')
-                    .attr('text-anchor', 'middle') // center horizontally
-                    .attr('alignment-baseline', 'middle') // center vertically
-                    .style('fill-opacity', 1);
-
+            if (!arr.length) {
                 return svg;
             }
-        </script>
-    </body>
+
+            const tree = d3.tree().size([
+                width - padding.left - padding.right,
+                height - padding.top - padding.bottom
+            ]);
+            const root = heapArrayToTree(arr);
+            let nodes = d3.hierarchy(root, node => node.children);
+            nodes = tree(nodes);
+
+            window.svg = svg = d3.select('body').append('svg')
+                .attr('width', width)
+                .attr('height', height);
+            const g = svg.append('g')
+                .attr('transform', `translate(${padding.left}, ${padding.top})`);
+
+            const descendants = nodes.descendants();
+
+            var link = g.selectAll('.link')
+                .data(descendants.slice(1))
+                .enter().append('path')
+                .attr('class', 'link')
+                .style('stroke', 'black')
+                .style('fill-opacity', 0)
+                .attr('d', d => `M${d.x},${d.y}C${d.x},${(d.y + d.parent.y) / 2} ${d.parent.x},${(d.y + d.parent.y) / 2} ${d.parent.x},${d.parent.y}`);
+
+            const node = g.selectAll('.node')
+                .data(descendants)
+                .enter().append('g')
+                .attr('class', d => `node ${d.children ? 'node--internal' : 'node--leaf'}`)
+                .attr('transform', d => `translate(${d.x}, ${d.y})`);
+
+            node.append('circle')
+                .attr('r', '15')
+                .style('fill', 'gold')
+                .style('stroke', 'black');
+
+            node.append('text')
+                .text(d => d.data.value)
+                .attr('font-size', '12')
+                .attr('font-family', 'Tahoma')
+                .attr('text-anchor', 'middle') // center horizontally
+                .attr('alignment-baseline', 'middle') // center vertically
+                .style('fill-opacity', 1);
+
+            return svg;
+        }
+    </script>
+</body>
+
 </html>
