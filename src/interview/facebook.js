@@ -230,3 +230,48 @@ console.log(getAverages(tree));
 
 // Pre-order, post-order, and in-order traversals are all depth-first.
 // Breadth-first requires a queue, typically.
+
+
+// ---------------------------------------------------------------------
+
+// My FB interview questions on Oct 21, 2021
+
+// Given two DOM subtrees with roots at A and B, where subtree B is the clone of subtree A
+// and x is some element somewhere in A, find the node y in B that corresponds to node x in A.
+
+// My original idea was to DFS the A tree for x and build a path as I go.
+// Then use that path on the second tree to find y.
+// I asked if I can proceed to code it and immediately sensed something in his body language,
+// so I was like is there a more efficient way to do it? :)
+
+// The hint was that I can rely on the fact that this is a DOM tree.
+// I asked if that means that I can rely on the parent link each node has.
+// He said yes, but he doesn't want to give away more than that.
+// And I kinda struggled to figure out how that would be useful.
+// Then he asked well how would you find an element in the second tree, you said you would use DFS
+// to presumably build a pass while you traverse A to later use it to find y in B. I was like "yeah".
+// So what would that path look like? And I said, like a linked list and them immediately corrected to
+// say, that it can just be a simple array of parents on our way down.
+// And then he said, well the elements are not the exactly the same in a the cloned tree.
+// They're same type but not the same elements. So I said in that case I can use indexes in the children
+// array of each parent on the way down as the path. But I still couldn't see how the parent property
+// would be helpful to avoid the need for DFS.
+// And than he's like well you have access the parentNode property of x. And then it dawned on me
+// that I can actually use the parentNode to go bottom up.
+// So it's be like log(n) time complexity because it's dependant on the depth of the tree.
+// Though I'd have to use use the indexOf to find the index of a child in each parent, so it wouldn't be
+// exactly as cheap as log(n).
+// Actually, since big O is the time complexity of the worst case scenario, and the worst case scenario
+// is either all nodes being children of the root and one we're looking for is the last one in that
+// array of children, or at every level of the tree we have exactly one node. In that case we get O(n)
+// time complexity. Which means my answer was wrong.
+
+function findElementInClone(A, B, x) { // return y
+
+}
+
+// The second question was, imagine a situation where you have a viewport in a SPA and any of the components
+// that are in it might have scheduled timeouts via setTimeout. And now you're replacing the viewport's
+// contents with other components, so you want to call the clearAllTimeouts function to make sure all
+// the timeouts that might have been scheduled are cleared.
+// So how would you implement that?

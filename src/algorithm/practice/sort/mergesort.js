@@ -78,9 +78,11 @@ function splitMerge(S, T, lo, hi) {
 
     const mid = Math.floor((lo + hi) / 2);
 
+    // Keep recursively subdividing the array in halfs until the halfs are the size of 1.
     splitMerge(T, S, lo, mid);
     splitMerge(T, S, mid, hi);
 
+    // Start merging the halfs back and forth on our way up.
     merge(S, T, lo, mid, hi);
 }
 

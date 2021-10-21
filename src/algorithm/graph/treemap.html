@@ -1,0 +1,88 @@
+<html>
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.1.1/d3.js"></script>
+</head>
+
+<body>
+    <div>
+        <input type="button" value="Build" onclick="onBuildClick()">
+    </div>
+    <br>
+    <script>
+        const root = {
+            name: 'A',
+            children: [{
+                name: 'B',
+                children: [{
+                    name: 'F',
+                    value: 5
+                }, {
+                    name: 'G',
+                    value: 12
+                }, {
+                    name: 'H',
+                    value: 8
+                }]
+            }, {
+                name: 'C',
+                children: [{
+                    name: 'I',
+                    value: 6
+                }, {
+                    name: 'J',
+                    children: [{
+                        name: 'K',
+                        value: 7
+                    }, {
+                        name: 'L',
+                        value: 2
+                    }]
+                }, {
+                    name: 'M',
+                    value: 7
+                }]
+            }, {
+                name: 'D',
+                value: 9
+            }, {
+                name: 'E',
+                value: 4
+            }]
+        };
+
+        function sum(root) {
+            if (root.children) {
+                root.value = root.children.reduce((prev, curr) => prev + sum(curr), 0);
+            }
+            return root.value;
+        }
+
+        function list(root) {
+            if (root.children) {
+                root.children.forEach(child => list(child));
+            }
+            console.log(root);
+        }
+
+        const width = 800;
+        const height = 600;
+
+        function squarify(children, row, w) {
+            const c = children[0];
+            if (worst(row, w) <= worst(row + [c], w)) {
+                squarify(children[children.length - 1], row + [c], w);
+            } else {
+                layoutRow(row);
+                squarify(children, [], width());
+            }
+        }
+
+        function onBuildClick() {
+            sum(root);
+            list(root);
+        }
+    </script>
+</body>
+
+</html>
