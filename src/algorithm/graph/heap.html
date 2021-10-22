@@ -9,6 +9,7 @@
         <input type="text" name="" id="input" placeholder="Enter a number">
         <input type="button" value="Insert" onclick="onInsertClick()">
         <input type="button" value="Build (comma separated)" onclick="onBuildClick()">
+        <input type="button" value="Build random heap (min or max)" onclick="onBuildRandomClick()">
         <input type="button" value="Remove root" onclick="onRemoveRootClick()">
     </div>
     <br>
@@ -127,9 +128,8 @@
             }
         }
 
-        // const arr = [2, 3, 8, 4, 7, 10, 9, 15, 9, 13, 9, 14, 20, 11, 19, 20, 17, 20];
         const arr = [];
-        const heap = new MaxHeap(arr);
+        let heap = new MaxHeap(arr);
         // const heap = new MinHeap(arr);
         renderHeap(heap.heap);
 
@@ -151,6 +151,19 @@
                 renderHeap(heap.heap);
             }
         }
+
+        function onBuildRandomClick() {
+                const count = 7 + Math.floor(Math.random() * 23);
+                const arr = [...(new Array(count))].map(() => Math.floor(Math.random() * 100));
+
+                if (Math.random() < 0.5) {
+                    heap = new MaxHeap(arr);
+                } else {
+                    heap = new MinHeap(arr);
+                }
+
+                renderHeap(heap.heap);
+            }
 
         function onInsertClick(e) {
             if (input) {
