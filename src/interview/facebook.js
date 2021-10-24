@@ -20,6 +20,21 @@ As well as fundamental algorithms like:
 - merge sort
 - quick sort
 
+Given a binary tree, get the average value at each level of the tree.
+
+Input:
+    4
+   / \
+  7   9
+ / \   \
+10  2   6
+     \
+	  6
+	 /
+    2
+Output:
+[4, 8, 6, 6, 2]
+
 I have a couple of questions. (It's important to ask clarifying questions!)
 1. Will the input is always going to be a tree or can I get an empty node?
 2. Is it all integer values? (Could have asked if it's ok to use integer division. But why?)
