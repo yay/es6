@@ -17,6 +17,10 @@ In practice, quicksort outperforms merge sort, and it significantly outperforms 
 and insertion sort. Another reason quicksort is fast is cache efficiency.
 Quicksort linearly scans the input and linearly partitions the input.
 
+Quicksort achieves optimal performance if we always divide the arrays and subarrays
+into two partitions of equal size. Because then, if the number of elements n is doubled,
+we only need one additional partitioning level p.
+
 Why quicksort is O(n * log2(n))?
 Because on each divide step we divide the array into two parts, which sums up to log2(n) operations.
 (It's like the depth of the recursive call tree).
@@ -28,7 +32,9 @@ If the input array is already sorted, we'll be subdividing the array n times in 
 That is because the array is not split in half, but at the very edge, where one part has
 one element and the other the rest of the elements.
 
-The worst case is a pivot that's actually the smallest or largest element in the input. In this case, we do an O(N) partitioning level, but instead of getting two halves of equal size, we've ended up with one partition of one element, and one partition of N-1 elements.
+The worst case is a pivot that's actually the smallest or largest element in the input.
+In this case, we do an O(n) partitioning level, but instead of getting two halves of equal size,
+we've ended up with one partition of one element, and one partition of n-1 elements.
 
 - Pick an element as pivot
 - Partition the given array around the picked pivot, so that

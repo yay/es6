@@ -290,3 +290,5 @@ function findElementInClone(A, B, x) { // return y
 // contents with other components, so you want to call the clearAllTimeouts function to make sure all
 // the timeouts that might have been scheduled are cleared.
 // So how would you implement that?
+
+// System design questions are kind of tailored to your experience.
