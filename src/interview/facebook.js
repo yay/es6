@@ -167,8 +167,8 @@ function getAverages(root) {
 	const result = [];
 	const queue = [[root, 0]];
 	let currentDepth = 0;
-	let sum = 0;
-	let count = 0;
+	let count = 0; // node count at current depth
+	let sum = 0;   // the sum of all node values at current depth
 
 	while (queue.length) {
 		const [node, depth] = queue.shift();
